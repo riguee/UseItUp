@@ -1,0 +1,44 @@
+h1, h2, h3, h4, h5, h6, p, .card-header, .card-body, label, input, button {
+    font-family: Roboto, sans-serif;
+    color: #393e41;
+    text-align: center;
+    margin: 30px;
+}
+body {
+    background-color: #fcfff5;
+}
+
+.details {
+  text-align: center;
+  margin: 30px;
+}
+
+.accent {
+    color: #e7bb41;
+}
+
+.btn-primary {
+    background-color: #9eb25d;
+    border-color: #9eb25d;
+}
+
+.btn-primary:hover {
+    background-color: #82924d;
+    border-color: #82924dx;
+}
+
+.btn-primary:active {
+    background-color: #65753a !important;
+    border-color: #65753a !important;
+}
+
+.search-btn {
+    margin: 0 5px 0 5px;
+}
+.listing-img {
+    height: 25vw;
+}
+
+.pickup-img {
+    height: 15vw;
+}

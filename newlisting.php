@@ -68,7 +68,14 @@
 </head>
 <body>
 <?php
-include 'connection.php'
+$servername = "localhost";
+$username = "root";
+$password = "";
+$db = "test";
+$conn = new mysqli($servername, $username, $password, $db);
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
 
 ?>
 
@@ -141,7 +148,7 @@ include 'connection.php'
 
 
 <h1>NEW LISTING</h1><br><br><div class="col-md-4 mx-auto">
-    <form name="newlisting" autocomplete="off" enctype="multipart/form-data" action="createdlisting.php" onsubmit="return timecheck();" method="post">
+    <form name="newlisting" autocomplete="off" action="createdlisting.php" onsubmit="return timecheck();" method="post">
         <fieldset>
             Select one of your saved dishes:
             <select name="dishes">
@@ -158,7 +165,7 @@ include 'connection.php'
             <textarea type="text" class="form-control" rows="5" id="description" name="description" placeholder="dish details: ingredients, cooking, flavour..."></textarea>
             <br><br><div  class="col-md-8 mx-auto">
                 Image:
-                <input type="file" class="form-control-file" placeholder="image" name="fileToUpload" id="fileToUpload" accept="image/gif, image/jpeg, image/png"></div>
+                <input type="file" class="form-control-file" placeholder="image" name="image" accept="image/gif, image/jpeg, image/png"></div>
             <br><br>
             Quantity:
             <input type="number" name="portions" class="form-control" min="1">
@@ -172,7 +179,7 @@ include 'connection.php'
                 if (mysqli_num_rows($result) > 0) {
                     // output data of each row
                     while($row = $result->fetch_assoc()) {
-                        echo "<option value='".$row["id"]."'>".$row["allergen"]."</option>";
+                        echo "<option value='".$row["allergenID"]."'>".$row["allergenname"]."</option>";
                     }
                 }
                 ?>
@@ -182,17 +189,17 @@ include 'connection.php'
             Suitable for:
             <select name="diet[]" class="selectpicker" multiple>
                 <?php
-                $diets = $conn->prepare("SELECT * FROM diets");
+                $diets = $conn->prepare("SELECT * FROM diet_requirements");
                 $diets->execute();
                 $dietresult = $diets->get_result();
                 if (mysqli_num_rows($dietresult) > 0) {
                     // output data of each row
                     while($dietrow = $dietresult->fetch_assoc()) {
-                        echo "<option value='".$dietrow["id"]."'>".$dietrow["diet"]."</option>";
+                        echo "<option value='".$dietrow["dietID"]."'>".$dietrow["dietname"]."</option>";
                     }
                 }
                 else {
-                    echo "there are no dietary requirements available at this time.";
+                    echo "<script>alert(\"bananaaaa\")</script>";
                 }
 
                 ?>

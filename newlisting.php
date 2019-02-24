@@ -11,34 +11,10 @@
             src="https://code.jquery.com/jquery-3.3.1.min.js"
             integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
             crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
     <style>
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: #f6f6f6;
-            min-width: 230px;
-            border: 1px solid #ddd;
-            z-index: 1;
-        }
-        .show {display:block;}
-
-        .dropdown-content label {
-            color: black;
-            padding: 8px 8px;
-            text-decoration: none;
-            display: block;
-        }
-
-        .dropdown {
-            position: relative;
-            display: inline-block;
-        }
-        #myInput:focus {outline: 3px solid #ddd;}
-
-        .topnav {
-            background-color: #82924d;
-            overflow: hidden;
-        }
 
         /* Style the links inside the navigation bar */
         .topnav a {
@@ -122,7 +98,7 @@ if ($conn->connect_error) {
     {
         if (inputtx.value.length == 0)
         {
-           // alert("please fill all fields marked *");
+            // alert("please fill all fields marked *");
             return false;
         }
         return true;
@@ -132,9 +108,9 @@ if ($conn->connect_error) {
     function timecheck() {
 
         if (required(document.getElementById("title"))==false ||
-        required(document.getElementById("description"))==false ||
-        required(document.getElementById("from"))==false ||
-        required(document.getElementById("until"))==false) {
+            required(document.getElementById("description"))==false ||
+            required(document.getElementById("from"))==false ||
+            required(document.getElementById("until"))==false) {
             alert("please fill all fields marked *");
             return false;
         }
@@ -194,60 +170,40 @@ if ($conn->connect_error) {
             Quantity:
             <input type="number" name="portions" class="form-control" min="1">
             <br><br>
-            Allergens:<br>
-            <div class="dropdown">
-                    <input type="text" class="form-control" autocomplete="off" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
-                    <div id="myDropdown" class="dropdown-content">
-                        <?php
-                        $stmt = $conn->prepare("SELECT * FROM allergens");
-                        $stmt->execute();
-                        $result = $stmt->get_result();
-
-                        if (mysqli_num_rows($result) > 0) {
-                            // output data of each row
-                            while($row = $result->fetch_assoc()) {
-                                echo "<label><input type=\"checkbox\" value=\"".$row["allergenID"] ."\" name=\"".$row["allergenname"] ."\" >".$row["allergenname"]."</label>";
-                            }
-                        } else {
-                            echo "0 results";
-                        }
-
-                        mysqli_close($conn);
-                        ?>
-
-                </div>
-            </div>
-            <script>
-                function myFunction() {
-                    document.getElementById("myDropdown").classList.toggle("show");
-                }
-                function filterFunction() {
-                    myFunction();
-                    var input, filter, ul, li, a, i;
-                    input = document.getElementById("myInput");
-                    filter = input.value.toUpperCase();
-                    div = document.getElementById("myDropdown");
-                    a = div.getElementsByTagName("label");
-                    for (i = 0; i < a.length; i++) {
-                        txtValue = a[i].textContent || a[i].innerText;
-                        if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                            a[i].style.display = "";
-                        } else {
-                            a[i].style.display = "none";
-                        }
+            Allergens:
+            <select name="allergen[]" class="selectpicker" multiple data-live-search="true">
+                <?php
+                $stmt = $conn->prepare("SELECT * FROM allergens");
+                $stmt->execute();
+                $result = $stmt->get_result();
+                if (mysqli_num_rows($result) > 0) {
+                    // output data of each row
+                    while($row = $result->fetch_assoc()) {
+                        echo "<option value='".$row["allergenID"]."'>".$row["allergenname"]."</option>";
                     }
-                }</script>
-                <br><br>
-            Suitable for:<br><br>
-            <div class="checkbox">
-                <label><input type="checkbox" id="veg" value="">Vegetarian</label>
-            </div>
-            <div class="checkbox">
-                <label><input type="checkbox" id="halal"  value="">Halal</label>
-            </div>
-            <div class="checkbox">
-                <label><input type="checkbox" id="kosher" value="">Kosher</label>
-            </div>
+                }
+                ?>
+            </select>
+
+            <br><br>
+            Suitable for:
+            <select name="diet[]" class="selectpicker" multiple>
+                <?php
+                $diets = $conn->prepare("SELECT * FROM diet_requirements");
+                $diets->execute();
+                $dietresult = $diets->get_result();
+                if (mysqli_num_rows($dietresult) > 0) {
+                    // output data of each row
+                    while($dietrow = $dietresult->fetch_assoc()) {
+                        echo "<option value='".$dietrow["dietID"]."'>".$dietrow["dietname"]."</option>";
+                    }
+                }
+                else {
+                    echo "<script>alert(\"bananaaaa\")</script>";
+                }
+
+                ?>
+            </select>
             <br><br><div class="col-md-6 mx-auto">
                 Pickup time <br>
                 From:

@@ -94,7 +94,7 @@
 <?php
 $servername = "localhost";
 $username = "root";
-$password = "";
+$password = "root";
 $db = "test";
 $conn = new mysqli($servername, $username, $password, $db);
 if ($conn->connect_error) {

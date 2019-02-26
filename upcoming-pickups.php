@@ -78,10 +78,6 @@ $data2 = mysqli_fetch_array($result);
 
 $query = "SELECT title, portions FROM orders JOIN orders_listings ON orders.ID = orders_listings.orderID JOIN listings ON listingID = listings.ID WHERE orders.ID = 2";
 $data3 = mysqli_query($conn, $query);
-//while($row = mysqli_fetch_assoc($data3)) {
-  //  echo $row['title'];
-    //echo $row['portions'];
-//}
 
 $order = new Order();
 
@@ -92,20 +88,6 @@ $order -> charityName = $data2["charityName"];
 $order -> listings = $data3;
 $order->display();
 
-
-/*echo gettype(mysqli_fetch_assoc($result)[2]);
-if (mysqli_num_rows($result)>0) {
-    while ($row = $result->fetch_assoc()) {
-        //$firstorder = $result->fetch_object(Order);
-        //$firstorder->display();
-        echo "there is a banana land";
-    }
-}
-else {
-    echo "life is as sad as a day without bananas";
-}
-//$firstorder = $result->fetch_object(Order);
-//$firstorder->display();*/
 ?>
 
 

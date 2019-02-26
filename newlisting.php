@@ -199,7 +199,7 @@ if ($conn->connect_error) {
                     }
                 }
                 else {
-                    echo "<script>alert(\"bananaaaa\")</script>";
+                    echo "there are no dietary requirements available at this time.";
                 }
 
                 ?>

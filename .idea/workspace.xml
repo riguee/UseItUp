@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BookmarkManager">
+    <bookmark url="file://$PROJECT_DIR$/UseItUpDatabase.sql" line="12" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="72b62685-67de-4cc0-be47-d0058f71faa5" name="Default Changelist" comment="updated hopefully almost functioning page">
-      <change beforePath="$PROJECT_DIR$/newlisting.php" beforeDir="false" afterPath="$PROJECT_DIR$/newlisting.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -14,6 +17,40 @@
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Login.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-357" />
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/CharityProfileView">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-153" />
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/common.css">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/confirm-order.php">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/nav.js">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Complaint.php">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/navbarcharity.php">
           <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
@@ -23,19 +60,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/mainlisting.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="18" column="34" selection-start-line="18" selection-start-column="34" selection-end-line="18" selection-end-column="34" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/createdlisting.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1513">
-              <caret line="89" column="40" selection-start-line="89" selection-start-column="40" selection-end-line="89" selection-end-column="40" />
+            <state relative-caret-position="144">
+              <caret line="126" column="47" lean-forward="true" selection-start-line="126" selection-start-column="47" selection-end-line="126" selection-end-column="47" />
             </state>
           </provider>
         </entry>
@@ -43,8 +71,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/newlisting.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="128">
-              <caret line="153" column="13" selection-start-line="153" selection-start-column="13" selection-end-line="153" selection-end-column="13" />
+            <state relative-caret-position="1700">
+              <caret line="106" column="52" lean-forward="true" selection-start-line="106" selection-start-column="52" selection-end-line="106" selection-end-column="52" />
             </state>
           </provider>
         </entry>
@@ -57,16 +85,16 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/mainlisting.php" />
         <option value="$PROJECT_DIR$/createdlisting.php" />
+        <option value="$PROJECT_DIR$/mainlisting.php" />
         <option value="$PROJECT_DIR$/newlisting.php" />
       </list>
     </option>
   </component>
-  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="MAMP PHP 7.1" />
-  <component name="ProjectFrameBounds" fullScreen="true">
-    <option name="width" value="1440" />
-    <option name="height" value="900" />
+  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="PHP" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="width" value="1920" />
+    <option name="height" value="1080" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -116,7 +144,7 @@
       <option name="presentableId" value="Default" />
       <updated>1550855055546</updated>
       <workItem from="1550855056866" duration="268000" />
-      <workItem from="1551045503459" duration="342000" />
+      <workItem from="1551045503459" duration="4797000" />
     </task>
     <task id="LOCAL-00001" summary="updated hopefully almost functioning page">
       <created>1551045679354</created>
@@ -125,20 +153,41 @@
       <option name="project" value="LOCAL" />
       <updated>1551045679354</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="updated hopefully almost functioning page">
+      <created>1551045858982</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1551045858982</updated>
+    </task>
+    <task id="LOCAL-00003" summary="updated hopefully almost functioning page">
+      <created>1551045901769</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1551045901769</updated>
+    </task>
+    <task id="LOCAL-00004" summary="updated hopefully almost functioning page">
+      <created>1551196713546</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1551196713547</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="610000" />
+    <option name="totallyTimeSpent" value="5065000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1280" height="720" extended-state="0" />
-    <editor active="true" />
+    <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25364667" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2534413" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info active="true" anchor="bottom" id="Messages" visible="true" weight="0.32921174" />
+      <window_info anchor="bottom" id="PHP-CGI Server" />
+      <window_info anchor="bottom" id="Messages" weight="0.32921174" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" />
@@ -148,9 +197,9 @@
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" />
-      <window_info anchor="bottom" id="Version Control" order="9" />
+      <window_info anchor="bottom" id="Version Control" order="9" weight="0.3285968" />
       <window_info anchor="bottom" id="Terminal" order="10" />
-      <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
+      <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" weight="0.3285968" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -161,35 +210,79 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ORDER">
+      <list>
+        <option value="0" />
+        <option value="2" />
+        <option value="3" />
+        <option value="1" />
+      </list>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="updated hopefully almost functioning page" />
     <option name="LAST_COMMIT_MESSAGE" value="updated hopefully almost functioning page" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Login.php">
+    <entry file="file://$PROJECT_DIR$/Register.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1887" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UseItUpDatabase.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-897">
+          <caret line="134" column="2" lean-forward="true" selection-start-line="134" selection-start-column="2" selection-end-line="134" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mainlisting.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="36" lean-forward="true" selection-start-line="11" selection-start-column="36" selection-end-line="11" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nav.js">
       <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/navbarcharity.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Complaint.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/createdlisting.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="126" column="47" lean-forward="true" selection-start-line="126" selection-start-column="47" selection-end-line="126" selection-end-column="47" />
+        </state>
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Login2.php">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/mainlisting.php">
+    <entry file="file://$PROJECT_DIR$/CharityProfileView">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="18" column="34" selection-start-line="18" selection-start-column="34" selection-end-line="18" selection-end-column="34" />
-        </state>
+        <state relative-caret-position="-153" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/createdlisting.php">
+    <entry file="file://$PROJECT_DIR$/common.css">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/confirm-order.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Login.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1513">
-          <caret line="89" column="40" selection-start-line="89" selection-start-column="40" selection-end-line="89" selection-end-column="40" />
-        </state>
+        <state relative-caret-position="-357" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/newlisting.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="128">
-          <caret line="153" column="13" selection-start-line="153" selection-start-column="13" selection-end-line="153" selection-end-column="13" />
+        <state relative-caret-position="1700">
+          <caret line="106" column="52" lean-forward="true" selection-start-line="106" selection-start-column="52" selection-end-line="106" selection-end-column="52" />
         </state>
       </provider>
     </entry>

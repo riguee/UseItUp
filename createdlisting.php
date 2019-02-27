@@ -30,7 +30,7 @@ $timeuntil = $_POST["until"];
 $servername = "localhost";
 $username = "root";
 $password = "";
-$db = "useitup";
+$db = "useitup2";
 $conn = new mysqli($servername, $username, $password, $db);
 $recconn = new mysqli($servername, $username, $password, $db);
 if ($conn->connect_error) {

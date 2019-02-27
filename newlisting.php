@@ -71,10 +71,11 @@
 $servername = "localhost";
 $username = "root";
 $password = "";
-$db = "test";
+$db = "useitup";
 $conn = new mysqli($servername, $username, $password, $db);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
+    echo "<script>alert('there was a problem')</script>";
 }
 
 ?>
@@ -179,7 +180,7 @@ if ($conn->connect_error) {
                 if (mysqli_num_rows($result) > 0) {
                     // output data of each row
                     while($row = $result->fetch_assoc()) {
-                        echo "<option value='".$row["allergenID"]."'>".$row["allergenname"]."</option>";
+                        echo "<option value='".$row["id"]."'>".$row["allergen"]."</option>";
                     }
                 }
                 ?>
@@ -189,13 +190,13 @@ if ($conn->connect_error) {
             Suitable for:
             <select name="diet[]" class="selectpicker" multiple>
                 <?php
-                $diets = $conn->prepare("SELECT * FROM diet_requirements");
+                $diets = $conn->prepare("SELECT * FROM diets");
                 $diets->execute();
                 $dietresult = $diets->get_result();
                 if (mysqli_num_rows($dietresult) > 0) {
                     // output data of each row
                     while($dietrow = $dietresult->fetch_assoc()) {
-                        echo "<option value='".$dietrow["dietID"]."'>".$dietrow["dietname"]."</option>";
+                        echo "<option value='".$dietrow["id"]."'>".$dietrow["diet"]."</option>";
                     }
                 }
                 else {

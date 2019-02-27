@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="54bfab1c-ba66-4790-9aec-713b87914fa2" name="localhost" url="https://github.com/Potato-King/COMP0034_GroupC/blob/master/">
+        <fileTransfer port="0" mountedRoot="C:\Users\margo\PhpstormProjects\UseItUp" accessType="MOUNT" />
+      </webServer>
+    </option>
+  </component>
+</project>

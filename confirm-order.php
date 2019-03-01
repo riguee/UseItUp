@@ -12,11 +12,17 @@
 <h1>Your order</h1>
 <?php
 include 'Listings.php';
-if (isset($_POST['listing'])) {
+if (isset($_POST['deleted'])) {
+    $listing_IDs = unserialize(base64_decode($_POST['listings']));
+    unset($listing_IDs[array_search($_POST['deleted'], $listing_IDs)]);
+}
+elseif (isset($_POST['listing'])) {
     $listing_IDs = array($_POST['listing']);
 }
 else {
     $listing_IDs = unserialize(base64_decode($_POST['listings']));
+    array_push($listing_IDs, $_POST['added-listing']);
+
 }
 $listings = array();
 foreach ($listing_IDs as $listing_id) {
@@ -24,7 +30,6 @@ foreach ($listing_IDs as $listing_id) {
     $listing->setListingFromId($listing_id);
     array_push($listings, $listing);
 }
-
 include 'Restaurants.php';
 $restaurant = new Restaurant();
 $restaurant->setRestaurantFromId($listing->restaurant_id);
@@ -57,7 +62,19 @@ $restaurant->setRestaurantFromId($listing->restaurant_id);
                 <th scope="row"><?php echo $i++ ?></th>
                 <td><?php echo $listing->title ?></td>
                 <td><?php echo $listing->portions ?></td>
-                <td style="text-align: right"><button class="btn btn-danger"><i class="fa fa-trash"></i></button></td>
+                <?php if (count($listing_IDs)>1): ?>
+                <td style="text-align: right">
+                    <form method="post" action="confirm-order.php">
+                        <select hidden class="form-control col-4" name="pickup-time">
+                            <option selected><?php echo $_POST['pickup-time'] ?></option>
+                        </select>
+                        <select hidden class="form-control col-4" name="listings">
+                            <option selected><?php print base64_encode(serialize($listing_IDs)) ?></option>
+                        </select>
+                        <button class="btn btn-danger" name="deleted" value="<?php print($listing->id) ?>"><i class="fa fa-trash"></i></button>
+                    </form>
+                </td>
+                <?php endif ?>
             </tr>
             <?php endforeach; ?>
             </tbody>
@@ -112,7 +129,9 @@ if($count > 0): ?>
                         <select hidden class="form-control col-4" name="pickup-time">
                             <option selected><?php echo $_POST['pickup-time'] ?></option>
                         </select>
-                        <?php array_push($listing_IDs, $available_listing->id)?>
+                        <select hidden class="form-control col-4" name="added-listing">
+                            <option selected><?php echo $available_listing->id ?></option>
+                        </select>
                         <button type="submit" name="listings" class="btn btn-primary" value="<?php print base64_encode(serialize($listing_IDs)) ?>">Add to order</button>
                     </form>
                 </div>

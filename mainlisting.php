@@ -20,7 +20,6 @@
             <button type="submit" class="btn btn-primary search-btn"><i class="fa fa-search"></i></button>
         </form>
         <br>
-        <!-- ASK DAN IF THIS IS THE RIGHT THING TO DO (the action="" above is empty instead of linking to another page) -->
         <div class="d-flex justify-content-center">
             <div class="col-md-5">
                 <div class="card">

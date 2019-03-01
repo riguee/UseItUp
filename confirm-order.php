@@ -3,100 +3,124 @@
 <head>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <link href="styles.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="UTF-8">
     <title>Confirm order</title>
 </head>
 <body class="container-fluid">
 <h1>Your order</h1>
+<?php
+include 'Listings.php';
+if (isset($_POST['listing'])) {
+    $listing_IDs = array($_POST['listing']);
+}
+else {
+    $listing_IDs = unserialize(base64_decode($_POST['listings']));
+}
+$listings = array();
+foreach ($listing_IDs as $listing_id) {
+    $listing = new Listing();
+    $listing->setListingFromId($listing_id);
+    array_push($listings, $listing);
+}
+
+include 'Restaurants.php';
+$restaurant = new Restaurant();
+$restaurant->setRestaurantFromId($listing->restaurant_id);
+//include 'Orders.php';
+//$order = new Order();
+//$order->addToOrder();
+?>
+
 <div class="card">
-    <h5 class="card-header">Order #1234567890</h5>
+    <h5 class="card-header">From <a href="#"><?php echo $restaurant->name ?></a></h5>
+    <div class="card-body">
+        <span class="h6">Pick up time: </span><span><?php echo $_POST['pickup-time'] ?></span><br>
+        <span class="h6">Pick up address: </span><span><?php echo $restaurant->address ?>, <?php echo $restaurant->postcode ?></span><br>
+        <span class="h6">Email: </span><span><a href="mailto:<?php print $restaurant->email ?>"><?php echo $restaurant->email ?></a></span><br>
+        <span class="h6">Telephone: </span><span><?php echo $restaurant->phone ?></span><br>
+        <br>
+        <table class="table" style="margin: 0 1%">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Dish</th>
+                <th scope="col">Quantity</th>
+                <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php $i = 1 ?>
+            <?php foreach ($listings as $listing): ?>
+            <tr>
+                <th scope="row"><?php echo $i++ ?></th>
+                <td><?php echo $listing->title ?></td>
+                <td><?php echo $listing->portions ?></td>
+                <td style="text-align: right"><button class="btn btn-danger"><i class="fa fa-trash"></i></button></td>
+            </tr>
+            <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
     <div class="row">
-        <div class="col-2">
-            <div class="middle">
-                <p>Pickup window:<br>19:34<br>19:35</p>
+        <div class="col-md-5" style="margin: 15px auto">
+            <form action="mainlisting.php"><button class="btn btn-block btn-danger" type="submit">Cancel order</button></form>
+        </div>
+        <div class="col-md-5" style="margin: 15px auto">
+            <button type="submit" class="btn btn-primary btn-block">Place order</button>
+        </div>
+    </div>
+</div>
+<br>
+<br>
+<br>
+<?php
+$count = 0;
+    foreach ($restaurant->listings as $restaurant_listing) {
+        if (!in_array($restaurant_listing, $listing_IDs)) {
+            $count++;
+        }
+    }
+if($count > 0): ?>
+        <h1>Other listings from the same restaurant</h1>
+    <?php endif ?>
+<?php foreach ($restaurant->listings as $restaurant_listing) {
+    if (!in_array($restaurant_listing, $listing_IDs)) {
+        $available_listing = new Listing();
+        $available_listing->setListingFromId($restaurant_listing); ?>
+        <div class="card">
+            <div class="card-body row">
+                <img class="col-3 listing-img" src="https://thumbs.dreamstime.com/z/spaghetti-chef-7961514.jpg">
+                <div class="col-9">
+                    <h4><?php echo $available_listing->title ?></h4>
+                    <h6>by <a href="#"><?php echo $available_listing->restaurant_name ?></a>.</h6>
+                    <p><?php echo $available_listing->description ?></p>
+                    <h6>Portions: <?php echo $available_listing->portions ?>.</h6>
+                    <?php if (!empty($available_listing->allergen)) { ?>
+                        <h6>Allergens: <?php
+                            $count = count($available_listing->allergen);
+                            for ($i = 0; $i<$count-1; $i++) {
+                            echo $available_listing->allergen[$i].", ";
+                            }
+                            echo $available_listing->allergen[$count-1];
+                            ?></h6>
+                    <?php } ?>
+                    <h6>Available pickup times: between <?php echo date("H:i", strtotime($available_listing->time_from)) ?> and <?php echo date("H:i", strtotime($available_listing->time_until)) ?></h6>
+                    <br>
+                    <form method="post" action="confirm-order.php">
+                        <select hidden class="form-control col-4" name="pickup-time">
+                            <option selected><?php echo $_POST['pickup-time'] ?></option>
+                        </select>
+                        <?php array_push($listing_IDs, $available_listing->id)?>
+                        <button type="submit" name="listings" class="btn btn-primary" value="<?php print base64_encode(serialize($listing_IDs)) ?>">Add to order</button>
+                    </form>
+                </div>
             </div>
         </div>
-        <div class="col-10">
-            <h6 style="margin-top: 15px; margin-bottom: 15px">From: <a href="#">Restaurant</a></h6>
-            <p>Pick up address: 1 Main Street, AB12C34</p>
-            <table class="table">
-                <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Dish</th>
-                    <th scope="col">Quantity</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Banana</td>
-                    <td>500</td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Pineapple</td>
-                    <td>3</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>Strawberry</td>
-                    <td>1</td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-    <button style="margin: 30px 30% 30px 30%" class="btn btn-secondary">Edit order</button>
-</div>
-<br>
-<form class="form-inline" style="margin: 0 10% 0 10%">
-    <span style="margin-right: 10px">Confirm pickup time</span>
-    <select class="form-control col-4">
-        <option>00:00:00</option>
-        <option>00:00:00</option>
-        <option>00:00:00</option>
-        <option>00:00:00</option>
-        <option>00:00:00</option>
-    </select>
-    <span style="margin: 0 10px 0 10px">and</span>
-    <button type="submit" class="btn btn-primary col-4">Place order</button>
-</form>
-<br>
-<br>
-<h1>Other listings from the same restaurant</h1>
-<div class="card">
-    <div class="card-body row">
-        <img class="col-3 listing-img" src="https://thumbs.dreamstime.com/z/spaghetti-chef-7961514.jpg">
-        <div class="col-9">
-            <h4>Listing title 2</h4>
-            <h6>by <a href="#">restaurant</a>.</h6>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque sed rhoncus lacus, tristique maximus neque. Nunc at risus aliquam, lacinia mauris at, tempor ante.</p>
-            <h6>Portions: 40.</h6>
-            <h6>Allergens: allergen 1, allergen 2, allergen 3.</h6>
-            <h6>Available pickup times: between 00/00/00 00:00:00 and 00/00/00 00:00:00.</h6>
-            <br>
-            <button class="btn btn-primary">Add to order</button>
-        </div>
-    </div>
-</div>
-<br>
-<div class="card">
-    <div class="card-body row">
-        <img class="col-3 listing-img" src="https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX2744003.jpg">
-        <div class="col-9">
-            <h4>Listing title 3</h4>
-            <h6>by <a href="#">restaurant</a>.</h6>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque sed rhoncus lacus, tristique maximus neque. Nunc at risus aliquam, lacinia mauris at, tempor ante.</p>
-            <h6>Portions: 40.</h6>
-            <h6>Allergens: allergen 1, allergen 2, allergen 3.</h6>
-            <h6>Available pickup times: between 00/00/00 00:00:00 and 00/00/00 00:00:00.</h6>
-            <br>
-            <button class="btn btn-primary">Add to order</button>
-        </div>
-    </div>
-</div>
-<br>
+        <br>
+<?php
+    }
+} ?>
 </body>
 </html>

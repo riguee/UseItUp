@@ -45,21 +45,19 @@ class Order {
                         </tr>
                         </thead>
                         <tbody>
+                        <?php
+                        $i = 0;
+                        while ($listing = mysqli_fetch_assoc($this->listings)) {
+                            $i += 1;
+                            ?>
                         <tr>
-                            <th scope="row">1</th>
-                            <td>Banana</td>
-                            <td>500</td>
+                            <th scope="row"><?php echo $i; ?></th>
+                            <td><?php echo $listing['title']; ?></td>
+                            <td><?php echo $listing['portions']; ?></td>
                         </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>Pineapple</td>
-                            <td>3</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td>Strawberry</td>
-                            <td>1</td>
-                        </tr>
+                        <?php
+                        }
+                        ?>
                         </tbody>
                     </table>
                 </div>
@@ -70,33 +68,16 @@ class Order {
     }
 }
 
-$query = "SELECT ID, timefrom, timeuntil FROM orders WHERE ID = 1";
+$query = "SELECT ID, timefrom, timeuntil FROM orders WHERE ID = 2";
 $result = mysqli_query($conn, $query);
 $data1 = mysqli_fetch_array($result);
 
-$query = "SELECT charities.charityName FROM orders JOIN charities ON orders.charityID = charities.ID WHERE orders.ID = 1";
+$query = "SELECT charities.charityName FROM orders JOIN charities ON orders.charityID = charities.ID WHERE orders.ID = 2";
 $result = mysqli_query($conn, $query);
 $data2 = mysqli_fetch_array($result);
 
-$query = "SELECT title, portions FROM orders JOIN orders_listings ON orders.ID = orders_listings.orderID JOIN listings ON listingID = listings.ID";
-$result = mysqli_query($conn, $query);
-/*$i = 0
-while ($data3 = mysqli_fetch_array($result)) {
-    $i += 1; ?>
-        <tr>
-            <th scope="row"><?php echo i; ?></th>
-            <td><?php echo $data3['title']; ?></td>
-            <td><?php echo $data3['portions']; ?></td>
-        </tr>
-        <?php } ?>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <button style="margin: 30px 400px 30px 400px" class="btn btn-danger">Cancel pickup</button>
-        </div>*/
-
-//echo $data3['title'];
+$query = "SELECT title, portions FROM orders JOIN orders_listings ON orders.ID = orders_listings.orderID JOIN listings ON listingID = listings.ID WHERE orders.ID = 2";
+$data3 = mysqli_query($conn, $query);
 
 $order = new Order();
 
@@ -104,22 +85,9 @@ $order -> ID = $data1["ID"];
 $order -> timefrom = $data1["timefrom"];
 $order -> timeuntil = $data1["timeuntil"];
 $order -> charityName = $data2["charityName"];
+$order -> listings = $data3;
 $order->display();
 
-
-/*echo gettype(mysqli_fetch_assoc($result)[2]);
-if (mysqli_num_rows($result)>0) {
-    while ($row = $result->fetch_assoc()) {
-        //$firstorder = $result->fetch_object(Order);
-        //$firstorder->display();
-        echo "there is a banana land";
-    }
-}
-else {
-    echo "life is as sad as a day without bananas";
-}
-//$firstorder = $result->fetch_object(Order);
-//$firstorder->display();*/
 ?>
 
 

@@ -3,7 +3,7 @@
 <div class="topnav">
     <a class="active" href="index.html">UseItUp</a>
     <a href="CharityProfileAcct.html">My account</a>
-    <a href="charityorder.html">My orders</a>
+    <a href="charityorder.php">My orders</a>
     <a href="mainlisting.php">Find listings around me</a>
     <a href="Complaint.php">A complaint?</a>
     <div class="search-container">

@@ -15,6 +15,8 @@
 </head>
 <body>
 <div id="topnav"></div>
+
+
 <?php
 
 if (empty($_POST['title']) || empty($_POST['description'])) {
@@ -27,71 +29,63 @@ $portion = $_POST['portions'];
 $timefrom = $_POST["from"];
 $timeuntil = $_POST["until"];
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$db = "useitup2";
-$conn = new mysqli($servername, $username, $password, $db);
-$recconn = new mysqli($servername, $username, $password, $db);
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-//include 'connection.php';
-class Listing{
-    public $id, $title, $description, $portions, $time_from, $time_until, $allergen, $diet  ;
-    /*function setlisting($id) {
-        include 'connection.php';
-        $query = "SELECT id, title, description, portions, time_from, time_until FROM listings
-WHERE id = ". $id;
-        $result = mysqli_query($conn,$query);
-        $this->Title =
-    }*/
-    function display() {?>
-        <div class="card">
-            <h5 class="card-header">Listing number: <?php echo $this->id; ?></h5>
-            <div class="row">
-                <div class="col-2">
-                    <div class="middle">
-                        <p>Pickup window:<br><?php echo $this->time_from; ?><br><?php echo $this->time_until; ?></p>
-                    </div>
-                </div>
-                <class="col-10">
-                Dish name: <?php echo $this->title; ?><br>
-                Dish description: <?php echo $this->description; ?><br>
-                Number of portions: <?php echo $this->portions; ?><br>
-                Allergens <ul> <?php
-                    if(isset($this->allergen)) {
-                        foreach ($this->allergen as $this_allergen) {
-                            echo "<li>".$this_allergen. "</li>";
-                        }
-                    }
-                    else {
-                        echo "No allergen. ";
-                    }
-                    echo "</ul>";
+include 'connection.php';
 
+$target_dir = "uploads/";
+$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 
-                    if(isset($this->diet)) {
-                        echo "Suitable for : <ul>";
-                        foreach ($this->diet as $this_diet) {
-                            echo "<li>".$this_diet. "</li>";
-                        }
-                    }
-                    ?></ul>
-            </div>
-        </div>
-
-        <?php
+$uploadOk = 1;
+$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+// Check if image file is a actual image or fake image
+if(isset($_POST["submit"])) {
+    $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
+    if($check !== false) {
+        echo "File is an image - " . $check["mime"] . ".";
+        $uploadOk = 1;
+    } else {
+        echo "File is not an image.";
+        $uploadOk = 0;
     }
-
+}
+// Check if file already exists
+if (file_exists($target_file)) {
+    echo "Sorry, file already exists.";
+    $uploadOk = 0;
+}
+// Check file size
+if ($_FILES["fileToUpload"]["size"] > 500000) {
+    echo "Sorry, your file is too large.";
+    $uploadOk = 0;
+}
+// Allow certain file formats
+if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+    && $imageFileType != "gif" ) {
+    echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+    $uploadOk = 0;
+}
+// Check if $uploadOk is set to 0 by an error
+if ($uploadOk == 0) {
+    echo "Sorry, your file was not uploaded.";
+// if everything is ok, try to upload file
+} else {
+    if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+    } else {
+        echo "Sorry, there was an error uploading your file.";
+    }
 }
 
-$createlisting = $conn->prepare("INSERT INTO listings (title, description, portions, time_from, time_until, day_posted)
-VALUES (?, ?, ?, ?, ?, NOW())");
-$createlisting->bind_param("sssss", $title, $description, $portion, $timefrom, $timeuntil);
+
+//include 'connection.php';
+include 'Listings.php';
+$restaurant = 1;
+
+$createlisting = $conn->prepare("INSERT INTO listings (title, description, portions, time_from, time_until, day_posted, restaurant_id, image)
+VALUES (?, ?, ?, ?, ?, NOW(),1, ?)");
+$createlisting->bind_param("ssssss", $title, $description, $portion, $timefrom, $timeuntil, $target_file);
 $createlisting->execute();
 
 $new_id = mysqli_insert_id($conn);
+
 if (isset($_POST["allergen"])) {
     foreach ($_POST["allergen"] as $curr_allergen_id) {
         $setallergens = $conn->prepare("INSERT INTO allergen_listings (listing_id, allergen_id) VALUES (?, ?)");
@@ -108,44 +102,10 @@ if (isset($_POST["diet"])) {
     }
 }
 
-$query = "SELECT id, title, description, portions, time_from, time_until FROM listings
-WHERE id = ". $new_id;
-$result = mysqli_query($conn,$query);
-$createdlisting = $result->fetch_object("Listing");
+$createdlisting = new Listing();
+$createdlisting->setListingFromId($new_id);
 
-
-$allergenquery = "SELECT allergens.allergen FROM allergens JOIN allergen_listings ON allergens.id=allergen_listings.allergen_id
-JOIN listings ON listings.id=allergen_lidtings.listing_id WHERE listings.id=".$new_id;
-
-$stmt = $conn->prepare("SELECT allergens.allergen FROM allergens JOIN allergen_listings ON allergens.id=allergen_listings.allergen_id
-JOIN listings ON listings.id=allergen_listings.listing_id WHERE listings.id=".$new_id);
-$stmt->execute();
-$allergenresult = $stmt->get_result();
-if (mysqli_num_rows($allergenresult) > 0) {
-    $allergenlist = array();
-    // output data of each row
-    while($row = $allergenresult->fetch_row()) {
-        array_push($allergenlist,$row[0]);
-        $createdlisting->allergen = $allergenlist;
-    }
-}
-
-$dietstmt = $conn->prepare("SELECT diets.diet FROM diets JOIN diet_listings
-ON diets.id=diet_listings.diet_id
-JOIN listings ON listings.id=diet_listings.listing_id WHERE listings.id=".$new_id);
-$dietstmt->execute();
-$dietresult = $dietstmt->get_result();
-if (mysqli_num_rows($dietresult) > 0) {
-    $dietlist = array();
-    // output data of each row
-    while($row = $dietresult->fetch_row()) {
-        array_push($dietlist,$row[0]);
-        $createdlisting->diet = $dietlist;
-    }
-}
-
-
-$createdlisting->display();
+$createdlisting->displayCreated();
 
 
 $conn->close();

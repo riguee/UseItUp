@@ -68,15 +68,7 @@
 </head>
 <body>
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$db = "useitup";
-$conn = new mysqli($servername, $username, $password, $db);
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-    echo "<script>alert('there was a problem')</script>";
-}
+include 'connection.php'
 
 ?>
 
@@ -149,7 +141,7 @@ if ($conn->connect_error) {
 
 
 <h1>NEW LISTING</h1><br><br><div class="col-md-4 mx-auto">
-    <form name="newlisting" autocomplete="off" action="createdlisting.php" onsubmit="return timecheck();" method="post">
+    <form name="newlisting" autocomplete="off" enctype="multipart/form-data" action="createdlisting.php" onsubmit="return timecheck();" method="post">
         <fieldset>
             Select one of your saved dishes:
             <select name="dishes">
@@ -166,7 +158,7 @@ if ($conn->connect_error) {
             <textarea type="text" class="form-control" rows="5" id="description" name="description" placeholder="dish details: ingredients, cooking, flavour..."></textarea>
             <br><br><div  class="col-md-8 mx-auto">
                 Image:
-                <input type="file" class="form-control-file" placeholder="image" name="image" accept="image/gif, image/jpeg, image/png"></div>
+                <input type="file" class="form-control-file" placeholder="image" name="fileToUpload" id="fileToUpload" accept="image/gif, image/jpeg, image/png"></div>
             <br><br>
             Quantity:
             <input type="number" name="portions" class="form-control" min="1">

@@ -19,12 +19,17 @@ h1 {
 
 .btn-primary:hover {
     background-color: #82924d;
-    border-color: #82924dx;
+    border-color: #82924d;
 }
 
 .btn-primary:active {
     background-color: #65753a !important;
     border-color: #65753a !important;
+}
+
+.details {
+    text-align: center;
+    margin: 30px;
 }
 
 .search-btn {
@@ -51,5 +56,57 @@ body {
 
 .table {
     position: relative;
-    right: 20px;
+    right: 5%;
+}
+
+.topnav {
+    background-color: #82924d;
+    overflow: hidden;
+}
+
+/* Style the links inside the navigation bar */
+.topnav a {
+    float: left;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+/* Add a color to the active/current link */
+.topnav a.active {;
+    color: #e7bb41;
+    font-weight: bold;
+}
+
+
+
+
+.topnav input[type=text] {
+    float: right;
+    padding: 6px;
+    border: none;
+    margin-top: 8px;
+    margin-right: 16px;
+    font-size: 17px;
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    border-radius: 50px;
+}
+
+.topnav .search-container button {
+    float: right;
+    padding: 6px 10px;
+    margin-top: 8px;
+    margin-right: 7px;
+    background: #e7bb41;
+    font-size: 17px;
+    border: none;
+    cursor: pointer;
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    border-radius: 50px;
+    width: auto;
+    color: white;
 }

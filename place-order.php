@@ -20,5 +20,5 @@ foreach ($listings as $listing) {
     $result = mysqli_query($conn, $query);
 }
 
-header("Location: upcoming-pickups.php");
+header("Location: charityorder.php");
 exit;

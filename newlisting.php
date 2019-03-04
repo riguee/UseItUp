@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+          integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <title>newlisting</title>
     <link rel="stylesheet" href="common.css">
@@ -15,33 +17,6 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
     <style>
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: #f6f6f6;
-            min-width: 230px;
-            border: 1px solid #ddd;
-            z-index: 1;
-        }
-        .show {display:block;}
-
-        .dropdown-content label {
-            color: black;
-            padding: 8px 8px;
-            text-decoration: none;
-            display: block;
-        }
-
-        .dropdown {
-            position: relative;
-            display: inline-block;
-        }
-        #myInput:focus {outline: 3px solid #ddd;}
-
-        .topnav {
-            background-color: #82924d;
-            overflow: hidden;
-        }
 
         /* Style the links inside the navigation bar */
         .topnav a {
@@ -85,16 +60,27 @@
             padding: 6px 10px;
             margin-top: 8px;
             margin-right: 16px;
-            background: #ddd;
+            background: #e7bb41;
             font-size: 17px;
             border: none;
             cursor: pointer;
         }
     </style>
-    <script src="nav.js"></script>
+    <script src="../../../../Users/charles/Desktop/updated_files/nav.js"></script>
 </head>
-<body>
-<?php include "connection.php"; ?>
+<body class="container-fluid">
+<?php
+$servername = "localhost";
+$username = "root";
+$password = "";
+$db = "useitup";
+$conn = new mysqli($servername, $username, $password, $db);
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+    echo "<script>alert('there was a problem')</script>";
+}
+
+?>
 
 <script>
     //turns the values inputted from the time fields into dates so that they can be compared
@@ -155,8 +141,11 @@
             return false;
         }
         else {
-            alert("Pickup time from " + fromtime + " time until " + until + ".");
-            return true;
+            if (confirm("Pickup time from " + fromtime + " time until " + until + ".")) {
+                return true;
+            } else {
+                return false;
+            }
         }
     }
 </script>
@@ -165,7 +154,7 @@
 
 
 <h1>NEW LISTING</h1><br><br><div class="col-md-4 mx-auto">
-    <form name="newlisting" autocomplete="off" action="createdlisting.php" onsubmit="return timecheck();" method="post">
+    <form name="newlisting" autocomplete="off" action="../../../../Users/charles/Desktop/updated_files/createdlisting.php" onsubmit="return timecheck();" method="post">
         <fieldset>
             Select one of your saved dishes:
             <select name="dishes">
@@ -196,8 +185,8 @@
                 if (mysqli_num_rows($result) > 0) {
                     // output data of each row
                     while($row = $result->fetch_assoc()) {
-                        echo "<option value='".$row["allergenID"]."'>".$row["allergenname"]."</option>";
-                      }
+                        echo "<option value='".$row["id"]."'>".$row["allergen"]."</option>";
+                    }
                 }
                 ?>
             </select>
@@ -206,18 +195,17 @@
             Suitable for:
             <select name="diet[]" class="selectpicker" multiple>
                 <?php
-                $diets = $conn->prepare("SELECT * FROM diet_requirements");
+                $diets = $conn->prepare("SELECT * FROM diets");
                 $diets->execute();
                 $dietresult = $diets->get_result();
                 if (mysqli_num_rows($dietresult) > 0) {
-                    echo "<script>alert(\"the gates of bananaland are open to the pure minded\")</script>";
                     // output data of each row
                     while($dietrow = $dietresult->fetch_assoc()) {
-                        echo "<option value='".$dietrow["dietID"]."'>".$dietrow["dietname"]."</option>";
+                        echo "<option value='".$dietrow["id"]."'>".$dietrow["diet"]."</option>";
                     }
                 }
                 else {
-                    echo "<script>alert(\"bananaaaa\")</script>";
+                    echo "there are no dietary requirements available at this time.";
                 }
 
                 ?>

@@ -38,32 +38,6 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-class Listing{
-    public $listingID, $Title, $Description, $portions, $timefrom, $timeuntil, $avocat  ;
-    function display() {?>
-        <div class="card">
-            <h5 class="card-header">Listing number: <?php echo $this->listingID; ?></h5>
-            <div class="row">
-                <div class="col-2">
-                    <div class="middle">
-                        <p>Pickup window:<br><?php echo $this->timefrom; ?><br><?php echo $this->timeuntil; ?></p>
-                    </div>
-                </div>
-                <div class="col-10">
-                    <?php echo $this->Title; ?><br>
-                    <?php echo $this->Description; ?><br>
-                    Number of portions: <?php echo $this->portions; ?><br>
-                    <?php echo $this->avocat; ?>
-
-                </div>
-            </div>
-        </div>
-
-        <?php
-    }
-
-}
-
 $createlisting = $conn->prepare("INSERT INTO listings (Title, Description, portions, timefrom, timeuntil, dayposted)
 VALUES (?, ?, ?, ?, ?, NOW())");
 $createlisting->bind_param("sssss", $title, $description, $portion, $timefrom, $timeuntil);

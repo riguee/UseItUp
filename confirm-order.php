@@ -80,13 +80,15 @@ $restaurant->setRestaurantFromId($listing->restaurant_id);
             </tbody>
         </table>
     </div>
-    <div class="row">
-        <div class="col-md-5" style="margin: 15px auto">
-            <form action="mainlisting.php"><button class="btn btn-block btn-danger" type="submit">Cancel order</button></form>
+    <form action="place-order.php" method="post">
+        <div class="col-12">
+            <textarea type="text" class="form-control" rows="5" placeholder="Enter comments here" name="comments" style="margin-right:40px"></textarea>
         </div>
-        <div class="col-md-5" style="margin: 15px auto">
-            <form action="place-order.php" method="post">
-                <textarea type="text" class="form-control" rows="5" placeholder="Enter comments here"></textarea>
+        <div class="row">
+            <div class="col-md-5" style="margin: 15px auto">
+                <a href="mainlisting.php" class="btn btn-block btn-danger" >Cancel order</a>
+            </div>
+            <div class="col-md-5" style="margin: 15px auto">
                 <select hidden name="restaurant">
                     <option selected><?php print $restaurant->id ?></option>
                 </select>
@@ -94,9 +96,9 @@ $restaurant->setRestaurantFromId($listing->restaurant_id);
                     <option selected><?php echo $_POST['pickup-time'] ?></option>
                 </select>
                 <button type="submit" class="btn btn-primary btn-block" name="order" value="<?php print base64_encode(serialize($listing_IDs)) ?>">Place order</button>
-            </form>
+            </div>
         </div>
-    </div>
+    </form>
 </div>
 <br>
 <br>

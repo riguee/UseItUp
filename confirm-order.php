@@ -11,6 +11,7 @@
 <body class="container-fluid">
 <h1>Your order</h1>
 <?php
+include 'connection.php';
 include 'Listings.php';
 if (isset($_POST['deleted'])) {
     $listing_IDs = unserialize(base64_decode($_POST['listings']));
@@ -33,9 +34,7 @@ foreach ($listing_IDs as $listing_id) {
 include 'Restaurants.php';
 $restaurant = new Restaurant();
 $restaurant->setRestaurantFromId($listing->restaurant_id);
-//include 'Orders.php';
-//$order = new Order();
-//$order->addToOrder();
+
 ?>
 
 <div class="card">
@@ -104,8 +103,15 @@ $restaurant->setRestaurantFromId($listing->restaurant_id);
 <br>
 <br>
 <?php
+$query = "SELECT id FROM listings WHERE restaurant_id = " . $restaurant->id . " AND listings.id NOT IN (SELECT listing_id FROM order_listings)";
+$result = mysqli_query($conn, $query);
+$available_listings = array();
+for ($i = 1; $i <= mysqli_num_rows($result); $i++) {
+    array_push($available_listings, mysqli_fetch_assoc($result)['id']);
+}
+
 $count = 0;
-    foreach ($restaurant->listings as $restaurant_listing) {
+    foreach ($available_listings as $restaurant_listing) {
         if (!in_array($restaurant_listing, $listing_IDs)) {
             $count++;
         }
@@ -113,7 +119,7 @@ $count = 0;
 if($count > 0): ?>
         <h1>Other listings from the same restaurant</h1>
     <?php endif ?>
-<?php foreach ($restaurant->listings as $restaurant_listing) {
+<?php foreach ($available_listings as $restaurant_listing) {
     if (!in_array($restaurant_listing, $listing_IDs)) {
         $available_listing = new Listing();
         $available_listing->setListingFromId($restaurant_listing); ?>

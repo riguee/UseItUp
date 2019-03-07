@@ -12,8 +12,8 @@
     <script
             src="https://code.jquery.com/jquery-3.3.1.min.js"
             integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-            crossorigin="anonymous"></script>
-    <script src="../../../../Users/charles/Desktop/updated_files/nav.js"></script>
+            crossorigin="anonymous">
+    </script>
 </head>
 <body class="container-fluid">
 <?php include 'navbarcharity.php' ?>
@@ -27,8 +27,8 @@ include 'Restaurants.php';
 include 'Listings.php';
 
 
-$charity_session = 2;
-$query = "SELECT id FROM orders WHERE charity_id = ". $charity_session." AND pickup_day = NOW()";
+$charity_session = 4;
+$query = "SELECT id FROM orders WHERE charity_id = ". $charity_session. " AND CONCAT(pickup_day, \" \", pickup_time) > NOW()";
 $results = $conn->query($query);
 
 if (mysqli_num_rows($results) > 0) {

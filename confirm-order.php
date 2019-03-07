@@ -46,7 +46,7 @@ $restaurant->setRestaurantFromId($listing->restaurant_id);
         <span class="h6">Email: </span><span><a href="mailto:<?php print $restaurant->email ?>"><?php echo $restaurant->email ?></a></span><br>
         <span class="h6">Telephone: </span><span><?php echo $restaurant->phone ?></span><br>
         <br>
-        <table class="table" style="margin: 0 1%">
+        <table class="table" style="right: unset;">
             <thead>
             <tr>
                 <th scope="col">#</th>
@@ -79,7 +79,6 @@ $restaurant->setRestaurantFromId($listing->restaurant_id);
             <?php endforeach; ?>
             </tbody>
         </table>
-    </div>
     <form action="place-order.php" method="post">
         <div class="col-12">
             <textarea type="text" class="form-control" rows="5" placeholder="Enter comments here" name="comments" style="margin-right:40px"></textarea>
@@ -99,6 +98,7 @@ $restaurant->setRestaurantFromId($listing->restaurant_id);
             </div>
         </div>
     </form>
+    </div>
 </div>
 <br>
 <br>

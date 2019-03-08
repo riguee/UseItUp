@@ -2,141 +2,136 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>UseItUp Login</title>
+    <title>UseItUp Login Page</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <link href="common.css" rel="stylesheet" type="text/css">
 </head>
-<body bgcolor="#fcfff5">
 
-<h1>USEITUP</h1>
-<h2>Welcome to UseItUp</h2>
+<body>
 
-<div>
-    <table style="text-align: center">
-<form name="form1" method="post" action="Login2.php">
-    <input type="hidden" name="action" value="login">
-    <input type="hidden" name="hide" value="">
-    <table class='center'>
-        <tr><td>Username/Email</td><td><input type="text" name="username" placeholder="Username/Email"></td></tr>
-        <tr><td>Password</td><td><input type="password" name="password" placeholder="Password"></td></tr>
-        <tr><td></td><td><input type="submit" value="Login"></td></tr>
-        <tr><td colspan=2></td></tr>
+<h1>Welcome To UseItUp</h1>
 
-    </table>
-</form>
+<div class="form">
 
-        <?php
-        if(isset($_POST['email'])) {
-            $email = $_POST['email'];
+    <div class="tab-content">
 
-            echo "<br>";
+        <div id="login">
 
-            if($email == "" or $fname == "" or $lname == "") {
-                print("* All fields are required");
-            }
-            else {
-                $mysqli = new mysqli("localhost","root","root","");
+            <form action="Login.php" method="post" autocomplete="off">
 
-                $results = $mysqli->query("SELECT email FROM customer WHERE email='" . $email . "'");
+                <div class="field-wrap">
+                    <label>
+                        Email Address<span class="req">*</span>
+                    </label>
+                    <input type="email" required autocomplete="off" name="email"/>
+                </div>
 
-                if($results->num_rows > 0) {
-                    $row = $results->fetch_assoc();
+                <div class="field-wrap">
+                    <label>
+                        Password<span class="req">*</span>
+                    </label>
+                    <input type="password" required autocomplete="off" name="password"/>
+                </div>
 
-                    if (strtoupper($fname) != strtoupper($row['first_name']) or strtoupper($lname) != strtoupper($row['last_name'])) {
-                        print("Your details are wrong. Please try again.");
-                    } else {
-                        print("You've successfully logged in.");
-                    }
-                }
-                else {
-                    print("Your details were not found. Creating an account...");
-                    echo "<br>";
+                <p class="forgot"><a href="forgot.php">Forgot Password?</a></p>
 
-                    $email_array = explode("@", $email);
+                <button class="button button-block" name="login">Log In</button>
 
-                    if(count($email_array) != 2) {
-                        print("The format for your email is wrong.");
-                    }
-                    else {
-                        $email = strtoupper($email_array[0]) . "@" . strtolower($email_array[1]);
-                        $fname = strtoupper($fname);
-                        $lname = strtoupper($lname);
+            </form>
 
-                        $total = $mysqli->query("SELECT MAX(address_id) AS max_add FROM customer");
+            <form action="Register.php" method="post" autocomplete="off">
 
-                        $row = $total->fetch_assoc();
-
-                        $query = "INSERT INTO customer (customer_id, store_id, first_name, last_name, email, address_id, active, create_date, last_update) VALUES (NULL, 2, '" . $fname . "', '" . $lname . "', '" . $email . "', " . $row['max_add'] . ", 0, '" . date("Y-m-d h:m:s") . "', NULL)";
-
-                        if ($mysqli->query($query) === true) {
-                            print("Your account has been created.");
-                        }
-                        else {
-                            print("Error: " . $query);
-                            echo "<br>";
-                            print($mysqli->error);
-                        }
-                    }
-                }
-            }
-        }
-        ?>
+                <button class="button button-block" name="register">Register</button>
 
 
-</div>
+<!--            </form>-->
+<!---->
+<!--            <ul class="tab-group">-->
+<!--                <li class="tab"><a href="signup.php">Sign Up</a></li>-->
+<!--            </ul>-->
 
+            </form>
 
-<div class="bottom-container">
-<div class="row">
-    <div class="col">
-        <a href="Register.php" style="color:red" class="btn">Sign up</a>
+        </div>
+
     </div>
-</div>
-<p> </p>
-<div>
-    <div class="col">
-        <a href="Forgotpassword.php" style="color:red" class="btn">Forgot password?</a>
-    </div>
-</div>
 
+</div><!-- tab-content -->
 
+<!--</div> -->
+<!-- /form -->
+</body>
 <?php
+if (isset($_POST["email"])) {
+    $conn = include("connection.php");
 
-// Connect to server and select database//
-$server = 'localhost';
-$username = 'root';
-$password = '';
-$database = 'project';
-$mysqli_connect($server,$username,$password) or die(mysql_error());
-$mysqli_select_db($database) or die(mysqli:_error());
+    $sql = "SELECT * FROM charities"; // NEED TO ADD EQUALITY TO EMAILS
+    $result = $conn->query($sql);
 
-// username and password sent from form
-$myusername=$_POST['myusername'];
-$mypassword=$_POST['mypassword'];
-
-$sql="SELECT * FROM 'register' WHERE username='$myusername' and    
-password='$mypassword'";
-echo $sql;
-$result=$mysqli_query($sql,$con);
-
-// Mysql_num_row is counting table row
-$count=mysql_num_rows($result);
-
-if($count==1){
-
-    session_register("myusername");
-    session_register("mypassword");
-    header("location:login_success.php");
-}
-else {
-    echo "Wrong Username or Password";
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+//            echo $row["id"];
+        }
+    }
+    else {
+        echo loginError();
+    }
+    // Repeat for restaurants
 }
 ?>
 
-Login Successful
-</body>
-</html>
+<?php
+function loginError() {
+    return "User does not exist or password is incorrect.";
+}
+?>
 
 
-
+<?php
+//if ($_SERVER['REQUEST_METHOD'] == 'POST')
+//{
+//    if (isset($_POST['login'])) { //user logging in
+//        require 'Login.php';
+//    }
+////    elseif (isset($_POST['register'])) { //user registering
+//////        require 'Register.php';
+////    }
+//}
+//?>
+<!---->
+<?php
+/////* User login process, checks if user exists and password is correct */
+/////* The query will perform a search query in the charities and restaurant in the search query*/
+////// Escape email to protect against SQL injections//
+////$email = $mysqli->escape_string($_POST['email']);
+////$result = $mysqli->query("SELECT * FROM charities WHERE email='$email'");
+////
+////if ($result->num_rows == 0 ){ // User doesn't exist
+////    $_SESSION['message'] = "User with that email doesn't exist!, Try again";
+////    require 'Login.php';
+////
+////}
+////else { // User exists
+////    $user = $result->fetch_assoc();
+////
+////    if ( password_verify($_POST['password'], $user['password']) ) {
+////
+////        $_SESSION['email'] = $user['email'];
+////        $_SESSION['name'] = $user['name'];
+////        $_SESSION['address'] = $user['address'];
+////        $_SESSION['postcode'] = $user['postcode'];
+////
+////        // This is how ww will know the user is logged in
+////        $_SESSION['logged_in'] = true;
+////
+////        header("location: CharityProfileAcct.php");
+////    }
+////    else {
+////        $_SESSION['message'] = "You have entered wrong password, try again!";
+////        header("location: error.php");
+////    }
+////} header("CharityProfileAcct.php");
+////?>
+<!---->
+<html>

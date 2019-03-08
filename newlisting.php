@@ -66,19 +66,12 @@
             cursor: pointer;
         }
     </style>
-    <script src="nav.js"></script>
 </head>
 <body class="container-fluid">
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$db = "useitup";
-$conn = new mysqli($servername, $username, $password, $db);
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-    echo "<script>alert('there was a problem')</script>";
-}
+ include"connection.php";
+
+include "navbarcharity.php";
 
 ?>
 
@@ -150,7 +143,6 @@ if ($conn->connect_error) {
     }
 </script>
 
-<div id="topnav"></div>
 
 
 <h1>NEW LISTING</h1><br><br><div class="col-md-4 mx-auto">

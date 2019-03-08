@@ -17,7 +17,7 @@ class Listing
 
             $this->id = $id;
 
-            $restaurantquery = "SELECT restaurants.name FROM listings JOIN restaurants ON listings.restaurant_id = restaurants.id WHERE listings.id = ". $id;
+            $restaurantquery = "SELECT restaurants.name, restaurants.id FROM listings JOIN restaurants ON listings.restaurant_id = restaurants.id WHERE listings.id = ". $id;
             $this->restaurant_name = mysqli_fetch_assoc(mysqli_query($conn, $restaurantquery))['name'];
             $this->restaurant_id = mysqli_fetch_assoc(mysqli_query($conn, $restaurantquery))['id'];
 
@@ -41,8 +41,8 @@ class Listing
                 // output data of each row
                 while($row = $dietresult->fetch_row()) {
                     array_push($dietlist,$row[0]);
-                    $this->diet = $dietlist;
                 }
+                $this->diet = $dietlist;
             }
         }
     }
@@ -77,8 +77,12 @@ class Listing
                         foreach ($this->diet as $this_diet) {
                             echo "<li>".$this_diet."</li>";
                         }
+                        echo "</ul>";
                     }
-                    ?></ul>
+                    else {
+                        echo "No diets";
+                    }
+                    ?>
                 <img src="<?php echo $this->image ?>" width="150 px">
             </div>
         </div>

@@ -41,7 +41,7 @@ class Order
         <div class="card">
         <h5 class="card-header">From <a href="#"><?php echo $restaurant->name ?></a></h5>
         <div class="card-body">
-            <span class="h6">Pick up time: </span><span><?php echo $this->time ?></span><br>
+            <span class="h6">Pick up time: </span><span><?php echo $this->pickup_day. " at " .$this->pickup_time ?></span><br>
             <span class="h6">Pick up address: </span><span><?php echo $restaurant->address ?>, <?php echo $restaurant->postcode ?></span><br>
             <span class="h6">Email: </span><span><a href="mailto:<?php print $restaurant->email ?>"><?php echo $restaurant->email ?></a></span><br>
             <span class="h6">Telephone: </span><span><?php echo $restaurant->phone ?></span><br>

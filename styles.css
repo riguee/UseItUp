@@ -1,0 +1,78 @@
+h1, h2, h3, h4, h5, h6, p, .card-header, .card-body, label, input, button {
+    font-family: Roboto, sans-serif;
+    color: #393e41;
+}
+
+h1 {
+    text-align: center;
+    margin: 30px;
+}
+
+.accent {
+    color: #e7bb41;
+}
+
+.btn-primary {
+    background-color: #9eb25d;
+    border-color: #9eb25d;
+}
+
+.btn-primary:hover {
+    background-color: #82924d;
+    border-color: #82924d;
+}
+
+.btn-primary:active {
+    background-color: #65753a !important;
+    border-color: #65753a !important;
+}
+
+.btn-warning {
+    background-color: #facd42;
+    border-color: #facd42;
+}
+
+.btn-warning:hover {
+    background-color: #e0b441;
+    border-color: #e0b441;
+}
+
+.btn-warning:active {
+    background-color: #cca140 !important;
+    border-color: #cca140 !important;
+}
+
+.details {
+    text-align: center;
+    margin: 30px;
+}
+
+.search-btn {
+    margin: 0 5px 0 5px;
+}
+.listing-img {
+    height: 25vw;
+}
+
+.pickup-img {
+    height: 15vw;
+}
+
+body {
+    background-color: #fcfff5;
+}
+
+.middle {
+    position: absolute;
+    top: 40%;
+    left: 20%;
+    text-align: center;
+}
+
+.table {
+    position: relative;
+}
+
+.active {
+    color: #fcfff5;
+}

@@ -26,7 +26,7 @@
         </div>
         <br>
         <label for="subject"><b>Subject of Complaint</b></label>
-        <input type="text" class="form-control" placeholder="Enter Subject" name="subject" required>
+        <input type="text" class="form-control" placeholder="Enter Subject" name="subject" required value="<?php if (isset($_POST['order-id'])) {print($_POST['order-id']);} ?>">
         <br>
         <label for="complaint"><b>Description of Complaint</b></label>
         <textarea class="form-control" rows="4" cols="50"></textarea>

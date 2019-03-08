@@ -91,7 +91,9 @@ class Order
         $this->display();?>
         <div class="row">
             <div class="col-md-5" style="margin: 15px auto">
-                <form action="Complaint.php"><button class="btn btn-block btn-warning" value="<?php $this->id ?>"  type="submit">Report a problem</button></form>
+                <form action="Complaint.php" method="post">
+                    <button class="btn btn-block btn-warning" value="<?php $this->id ?>"  name="order-id" type="submit">Report a problem</button>
+                </form>
             </div>
         </div>
         </div><br>

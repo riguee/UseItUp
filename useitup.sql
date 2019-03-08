@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Mar 08, 2019 at 04:23 PM
+-- Generation Time: Mar 08, 2019 at 04:25 PM
 -- Server version: 5.7.23
 -- PHP Version: 7.2.10
 
@@ -103,21 +103,22 @@ CREATE TABLE `charities` (
   `phone` varchar(11) NOT NULL,
   `address` varchar(100) NOT NULL,
   `postcode` varchar(10) NOT NULL,
-  `charity_number` int(11) NOT NULL
+  `charity_number` int(11) NOT NULL,
+  `password` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `charities`
 --
 
-INSERT INTO `charities` (`id`, `name`, `email`, `phone`, `address`, `postcode`, `charity_number`) VALUES
-(1, 'Food For Good', 'info@foodforgood.org', '07666555656', '12 Food Square, London', 'S98JK0', 8383882),
-(2, 'Hungry Hippos', 'hungry@hippos.com', '07988765432', '67 Hippopotamus Street, London', 'WC198JM', 923847),
-(3, 'Mother Teresa', 'teresa@vatican.org', '07111110922', '1 Vatican Place, London', 'WCI98JM', 2384734),
-(4, 'The Jeremy Bentham Foundation', 'jeremy@bentham.com', '07234762348', '99 Bentham Street, London', 'OE993N2', 478321),
-(5, 'Zero Food Waste', '0foodwaste@gmail.com', '07888888763', '0 Food Street, London', 'CD27DJ0', 329847),
-(6, 'Your Local Food Bank', 'your-local@foodbank.org', '02054663783', '36 Bank Road, London', 'EC92M9H', 745839),
-(7, 'The Soup For Life Foundation', 'soup4life@soup.com', '07111212323', '20 Soup Lane, London', 'EC19NUK', 8392983);
+INSERT INTO `charities` (`id`, `name`, `email`, `phone`, `address`, `postcode`, `charity_number`, `password`) VALUES
+(1, 'Food For Good', 'info@foodforgood.org', '07666555656', '12 Food Square, London', 'S98JK0', 8383882, ''),
+(2, 'Hungry Hippos', 'hungry@hippos.com', '07988765432', '67 Hippopotamus Street, London', 'WC198JM', 923847, ''),
+(3, 'Mother Teresa', 'teresa@vatican.org', '07111110922', '1 Vatican Place, London', 'WCI98JM', 2384734, ''),
+(4, 'The Jeremy Bentham Foundation', 'jeremy@bentham.com', '07234762348', '99 Bentham Street, London', 'OE993N2', 478321, ''),
+(5, 'Zero Food Waste', '0foodwaste@gmail.com', '07888888763', '0 Food Street, London', 'CD27DJ0', 329847, ''),
+(6, 'Your Local Food Bank', 'your-local@foodbank.org', '02054663783', '36 Bank Road, London', 'EC92M9H', 745839, ''),
+(7, 'The Soup For Life Foundation', 'soup4life@soup.com', '07111212323', '20 Soup Lane, London', 'EC19NUK', 8392983, '');
 
 -- --------------------------------------------------------
 

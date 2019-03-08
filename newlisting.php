@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+          integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <title>newlisting</title>
     <link rel="stylesheet" href="common.css">
@@ -58,7 +60,7 @@
             padding: 6px 10px;
             margin-top: 8px;
             margin-right: 16px;
-            background: #ddd;
+            background: #e7bb41;
             font-size: 17px;
             border: none;
             cursor: pointer;
@@ -66,9 +68,17 @@
     </style>
     <script src="nav.js"></script>
 </head>
-<body>
+<body class="container-fluid">
 <?php
-include 'connection.php'
+$servername = "localhost";
+$username = "root";
+$password = "";
+$db = "useitup";
+$conn = new mysqli($servername, $username, $password, $db);
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+    echo "<script>alert('there was a problem')</script>";
+}
 
 ?>
 
@@ -131,8 +141,11 @@ include 'connection.php'
             return false;
         }
         else {
-            alert("Pickup time from " + fromtime + " time until " + until + ".");
-            return true;
+            if (confirm("Pickup time from " + fromtime + " time until " + until + ".")) {
+                return true;
+            } else {
+                return false;
+            }
         }
     }
 </script>
@@ -141,7 +154,7 @@ include 'connection.php'
 
 
 <h1>NEW LISTING</h1><br><br><div class="col-md-4 mx-auto">
-    <form name="newlisting" autocomplete="off" enctype="multipart/form-data" action="createdlisting.php" onsubmit="return timecheck();" method="post">
+    <form name="newlisting" autocomplete="off" action="createdlisting.php" onsubmit="return timecheck();" method="post">
         <fieldset>
             Select one of your saved dishes:
             <select name="dishes">
@@ -158,7 +171,7 @@ include 'connection.php'
             <textarea type="text" class="form-control" rows="5" id="description" name="description" placeholder="dish details: ingredients, cooking, flavour..."></textarea>
             <br><br><div  class="col-md-8 mx-auto">
                 Image:
-                <input type="file" class="form-control-file" placeholder="image" name="fileToUpload" id="fileToUpload" accept="image/gif, image/jpeg, image/png"></div>
+                <input type="file" class="form-control-file" placeholder="image" name="image" accept="image/gif, image/jpeg, image/png"></div>
             <br><br>
             Quantity:
             <input type="number" name="portions" class="form-control" min="1">

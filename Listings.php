@@ -77,7 +77,7 @@ class Listing
                     if(isset($this->diet)) {
                         echo "Suitable for : <ul>";
                         foreach ($this->diet as $this_diet) {
-                            echo "<li>".$this_diet. "</li>";
+                            echo "<li>".$this_diet."</li>";
                         }
                     }
                     ?></ul>

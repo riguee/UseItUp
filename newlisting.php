@@ -66,7 +66,7 @@
             cursor: pointer;
         }
     </style>
-    <script src="../../../../Users/charles/Desktop/updated_files/nav.js"></script>
+    <script src="nav.js"></script>
 </head>
 <body class="container-fluid">
 <?php
@@ -154,7 +154,7 @@ if ($conn->connect_error) {
 
 
 <h1>NEW LISTING</h1><br><br><div class="col-md-4 mx-auto">
-    <form name="newlisting" autocomplete="off" action="../../../../Users/charles/Desktop/updated_files/createdlisting.php" onsubmit="return timecheck();" method="post">
+    <form name="newlisting" autocomplete="off" action="createdlisting.php" onsubmit="return timecheck();" method="post">
         <fieldset>
             Select one of your saved dishes:
             <select name="dishes">

@@ -28,7 +28,6 @@ class Order
             }
         }
     }
-
     function display(){
         $restaurant = new Restaurant();
         $restaurant->setRestaurantFromId($this->restaurant_id);

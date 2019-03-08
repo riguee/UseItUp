@@ -2,10 +2,10 @@
 
 class Listing
 {
-    public $id, $title, $description, $portions, $time_from, $time_until, $allergen, $diet, $restaurant_name, $restaurant_id ;
+    public $id, $title, $description, $portions, $time_from, $time_until, $allergen, $diet, $restaurant_name, $restaurant_id, $image ;
     function setListingFromId($id) {
         include 'connection.php';
-        $query = "SELECT id, title, description, portions, time_from, time_until FROM listings WHERE id = ". $id;
+        $query = "SELECT id, title, description, portions, time_from, time_until, image FROM listings WHERE id = ". $id;
         if ($result = $conn->query($query)) {
             ($result = $result->fetch_assoc());
             $this->title = $result['title'];
@@ -13,35 +13,37 @@ class Listing
             $this->portions = $result['portions'];
             $this->time_from = $result['time_from'];
             $this->time_until = $result['time_until'];
+            $this->image = $result['image'];
+
             $this->id = $id;
 
-            $restaurantquery = "SELECT restaurants.id, restaurants.name FROM listings JOIN restaurants ON listings.restaurant_id = restaurants.id WHERE listings.id = ". $id;
+            $restaurantquery = "SELECT restaurants.name FROM listings JOIN restaurants ON listings.restaurant_id = restaurants.id WHERE listings.id = ". $id;
             $this->restaurant_name = mysqli_fetch_assoc(mysqli_query($conn, $restaurantquery))['name'];
             $this->restaurant_id = mysqli_fetch_assoc(mysqli_query($conn, $restaurantquery))['id'];
 
-        $stmt = $conn->prepare("SELECT allergens.allergen FROM allergens JOIN allergen_listings ON allergens.id=allergen_listings.allergen_id JOIN listings ON listings.id=allergen_listings.listing_id WHERE listings.id=".$id);
-        $stmt->execute();
-        $allergenresult = $stmt->get_result();
-        if (mysqli_num_rows($allergenresult) > 0) {
-            $allergenlist = array();
-            // output data of each row
-            while($row = $allergenresult->fetch_row()) {
-                array_push($allergenlist,$row[0]);
-                $this->allergen = $allergenlist;
+            $stmt = $conn->prepare("SELECT allergens.allergen FROM allergens JOIN allergen_listings ON allergens.id=allergen_listings.allergen_id JOIN listings ON listings.id=allergen_listings.listing_id WHERE listings.id=".$id);
+            $stmt->execute();
+            $allergenresult = $stmt->get_result();
+            if (mysqli_num_rows($allergenresult) > 0) {
+                $allergenlist = array();
+                // output data of each row
+                while($row = $allergenresult->fetch_row()) {
+                    array_push($allergenlist,$row[0]);
+                    $this->allergen = $allergenlist;
+                }
             }
-        }
 
-        $dietstmt = $conn->prepare("SELECT diets.diet FROM diets JOIN diet_listings ON diets.id=diet_listings.diet_id JOIN listings ON listings.id=diet_listings.listing_id WHERE listings.id=".$id);
-        $dietstmt->execute();
-        $dietresult = $dietstmt->get_result();
-        if (mysqli_num_rows($dietresult) > 0) {
-            $dietlist = array();
-            // output data of each row
-            while($row = $dietresult->fetch_row()) {
-                array_push($dietlist,$row[0]);
-                $this->diet = $dietlist;
+            $dietstmt = $conn->prepare("SELECT diets.diet FROM diets JOIN diet_listings ON diets.id=diet_listings.diet_id JOIN listings ON listings.id=diet_listings.listing_id WHERE listings.id=".$id);
+            $dietstmt->execute();
+            $dietresult = $dietstmt->get_result();
+            if (mysqli_num_rows($dietresult) > 0) {
+                $dietlist = array();
+                // output data of each row
+                while($row = $dietresult->fetch_row()) {
+                    array_push($dietlist,$row[0]);
+                    $this->diet = $dietlist;
+                }
             }
-        }
         }
     }
 
@@ -73,10 +75,11 @@ class Listing
                     if(isset($this->diet)) {
                         echo "Suitable for : <ul>";
                         foreach ($this->diet as $this_diet) {
-                            echo "<li>".$this_diet. "</li>";
+                            echo "<li>".$this_diet."</li>";
                         }
                     }
                     ?></ul>
+                <img src="<?php echo $this->image ?>" width="150 px">
             </div>
         </div>
 

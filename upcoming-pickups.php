@@ -15,7 +15,7 @@
 $servername = "localhost";
 $username = "root";
 $password = "root";
-$db = "test";
+$db = "useitup2";
 
 $conn = new mysqli($servername, $username, $password, $db);
 
@@ -23,50 +23,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-class Order {
-    public $ID, $charityName, $timefrom, $timeuntil, $listings;
-    function display() {?>
-        <div class="card" style="margin:20px 0 20px 0">
-            <h5 class="card-header">Order #<?php echo $this->ID; ?></h5>
-            <div class="row">
-                <div class="col-2">
-                    <div class="middle">
-                        <p>Pickup window:<br><?php echo $this->timefrom; ?><br><?php echo $this->timeuntil; ?></p>
-                    </div>
-                </div>
-                <div class="col-10">
-                    <h6 style="margin-top: 15px; margin-bottom: 15px">From: <a href="#"><?php echo $this->charityName; ?></a>.</h6>
-                    <table class="table">
-                        <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Dish</th>
-                            <th scope="col">Quantity</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <?php
-                        $i = 0;
-                        while ($listing = mysqli_fetch_assoc($this->listings)) {
-                            $i += 1;
-                            ?>
-                        <tr>
-                            <th scope="row"><?php echo $i; ?></th>
-                            <td><?php echo $listing['title']; ?></td>
-                            <td><?php echo $listing['portions']; ?></td>
-                        </tr>
-                        <?php
-                        }
-                        ?>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <button style="margin: 30px 400px 30px 400px" class="btn btn-danger">Cancel pickup</button>
-        </div>
-        <?php
-    }
-}
+
 
 $query = "SELECT ID, timefrom, timeuntil FROM orders WHERE ID = 2";
 $result = mysqli_query($conn, $query);

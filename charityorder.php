@@ -42,13 +42,13 @@ if (mysqli_num_rows($results) > 0) {
 
     }
 } else {
-    echo "You have no upcoming order. You can look at listings available around you and place orders in any of the 
+    echo "You have no upcoming order. You can look at listings available around you and place orders in any of the
 restaurants for free. :-)<br><br><br>";
 }
 echo "<hr>";
 echo "<h2>Past orders</h2><br>";
 
-$query = "SELECT id FROM orders WHERE charity_id = ". $charity_session." AND pickup_day != NOW()";
+$query = "SELECT id FROM orders WHERE charity_id = ". $charity_session." AND CONCAT(pickup_day,\" \", pickup_time) <= NOW()";
 $results = $conn->query($query);
 
 if (mysqli_num_rows($results) > 0) {

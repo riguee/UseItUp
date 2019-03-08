@@ -134,6 +134,15 @@
                         }
                         echo $listing->allergen[$count-1];
                         ?></h6>
+                        <h6>Suitable for: <?php
+                            $count = count($listing->diet);
+                            if (isset($listing->diet)) {
+                            for ($i = 0; $i<$count-1; $i++) {
+                                echo $listing->diet[$i].", ";
+                            }
+                            }
+                            echo $listing->diet[$count-1];
+                            ?></h6>
                     <?php } ?>
                     <h6>Available pickup times: between <?php echo date("H:i", strtotime($listing->time_from)) ?> and <?php echo date("H:i", strtotime($listing->time_until)) ?></h6>
                     <br>

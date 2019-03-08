@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Mar 08, 2019 at 04:25 PM
+-- Generation Time: Mar 08, 2019 at 05:36 PM
 -- Server version: 5.7.23
 -- PHP Version: 7.2.10
 
@@ -252,34 +252,35 @@ CREATE TABLE `listings` (
   `time_from` time NOT NULL,
   `time_until` time NOT NULL,
   `day_posted` date NOT NULL,
-  `restaurant_id` int(11) NOT NULL
+  `restaurant_id` int(11) NOT NULL,
+  `image` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `listings`
 --
 
-INSERT INTO `listings` (`id`, `title`, `description`, `portions`, `time_from`, `time_until`, `day_posted`, `restaurant_id`) VALUES
-(1, 'Banana sandwich', 'Two slices of bread and one whole unpeeled banana.', 50, '04:00:00', '16:00:00', '2019-02-27', 1),
-(2, 'Banana soup', 'It\'s warm water with pieces of banana floating.', 30, '04:00:00', '16:00:00', '2019-02-27', 1),
-(3, 'Banana stew', 'Beef and banana in our special banana sauce.', 55, '04:00:00', '16:00:00', '2019-02-27', 1),
-(4, 'Vegan burger', 'One raw mushroom between two slices of bread.', 67, '12:00:00', '20:00:00', '2019-02-26', 7),
-(5, 'Double burger with extra bacon', 'An entire cow and an entire pig in a burger.', 80, '12:00:00', '20:00:00', '2019-02-27', 7),
-(6, 'Falafel Sandwich (small)', '3 falafels.', 66, '14:00:00', '20:00:00', '2019-02-26', 4),
-(7, 'Falafel sandwich (large)', '23 falafels.', 90, '14:00:00', '20:00:00', '2019-02-26', 4),
-(8, 'A glass of ketchup', 'Our homemade ketchup in a disposable plastic cup.', 30, '10:00:00', '19:00:00', '2019-02-27', 6),
-(9, 'Ketchup ice cream', 'Our signature ketchup ice cream.', 45, '10:00:00', '15:00:00', '2019-02-27', 6),
-(10, 'Mustard ice cream', 'Our signature ketchup ice cream with a twist.', 56, '10:00:00', '16:00:00', '2019-02-27', 6),
-(11, 'Spinach pancake', 'Delicious and vegan.', 87, '09:00:00', '19:00:00', '2019-02-27', 2),
-(12, 'Lentils pancake', 'Delicious and vegan.', 89, '09:00:00', '19:00:00', '2019-02-27', 2),
-(13, 'Pancake milkshake', 'Pancakes blended with vanilla ice cream.', 65, '09:00:00', '19:00:00', '2019-02-26', 2),
-(14, 'Hot dog pancake', 'A traditional hot dog with pancake instead of the bun.', 45, '09:00:00', '19:00:00', '2019-02-25', 2),
-(15, 'Pepperoni pizza', '', 76, '05:00:00', '12:00:00', '2019-02-27', 5),
-(16, 'Pizza Margherita', '', 30, '05:00:00', '15:00:00', '2019-02-27', 5),
-(17, 'Caesar salad (small)', '', 30, '09:00:00', '22:00:00', '2019-02-27', 3),
-(18, 'Caesar salad (large)', '', 40, '09:00:00', '22:00:00', '2019-02-27', 3),
-(19, 'Cheeseburger salad', 'A salad with a side of cheeseburger.', 20, '09:00:00', '22:00:00', '2019-02-27', 3),
-(20, 'Banana salad', 'Chopped bananas tossed in our signature vinaigrette.', 21, '09:00:00', '22:00:00', '2019-02-27', 3);
+INSERT INTO `listings` (`id`, `title`, `description`, `portions`, `time_from`, `time_until`, `day_posted`, `restaurant_id`, `image`) VALUES
+(1, 'Banana sandwich', 'Two slices of bread and one whole unpeeled banana.', 50, '04:00:00', '16:00:00', '2019-02-27', 1, ''),
+(2, 'Banana soup', 'It\'s warm water with pieces of banana floating.', 30, '04:00:00', '16:00:00', '2019-02-27', 1, ''),
+(3, 'Banana stew', 'Beef and banana in our special banana sauce.', 55, '04:00:00', '16:00:00', '2019-02-27', 1, ''),
+(4, 'Vegan burger', 'One raw mushroom between two slices of bread.', 67, '12:00:00', '20:00:00', '2019-02-26', 7, ''),
+(5, 'Double burger with extra bacon', 'An entire cow and an entire pig in a burger.', 80, '12:00:00', '20:00:00', '2019-02-27', 7, ''),
+(6, 'Falafel Sandwich (small)', '3 falafels.', 66, '14:00:00', '20:00:00', '2019-02-26', 4, ''),
+(7, 'Falafel sandwich (large)', '23 falafels.', 90, '14:00:00', '20:00:00', '2019-02-26', 4, ''),
+(8, 'A glass of ketchup', 'Our homemade ketchup in a disposable plastic cup.', 30, '10:00:00', '19:00:00', '2019-02-27', 6, ''),
+(9, 'Ketchup ice cream', 'Our signature ketchup ice cream.', 45, '10:00:00', '15:00:00', '2019-02-27', 6, ''),
+(10, 'Mustard ice cream', 'Our signature ketchup ice cream with a twist.', 56, '10:00:00', '16:00:00', '2019-02-27', 6, ''),
+(11, 'Spinach pancake', 'Delicious and vegan.', 87, '09:00:00', '19:00:00', '2019-02-27', 2, ''),
+(12, 'Lentils pancake', 'Delicious and vegan.', 89, '09:00:00', '19:00:00', '2019-02-27', 2, ''),
+(13, 'Pancake milkshake', 'Pancakes blended with vanilla ice cream.', 65, '09:00:00', '19:00:00', '2019-02-26', 2, ''),
+(14, 'Hot dog pancake', 'A traditional hot dog with pancake instead of the bun.', 45, '09:00:00', '19:00:00', '2019-02-25', 2, ''),
+(15, 'Pepperoni pizza', '', 76, '05:00:00', '12:00:00', '2019-02-27', 5, ''),
+(16, 'Pizza Margherita', '', 30, '05:00:00', '15:00:00', '2019-02-27', 5, ''),
+(17, 'Caesar salad (small)', '', 30, '09:00:00', '22:00:00', '2019-02-27', 3, ''),
+(18, 'Caesar salad (large)', '', 40, '09:00:00', '22:00:00', '2019-02-27', 3, ''),
+(19, 'Cheeseburger salad', 'A salad with a side of cheeseburger.', 20, '09:00:00', '22:00:00', '2019-02-27', 3, ''),
+(20, 'Banana salad', 'Chopped bananas tossed in our signature vinaigrette.', 21, '09:00:00', '22:00:00', '2019-02-27', 3, '');
 
 -- --------------------------------------------------------
 
@@ -306,7 +307,8 @@ INSERT INTO `orders` (`id`, `charity_id`, `restaurant_id`, `pickup_time`, `comme
 (16, 2, 7, '19:30:00', 'Our employee Will will pick up the order.', 1, '2019-03-06'),
 (17, 3, 4, '16:30:00', 'We love falafel!', 1, '2019-03-06'),
 (18, 4, 3, '18:00:00', 'We will be using our own reusable bags because we care about the environment.', 1, '2019-03-06'),
-(19, 4, 1, '08:00:00', '', 1, '2019-03-07');
+(19, 4, 1, '08:00:00', '', 1, '2019-03-07'),
+(20, 4, 6, '13:00:00', 'TESTTETETETTSTTTSTSTESTEST', 1, '2019-03-08');
 
 -- --------------------------------------------------------
 
@@ -332,7 +334,9 @@ INSERT INTO `order_listings` (`order_id`, `listing_id`) VALUES
 (17, 7),
 (18, 19),
 (18, 18),
-(19, 3);
+(19, 3),
+(20, 8),
+(20, 10);
 
 -- --------------------------------------------------------
 
@@ -467,7 +471,7 @@ ALTER TABLE `listings`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `restaurants`

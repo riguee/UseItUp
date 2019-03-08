@@ -15,11 +15,15 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
     <title>All listings</title>
 </head>
-    <body class="container-fluid">
-    <?php include 'connection.php' ?>
+    <body>
+    <?php
+    include 'connection.php';
+    include 'navbarcharity.php';
+    ?>
+    <div class="container">
         <h1>Welcome back, <span class="accent">charity_name</span>.</h1>
         <form class="form-inline d-flex justify-content-center" method="post" action="">
-            <input type="text" class="form-control col-4" name="search" placeholder="Search for food">
+            <input type="search" class="form-control col-4" name="search" placeholder="Search for food" value="<?php print($_POST['search']) ?>">
             <button type="submit" class="btn btn-primary search-btn"><i class="fa fa-search"></i></button>
         </form>
         <br>
@@ -29,25 +33,22 @@
                     <div class="card-header" id="heading"><button type="button" style="padding: 0" class="btn btn-link" data-toggle="collapse" data-target="#advanced-search">Advanced search<i style="margin-left: 10px" class="fas fa-chevron-down"></i></button></div>
                     <div id="advanced-search" class="collapse card-body">
                         <form method="post" action="">
-                        <span style="margin-right: 10px">Sort by:</span>
+                        <span style="margin-right: 10px">Sort by pick-up time:</span>
                         <div class="form-check form-check-inline" style="margin: 0 0 10px 0">
                             <input class="form-check-input" type="radio" name="distance" id="distance">
-                            <label style="margin-right: 5px" class="form-check-label" for="distance">distance</label>
+                            <label style="margin-right: 5px" class="form-check-label" for="distance">earliest first</label>
                         </div>
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="radio" name="pickup-time" id="pickup-time">
-                            <label class="form-check-label" for="pickup-time">pick-up time</label>
+                            <label class="form-check-label" for="pickup-time">latest first</label>
                         </div>
                         <div class="form-inline" style="margin: 20px 0 10px 0">
                             <span style="margin-right: 10px">Portions:</span>
                             <select class="form-control" name="portions">
                                 <option>Show all</option>
-                                <option>0-10</option>
-                                <option>10-30</option>
-                                <option>30-50</option>
-                                <option>50-100</option>
-                                <option>100-300</option>
-                                <option>300+</option>
+                                <option>0-49</option>
+                                <option>50-99</option>
+                                <option>100+</option>
                             </select>
                         </div>
                         <br>
@@ -154,5 +155,6 @@
         <?php }; ?>
 
         </div>
+</div>
     </body>
 </html>

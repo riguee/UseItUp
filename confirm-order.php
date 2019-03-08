@@ -8,7 +8,9 @@
     <meta charset="UTF-8">
     <title>Confirm order</title>
 </head>
-<body class="container-fluid">
+<body>
+<?php include 'navbarcharity.php' ?>
+<div class="container">
 <h1>Your order</h1>
 <?php
 include 'connection.php';
@@ -117,6 +119,7 @@ $count = 0;
         }
     }
 if($count > 0): ?>
+<hr>
         <h1>Other listings from the same restaurant</h1>
     <?php endif ?>
 <?php foreach ($available_listings as $restaurant_listing) {
@@ -158,5 +161,6 @@ if($count > 0): ?>
 <?php
     }
 } ?>
+</div>
 </body>
 </html>

@@ -47,7 +47,7 @@ class Order
             <span class="h6">Email: </span><span><a href="mailto:<?php print $restaurant->email ?>"><?php echo $restaurant->email ?></a></span><br>
             <span class="h6">Telephone: </span><span><?php echo $restaurant->phone ?></span><br>
             <br>
-            <table class="table" style="margin: 0 1%; position: relative; left: 5px">
+            <table class="table" style="right: unset;">
                 <thead>
                 <tr>
                     <th scope="col">#</th>
@@ -91,7 +91,7 @@ class Order
         $this->display();?>
         <div class="row">
             <div class="col-md-5" style="margin: 15px auto">
-                <form action="Complaint.php"><button class="btn btn-block btn-primary" value="<?php $this->id ?>"  type="submit">Report a problem</button></form>
+                <form action="Complaint.php"><button class="btn btn-block btn-warning" value="<?php $this->id ?>"  type="submit">Report a problem</button></form>
             </div>
         </div>
         </div><br>

@@ -24,7 +24,7 @@ include 'Listings.php';
 
 
 $charity_session = 4;
-$query = "SELECT id FROM orders WHERE charity_id = ". $charity_session. " AND CONCAT(pickup_day, \" \", pickup_time) > NOW()";
+$query = "SELECT id FROM orders WHERE charity_id = ". $charity_session. " AND CONCAT(pickup_day, \" \", pickup_time) > NOW() ORDER BY pickup_day, pickup_time";
 $results = $conn->query($query);
 
 if (mysqli_num_rows($results) > 0) {

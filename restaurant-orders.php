@@ -19,16 +19,44 @@
 <?php
 include 'connection.php';
 include 'Orders.php';
+include 'Listings.php';
+include 'Charities.php';
 $restaurant_session = 1;
-$query = "SELECT id FROM orders WHERE restaurant_id = " . $restaurant_session . " AND CONCAT(pickup_day, \" \", pickup_time) > NOW() ORDER BY pickup_day, pickup_time";
-$result = mysqli_query($conn, $query);
-$orders = array();
-for ($i = 1; $i <= mysqli_num_rows($result); $i++) {
-    $order = new Order();
-    $order->setOrderFromId(mysqli_fetch_assoc($result)['id']);
-    array_push($orders, $order);
-}
-print_r($orders);
+include 'navbarcharity.php';
 ?>
+<div class="container">
+    <h1>Orders</h1>
+    <h2>Upcoming orders</h2><br>
+    <?php
+    $query = "SELECT id FROM orders WHERE restaurant_id = " . $restaurant_session . " AND CONCAT(pickup_day, \" \", pickup_time) > NOW() ORDER BY pickup_day, pickup_time";
+    $result = mysqli_query($conn, $query);
+    if (mysqli_num_rows($result)>0) {
+        for ($i = 1; $i <= mysqli_num_rows($result); $i++) {
+            $order = new Order();
+            $order->setOrderFromId(mysqli_fetch_assoc($result)['id']);
+            $order->displayRestaurantUpcoming();
+        }
+    }
+    else {
+        echo "There are no upcoming orders.";
+    }
+    ?>
+    <hr>
+    <h2>Past orders</h2><br>
+    <?php
+    $query = "SELECT id FROM orders WHERE restaurant_id = " . $restaurant_session . " AND CONCAT(pickup_day, \" \", pickup_time) <= NOW() ORDER BY pickup_day, pickup_time";
+    $result = mysqli_query($conn, $query);
+    if (mysqli_num_rows($result)>0) {
+        for ($i = 1; $i <= mysqli_num_rows($result); $i++) {
+            $order = new Order();
+            $order->setOrderFromId(mysqli_fetch_assoc($result)['id']);
+            $order->displayRestaurantPast();
+        }
+    }
+    else {
+        echo "Past orders will appear here once they have been picked up.";
+    }
+    ?>
+</div>
 </body>
 </html>

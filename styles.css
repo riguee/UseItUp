@@ -76,3 +76,11 @@ body {
 .active {
     color: #fcfff5;
 }
+
+a {
+    color: #e7bb41;
+}
+
+a:hover {
+    color: #cb9f41;
+}

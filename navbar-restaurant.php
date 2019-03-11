@@ -6,24 +6,18 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item <?php if (basename($_SERVER['PHP_SELF']) == "mainlisting.php") {print("active");} ?>">
-                <a class="nav-link" href="mainlisting.php">Search for food <span class="sr-only">(current)</span></a>
+            <li class="nav-item <?php if (basename($_SERVER['PHP_SELF']) == "newlisting.php") {print("active");} ?>">
+                <a class="nav-link" href="newlisting.php">Upload a listing <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">My account <span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item <?php if (basename($_SERVER['PHP_SELF']) == "charityorder.php") {print("active");} ?>">
-                <a class="nav-link" href="charityorder.php">My orders <span class="sr-only">(current)</span></a>
+            <li class="nav-item <?php if (basename($_SERVER['PHP_SELF']) == "restaurant-orders.php") {print("active");} ?>">
+                <a class="nav-link" href="restaurant-orders.php">Orders <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item <?php if (basename($_SERVER['PHP_SELF']) == "Complaint.php") {print("active");} ?>">
                 <a class="nav-link" href="Complaint.php">Report a problem <span class="sr-only">(current)</span></a>
             </li>
         </ul>
-        <?php if (basename($_SERVER['PHP_SELF']) != "mainlisting.php") { ?>
-        <form class="form-inline my-2 my-lg-0" method="post" action="mainlisting.php">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search">
-            <button class="btn btn-outline-warning my-2 my-sm-0" type="submit"><i class="fa fa-search"></i></button>
-        </form>
-        <?php } ?>
     </div>
 </nav>

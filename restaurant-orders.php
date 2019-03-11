@@ -22,7 +22,7 @@ include 'Orders.php';
 include 'Listings.php';
 include 'Charities.php';
 $restaurant_session = 1;
-include 'navbarcharity.php';
+include 'navbar-restaurant.php';
 ?>
 <div class="container">
     <h1>Orders</h1>

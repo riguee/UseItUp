@@ -13,6 +13,34 @@
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+    <script>
+        function toDate(dStr,format) {
+            var now = new Date();
+            if (format == "h:m") {
+                now.setHours(dStr.substr(0,dStr.indexOf(":")));
+                now.setMinutes(dStr.substr(dStr.indexOf(":")+1));
+                now.setSeconds(0);
+                return now;
+            }
+            else {
+                return "Invalid Format";
+            }
+        }
+
+        function timecheck() {
+            var timefrom = document.getElementById(timefrom).value;
+            var timeuntil = document.getElementById(timeuntil).value;
+            var time = document.getElementById(time).value;
+            if (toDate(time, "h:m") >= timefrom || toDate(time, "h:m") < timeuntil) {
+                alert(toDate(time, "h:m"));
+                return true;
+            }
+            else {
+                alert("The time you selected is not in the available range.");
+                return false;
+            }
+        }
+    </script>
     <title>All listings</title>
 </head>
     <body>
@@ -60,7 +88,6 @@
                                 $stmt->execute();
                                 $result = $stmt->get_result();
                                 if (mysqli_num_rows($result) > 0) {
-                                    // output data of each row
                                     while($row = $result->fetch_assoc()) {
                                         echo "<option value='".$row["id"]."'>".$row["allergen"]."</option>";
                                     }
@@ -109,9 +136,8 @@
         else {
             $search = "";
         }
-        include 'connection.php';
         include 'Listings.php';
-        $search_funct = $conn->prepare("SELECT id FROM listings WHERE (listings.title LIKE CONCAT('%',?,'%') OR listings.description LIKE CONCAT('%',?,'%')) AND listings.id NOT IN (SELECT listing_id FROM order_listings)");
+        $search_funct = $conn->prepare("SELECT id FROM listings WHERE (listings.title LIKE CONCAT('%',?,'%') OR listings.description LIKE CONCAT('%',?,'%')) AND listings.id NOT IN (SELECT listing_id FROM order_listings) AND CONCAT(listings.day_posted, \" \", listings.time_until) > NOW()");
         $search_funct->bind_param("ss", $search, $search);
         $search_funct->execute();
         $result = $search_funct->get_result();
@@ -125,36 +151,30 @@
                     <h4><?php echo $listing->title ?></h4>
                     <h6>by <a href="#"><?php echo $listing->restaurant_name ?></a>.</h6>
                     <p><?php echo $listing->description ?></p>
-                    <h6>Portions: <?php echo $listing->portions ?></h6>
+                    <h6>Portions: <?php //echo $listing->portions ?></h6>
                     <?php if (!empty($listing->allergen)) { ?>
                     <h6>Allergens: <?php
                         $count = count($listing->allergen);
                         for ($i = 0; $i<$count-1; $i++) {
-                            echo $listing->allergen[$i].", ";
-                        }
-                        echo $listing->allergen[$count-1];
+                          echo $listing->allergen[$i].", ";
+                       }
+                       echo $listing->allergen[$count-1];
                         ?></h6>
                         <?php if (isset($listing->diet)): ?>
                         <h6>Suitable for: <?php
                             $count = count($listing->diet);
                             for ($i = 0; $i<$count-1; $i++) {
-                                echo $listing->diet[$i].", ";
+                               echo $listing->diet[$i].", ";
                             }
-                            echo $listing->diet[$count-1];
+                           echo $listing->diet[$count-1];
                             ?></h6>
                         <?php endif ?>
                     <?php } ?>
-                    <h6>Available pickup times: between <?php echo date("H:i", strtotime($listing->time_from)) ?> and <?php echo date("H:i", strtotime($listing->time_until)) ?></h6>
+                    <h6>Available pickup times: between <span id="timefrom"><?php echo date("H:i", strtotime($listing->time_from)) ?></span> and <span id="timeuntil"><?php echo date("H:i", strtotime($listing->time_until)) ?></span></h6>
                     <br>
-                    <form class="form-inline" method="post" action="confirm-order.php">
-                        <span style="margin-right: 10px">Select pickup time</span>
-                        <select class="form-control col-4" name="pickup-time">
-                            <?php $time = date("H:i", strtotime($listing->time_from));
-                            while ($time < date("H:i", strtotime($listing->time_until))) { ?>
-                            <option><?php echo $time ?></option>
-                            <?php $time = date("H:i", strtotime('+30 minutes', strtotime($time)));
-                            } ?>
-                        </select>
+                    <form class="form-inline row" method="post" action="confirm-order.php" onsubmit="return timecheck()">
+                        <span style="margin-right: 10px">Choose pickup time</span>
+                        <input type="time" class="form-control" id="time">
                         <span style="margin: 0 10px 0 10px"> and </span>
                         <button type="submit" class="btn btn-primary col-4" name="listing" value="<?php print($listing->id) ?>" >Order</button>
                     </form>

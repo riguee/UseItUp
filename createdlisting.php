@@ -2,31 +2,28 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
-    <title>created listing</title>
-    <script
-        src="https://code.jquery.com/jquery-3.3.1.min.js"
-        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <title>New listing</title>
 </head>
 <body class="container-fluid">
 <div id="topnav"></div>
-<?php
 
-if (empty($_POST['title']) || empty($_POST['description'])) {
-    echo '<script> alert("All the fields marked * need to be filled!")</script> ';
-    return;
-}
+<?php
+include 'connection.php';
+$restaurant_session = 1;
 $title = $_POST["title"];
 $description = $_POST["description"];
 $portion = $_POST['portions'];
-$timefrom = $_POST["from"];
-$timeuntil = $_POST["until"];
 
-include 'connection.php';
+$today = strtolower(date("l"));
+$query = "SELECT " . $today . "_from, " . $today . "_until FROM restaurants WHERE id = " . $restaurant_session;
+$result = mysqli_query($conn, $query);
+$result = mysqli_fetch_assoc($result);
+$timefrom = $result[$today . "_from"];
+$timeuntil = $result[$today . "_until"];
 
 $target_dir = "uploads/";
 $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);

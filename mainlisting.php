@@ -119,7 +119,7 @@
             $listing = new Listing();
             $listing->setListingFromId($row['id']);?>
         <div class="card container-fluid" style="margin:10px 0 10px 0">
-            <div class="card-body row" style="height: 300px">
+            <div class="card-body row" style="min-height: 300px">
                 <img class="col-3" src="https://thumbs.dreamstime.com/z/chef-showing-pasta-11270828.jpg" style="height: 250px">
                 <div class="col-9">
                     <h4><?php echo $listing->title ?></h4>
@@ -135,11 +135,12 @@
                         echo $listing->allergen[$count-1];
                         ?></h6>
                         <h6>Suitable for: <?php
-                            $count = count($listing->diet);
+
                             if (isset($listing->diet)) {
-                            for ($i = 0; $i<$count-1; $i++) {
-                                echo $listing->diet[$i].", ";
-                            }
+                                $count = count($listing->diet);
+                                for ($i = 0; $i<$count-1; $i++) {
+                                    echo $listing->diet[$i].", ";
+                                }
                             }
                             echo $listing->diet[$count-1];
                             ?></h6>

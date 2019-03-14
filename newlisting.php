@@ -86,7 +86,7 @@
  ?>
 <div class="container">
 <h1>New listing</h1><br>
-    <form name="newlisting" autocomplete="off" action="createdlisting.php" onsubmit="return timecheck();" method="post">
+    <form name="newlisting" autocomplete="off" enctype="multipart/form-data" action="createdlisting.php" onsubmit="return timecheck();" method="post">
         <div class="form-group">
             <label for="dishes">Select one of your saved dishes:</label>
             <select class="form-control" name="dishes" id="dishes">
@@ -104,7 +104,7 @@
             <textarea type="text" class="form-control" rows="5" id="description" name="description" placeholder="dish details: ingredients, cooking, flavour..."></textarea>
             <br><br><div  class="col-md-8 mx-auto">
                 Image:
-                <input type="file" class="form-control-file" placeholder="image" name="image" accept="image/gif, image/jpeg, image/png"></div>
+                <input type="file" class="form-control-file" placeholder="image" name="fileToUpload" accept="image/gif, image/jpeg, image/png"></div>
             <br><br>
             Quantity:
             <input type="number" name="portions" class="form-control" min="1">
@@ -152,7 +152,7 @@
                 <input type="time" class="form-control" name="until" id="until" data-custom-pattern="Invalid date">
                 <br><br></div>
                 -->
-            <button type="submit" class="btn btn-primary col-md-12" id="submitlisting" >Submit</button>
+            <button type="submit" class="btn btn-primary col-md-12" value="Upload Image" id="submitlisting" >Submit</button>
 
 
     </form>

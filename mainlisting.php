@@ -13,8 +13,6 @@
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
-<<<<<<< HEAD
-=======
     <script>
         function toDate(dStr,format) {
             var now = new Date();
@@ -49,7 +47,6 @@
             }
         }
     </script>
->>>>>>> charles
     <title>All listings</title>
 </head>
     <body>
@@ -182,25 +179,11 @@
                             echo $listing->diet[$count-1];
                             ?></h6>
                     <?php } ?>
-<<<<<<< HEAD
-                    <h6>Available pickup times: between <?php echo date("H:i", strtotime($listing->time_from)) ?> and <?php echo date("H:i", strtotime($listing->time_until)) ?></h6>
-                    <br>
-                    <form class="form-inline" method="post" action="confirm-order.php">
-                        <span style="margin-right: 10px">Select pickup time</span>
-                        <select class="form-control col-4" name="pickup-time">
-                            <?php $time = date("H:i", strtotime($listing->time_from));
-                            while ($time < date("H:i", strtotime($listing->time_until))) { ?>
-                            <option><?php echo $time ?></option>
-                            <?php $time = date("H:i", strtotime('+30 minutes', strtotime($time)));
-                            } ?>
-                        </select>
-=======
                     <h6>Available pickup times: between <span id="<?php print("timefrom" . $listing->id) ?>"><?php echo date("H:i", strtotime($listing->time_from)) ?></span> and <span id="<?php print("timeuntil" . $listing->id) ?>"><?php echo date("H:i", strtotime($listing->time_until)) ?></span></h6>
                     <br>
                     <form class="form-inline row" method="post" action="confirm-order.php" onsubmit="return timecheck(<?php print($listing->id) ?>)">
                         <span style="margin-right: 10px">Choose pickup time</span>
                         <input type="time" class="form-control" id="<?php print($listing->id) ?>" name="pickup-time">
->>>>>>> charles
                         <span style="margin: 0 10px 0 10px"> and </span>
                         <button type="submit" class="btn btn-primary col-4" name="listing" value="<?php print($listing->id) ?>" >Order</button>
                     </form>

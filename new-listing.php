@@ -142,6 +142,10 @@
         </select>
         <br>
         <br>
+        <input type="checkbox" class="form-check-input" id="save">
+        <label for="save" style="font-weight: unset">Save this listing for next time</label>
+        <br>
+        <br>
         <!--
             <br><br><div class="col-md-6 mx-auto">
                 Pickup time <br>

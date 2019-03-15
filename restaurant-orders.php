@@ -26,7 +26,7 @@ include 'navbar-restaurant.php';
 ?>
 <div class="container">
     <h1>Orders</h1>
-    <h2>Upcoming orders</h2><br>
+    <h2>Upcoming orders</h2>
     <?php
     $query = "SELECT id FROM orders WHERE restaurant_id = " . $restaurant_session . " AND CONCAT(pickup_day, \" \", pickup_time) > NOW() ORDER BY pickup_day, pickup_time";
     $result = mysqli_query($conn, $query);

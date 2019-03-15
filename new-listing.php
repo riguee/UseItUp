@@ -85,6 +85,7 @@
  include "navbar-restaurant.php";
  ?>
 <div class="container">
+<<<<<<< HEAD:newlisting.php
 <h1>New listing</h1><br>
     <form name="newlisting" autocomplete="off" enctype="multipart/form-data" action="createdlisting.php" onsubmit="return timecheck();" method="post">
         <div class="form-group">
@@ -120,29 +121,65 @@
                     while($row = $result->fetch_assoc()) {
                         echo "<option value='".$row["id"]."'>".$row["allergen"]."</option>";
                     }
+=======
+<h1>New listing</h1>
+    <form name="newlisting" autocomplete="off" action="createdlisting.php" onsubmit="return timecheck();" method="post">
+        <label for="dishes">Select one of your saved dishes:</label>
+        <select class="form-control" name="dishes" id="dishes">
+            <option value="none">None</option>
+            <option value="dish1">Dish 1</option>
+            <option value="dish2">Dish 2</option>
+            <option value="dish3">Dish 3</option>
+        </select>
+        <br>
+        <label for="title">or fill in information for a new dish:</label>
+        <input type="text" class="form-control" id="title" name="title" placeholder="Name of the dish">
+        <br>
+        <label for="description">Description</label>
+        <textarea type="text" class="form-control" rows="5" id="description" name="description" placeholder="e.g. ingredients, flavour, etc."></textarea>
+        <br>
+        <label for="image">Choose an image</label>
+        <input type="file" id="image" class="form-control-file" placeholder="image" name="image" accept="image/gif, image/jpeg, image/png">
+        <br>
+        <label for="portions">Quantity</label>
+        <input type="number" name="portions" id="portions" class="form-control" min="1">
+        <br>
+        <label for="allergens">Allergens:</label>
+        <select name="allergen[]" id="allergens" class="selectpicker" multiple data-live-search="true">
+            <?php
+            $stmt = $conn->prepare("SELECT * FROM allergens");
+            $stmt->execute();
+            $result = $stmt->get_result();
+            if (mysqli_num_rows($result) > 0) {
+                // output data of each row
+                while($row = $result->fetch_assoc()) {
+                    echo "<option value='".$row["id"]."'>".$row["allergen"]."</option>";
+>>>>>>> charles:new-listing.php
                 }
-                ?>
-            </select>
-
-            <br><br>
-            Suitable for:
-            <select name="diet[]" class="selectpicker" multiple>
-                <?php
-                $diets = $conn->prepare("SELECT * FROM diets");
-                $diets->execute();
-                $dietresult = $diets->get_result();
-                if (mysqli_num_rows($dietresult) > 0) {
-                    // output data of each row
-                    while($dietrow = $dietresult->fetch_assoc()) {
-                        echo "<option value='".$dietrow["id"]."'>".$dietrow["diet"]."</option>";
-                    }
+            }
+            ?>
+        </select>
+        <br>
+        <br>
+        <label for="diets">Suitable for:</label>
+        <select name="diet[]" id="diets" class="selectpicker" multiple>
+            <?php
+            $diets = $conn->prepare("SELECT * FROM diets");
+            $diets->execute();
+            $dietresult = $diets->get_result();
+            if (mysqli_num_rows($dietresult) > 0) {
+                // output data of each row
+                while($dietrow = $dietresult->fetch_assoc()) {
+                    echo "<option value='".$dietrow["id"]."'>".$dietrow["diet"]."</option>";
                 }
-                else {
-                    echo "There are no dietary requirements available at this time.";
-                }
-
-                ?>
-            </select>
+            }
+            else {
+                echo "There are no dietary requirements available at this time.";
+            }
+            ?>
+        </select>
+        <br>
+        <br>
         <!--
             <br><br><div class="col-md-6 mx-auto">
                 Pickup time <br>
@@ -152,9 +189,15 @@
                 <input type="time" class="form-control" name="until" id="until" data-custom-pattern="Invalid date">
                 <br><br></div>
                 -->
+<<<<<<< HEAD:newlisting.php
             <button type="submit" class="btn btn-primary col-md-12" value="Upload Image" id="submitlisting" >Submit</button>
 
 
+=======
+        <button type="submit" class="btn btn-primary col-md-12" id="submitlisting" >Submit</button>
+        <br>
+        <br>
+>>>>>>> charles:new-listing.php
     </form>
 </div>
 </body>

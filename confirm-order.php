@@ -9,7 +9,7 @@
     <title>Confirm order</title>
 </head>
 <body>
-<?php include 'navbarcharity.php' ?>
+<?php include 'navbar-charity.php' ?>
 <div class="container">
 <h1>Your order</h1>
 <?php

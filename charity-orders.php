@@ -11,7 +11,7 @@
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 </head>
 <body>
-<?php include 'navbarcharity.php' ?>
+<?php include 'navbar-charity.php' ?>
 <div class="container">
 <h1>Orders</h1>
 <h2>Upcoming orders</h2><br>
@@ -34,12 +34,11 @@ if (mysqli_num_rows($results) > 0) {
         $id = $row['id'];
         $order = new Order();
         $order->setOrderFromId($id);
-        $order->displayUpcomingorders();
+        $order->displayCharityUpcoming();
 
     }
 } else {
-    echo "You have no upcoming order. You can look at listings available around you and place orders in any of the
-restaurants for free. :-)<br><br><br>";
+    echo "You have no upcoming order. Orders will appear here before they are picked up.<br><br>";
 }
 echo "<hr>";
 echo "<h2>Past orders</h2><br>";
@@ -54,7 +53,7 @@ if (mysqli_num_rows($results) > 0) {
         $id = $row['id'];
         $order = new Order();
         $order->setOrderFromId($id);
-        $order->displayPastOrders();
+        $order->displayCharityPast();
 
     }
 } else {

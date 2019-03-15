@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: charles
- * Date: 2019-03-10
- * Time: 20:35
- */
 
 class Charity
 {
@@ -24,3 +18,5 @@ class Charity
     }
 
 }
+
+?>

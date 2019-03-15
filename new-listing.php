@@ -86,7 +86,7 @@
  ?>
 <div class="container">
 <h1>New listing</h1>
-    <form name="newlisting" autocomplete="off" action="createdlisting.php" onsubmit="return timecheck();" method="post">
+    <form name="newlisting" enctype="multipart/form-data" autocomplete="off" action="createdlisting.php" onsubmit="return timecheck();" method="post">
         <label for="dishes">Select one of your saved dishes:</label>
         <select class="form-control" name="dishes" id="dishes">
             <option value="none">None</option>
@@ -151,7 +151,7 @@
                 <input type="time" class="form-control" name="until" id="until" data-custom-pattern="Invalid date">
                 <br><br></div>
                 -->
-        <button type="submit" class="btn btn-primary col-md-12" id="submitlisting" >Submit</button>
+        <button type="submit" class="btn btn-primary col-md-12" id="submitlisting" value="Upload Image" >Submit</button>
         <br>
         <br>
     </form>

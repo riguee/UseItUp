@@ -51,12 +51,12 @@ class Listing
         <div class="card">
             <h5 class="card-header">Listing number: <?php echo $this->id; ?></h5>
             <div class="row">
-                <div class="col-2">
+                <div class="col-4">
                     <div class="middle">
                         <img src="<?php echo $this->image ?>" width="150 px">
                     </div>
                 </div>
-                <class="col-10">
+                <div class="col-8">
                 Dish name: <?php echo $this->title; ?><br>
                 Dish description: <?php echo $this->description; ?><br>
                 Number of portions: <?php echo $this->portions; ?><br>

@@ -12,6 +12,7 @@
 <div id="topnav"></div>
 
 <?php
+include 'navbar-restaurant.php';
 include 'connection.php';
 $restaurant_session = 1;
 $title = $_POST["title"];

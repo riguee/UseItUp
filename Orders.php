@@ -28,10 +28,70 @@ class Order
             }
         }
     }
-    function display(){
+
+    function displayCharityUpcoming() {
         $restaurant = new Restaurant();
         $restaurant->setRestaurantFromId($this->restaurant_id);
+        $listings = array();
+        foreach ($this->listings as $value) {
+            $listing = new Listing();
+            $listing->setListingFromId($value);
+            array_push($listings, $listing);
+        }?>
+        <script>
+            function cancelconfirm() {
+                var r = confirm("Are you sure you want to cancel this order?");
+                return r;
+            }
+        </script>
+        <div class="card">
+            <div class="card-header" style="padding: 12px 20px 12px 20px">
+                <h5 style="float: left; margin: 0px">From <a href="#"><?php echo $restaurant->name ?></a></h5>
+                <h5 style="float: right; margin: 0px" class="text-muted">ID #<?php echo $this->id?></h5>
+            </div>
+            <div class="card-body">
+                <span class="h6">Pick up time: </span><span><?php echo date("H:i", strtotime($this->pickup_time)) ?></span><br>
+                <span class="h6">Pick up address: </span><span><?php echo $restaurant->address ?>, <?php echo $restaurant->postcode ?></span><br>
+                <span class="h6">Email: </span><span><a href="mailto:<?php print $restaurant->email ?>"><?php echo $restaurant->email ?></a></span><br>
+                <span class="h6">Telephone: </span><span><?php echo $restaurant->phone ?></span><br>
+                <?php if (strlen($this->comments)>0): ?>
+                    <span class="h6">Comments: </span><span><?php echo $this->comments ?></span><br>
+                <?php endif ?>
+                <br>
+                <table class="table" style="right: unset;">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Dish</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php $i = 1 ?>
+                    <?php foreach ($listings as $listing): ?>
+                        <tr>
+                            <th scope="row"><?php echo $i++ ?></th>
+                            <td><?php echo $listing->title ?></td>
+                            <td><?php echo $listing->portions ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
+            <div class="row">
+                <div class="col-md-5" style="margin: 15px auto">
+                    <form action="cancel-order.php" onsubmit="return cancelconfirm()" method="post"><button class="btn btn-block btn-danger" value="<?php print($this->id) ?>"  type="submit" name="order">Cancel order</button></form>
+                </div>
+            </div>
+        </div>
+        <br>
+        <?php
+    }
 
+    function displayCharityPast() {
+        $restaurant = new Restaurant();
+        $restaurant->setRestaurantFromId($this->restaurant_id);
         $listings = array();
         foreach ($this->listings as $value) {
             $listing = new Listing();
@@ -39,63 +99,49 @@ class Order
             array_push($listings, $listing);
         }?>
         <div class="card">
-        <h5 class="card-header">From <a href="#"><?php echo $restaurant->name ?></a></h5>
-        <div class="card-body">
-            <span class="h6">Pick up time: </span><span><?php echo $this->pickup_day. " at " .$this->pickup_time ?></span><br>
-            <span class="h6">Pick up address: </span><span><?php echo $restaurant->address ?>, <?php echo $restaurant->postcode ?></span><br>
-            <span class="h6">Email: </span><span><a href="mailto:<?php print $restaurant->email ?>"><?php echo $restaurant->email ?></a></span><br>
-            <span class="h6">Telephone: </span><span><?php echo $restaurant->phone ?></span><br>
-            <br>
-            <table class="table" style="right: unset;">
-                <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Dish</th>
-                    <th scope="col">Quantity</th>
-                    <th scope="col"></th>
-                </tr>
-                </thead>
-                <tbody>
-                <?php $i = 1 ?>
-                <?php foreach ($listings as $listing): ?>
+            <div class="card-header" style="padding: 12px 20px 12px 20px">
+            <h5 style="float: left; margin: 0px">From <a href="#"><?php echo $restaurant->name ?></a></h5>
+            <h5 style="float: right; margin: 0px" class="text-muted">ID #<?php echo $this->id?></h5>
+            </div>
+            <div class="card-body">
+                <span class="h6">Pick up date: </span><span><?php echo $this->pickup_day. " at " . date("H:i", strtotime($this->pickup_time)) ?></span><br>
+                <span class="h6">Pick up address: </span><span><?php echo $restaurant->address ?>, <?php echo $restaurant->postcode ?></span><br>
+                <span class="h6">Email: </span><span><a href="mailto:<?php print $restaurant->email ?>"><?php echo $restaurant->email ?></a></span><br>
+                <span class="h6">Telephone: </span><span><?php echo $restaurant->phone ?></span><br>
+                <?php if (strlen($this->comments)>0): ?>
+                    <span class="h6">Comments: </span><span><?php echo $this->comments ?></span><br>
+                <?php endif ?>
+                <br>
+                <table class="table" style="right: unset;">
+                    <thead>
                     <tr>
-                        <th scope="row"><?php echo $i++ ?></th>
-                        <td><?php echo $listing->title ?></td>
-                        <td><?php echo $listing->portions ?></td>
+                        <th scope="col">#</th>
+                        <th scope="col">Dish</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col"></th>
                     </tr>
-                <?php endforeach; ?>
-                </tbody>
-            </table>
-
-
-        </div>
-
-
-        <?php
-    }
-
-    function displayUpcomingorders() {
-        $this->display();?>
-        <div class="row">
-            <div class="col-md-5" style="margin: 15px auto">
-                <form action="confirm-order.php"><button class="btn btn-block btn-primary" value="<?php $this->id ?>"  type="submit">Edit order</button></form>
+                    </thead>
+                    <tbody>
+                    <?php $i = 1 ?>
+                    <?php foreach ($listings as $listing): ?>
+                        <tr>
+                            <th scope="row"><?php echo $i++ ?></th>
+                            <td><?php echo $listing->title ?></td>
+                            <td><?php echo $listing->portions ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
+            <div class="row">
+                <div class="col-md-5" style="margin: 15px auto">
+                    <form action="complaint-form.php" method="post">
+                        <button class="btn btn-block btn-warning" value="<?php print($this->id) ?>"  name="order" type="submit">Report a problem</button>
+                    </form>
+                </div>
             </div>
         </div>
-        </div><br>
-
-        <?php
-    }
-
-    function displayPastOrders() {
-        $this->display();?>
-        <div class="row">
-            <div class="col-md-5" style="margin: 15px auto">
-                <form action="Complaint.php" method="post">
-                    <button class="btn btn-block btn-warning" value="<?php $this->id ?>"  name="order-id" type="submit">Report a problem</button>
-                </form>
-            </div>
-        </div>
-        </div><br>
+        <br>
         <?php
     }
 
@@ -104,7 +150,10 @@ class Order
         $charity->setCharityFromId($this->charity_id);
         ?>
         <div class="card">
-            <h5 class="card-header">From <a href="#"><?php echo $charity->name ?></a></h5>
+            <div class="card-header" style="padding: 12px 20px 12px 20px">
+                <h5 style="float: left; margin: 0px">From <a href="#"><?php echo $charity->name ?></a></h5>
+                <h5 style="float: right; margin: 0px" class="text-muted">ID #<?php echo $this->id?></h5>
+            </div>
             <div class="card-body">
                 <span class="h6">Pick up time: </span><span><?php echo date("H:i", strtotime($this->pickup_time)) ?></span><br>
                 <span class="h6">Email: </span><span><a href="mailto:<?php print $charity->email ?>"><?php echo $charity->email ?></a></span><br>
@@ -155,7 +204,10 @@ class Order
         $charity->setCharityFromId($this->charity_id);
         ?>
         <div class="card">
-            <h5 class="card-header">From <a href="#"><?php echo $charity->name ?></a></h5>
+            <div class="card-header" style="padding: 12px 20px 12px 20px">
+                <h5 style="float: left; margin: 0px">From <a href="#"><?php echo $charity->name ?></a></h5>
+                <h5 style="float: right; margin: 0px" class="text-muted">ID #<?php echo $this->id?></h5>
+            </div>
             <div class="card-body">
                 <span class="h6">Pick up date: </span><span><?php echo $this->pickup_day . " at " . date("H:i", strtotime($this->pickup_time)) ?></span><br>
                 <span class="h6">Email: </span><span><a href="mailto:<?php print $charity->email ?>"><?php echo $charity->email ?></a></span><br>
@@ -187,8 +239,8 @@ class Order
                     <?php } ?>
                     </tbody>
                 </table>
-                <form class="col-md-8" style="margin: 15px auto" action="" method="post">
-                    <button type="submit" class="btn btn-block btn-warning" >Report a problem</button>
+                <form class="col-md-8" style="margin: 15px auto" action="complaint-form.php" method="post">
+                    <button type="submit" class="btn btn-block btn-warning" name="order" value="<?php print($this->id) ?>">Report a problem</button>
                 </form>
             </div>
         </div>

@@ -84,3 +84,7 @@ a {
 a:hover {
     color: #cb9f41;
 }
+
+label {
+    font-weight: 500;
+}

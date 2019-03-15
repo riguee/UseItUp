@@ -27,13 +27,19 @@
             }
         }
 
-        function timecheck() {
-            var timefrom = document.getElementById(timefrom).value;
-            var timeuntil = document.getElementById(timeuntil).value;
-            var time = document.getElementById(time).value;
-            if (toDate(time, "h:m") >= timefrom || toDate(time, "h:m") < timeuntil) {
-                alert(toDate(time, "h:m"));
-                return true;
+        function timecheck(id) {
+            var now = new Date();
+            var time = toDate(document.getElementById(id).value, "h:m");
+            var timefrom = toDate(document.getElementById("timefrom".concat(id)).innerHTML, "h:m");
+            var timeuntil = toDate(document.getElementById("timeuntil".concat(id)).innerHTML, "h:m");
+            if (time >= timefrom && time < timeuntil) {
+                if (time > now) {
+                    return true;
+                }
+                else {
+                    alert("The time you selected is in the past.");
+                    return false;
+                }
             }
             else {
                 alert("The time you selected is not in the available range.");
@@ -46,7 +52,7 @@
     <body>
     <?php
     include 'connection.php';
-    include 'navbarcharity.php';
+    include 'navbar-charity.php';
     ?>
     <div class="container">
         <h1>Welcome back, <span class="accent">charity_name</span>.</h1>
@@ -170,11 +176,11 @@
                             ?></h6>
                         <?php endif ?>
                     <?php } ?>
-                    <h6>Available pickup times: between <span id="timefrom"><?php echo date("H:i", strtotime($listing->time_from)) ?></span> and <span id="timeuntil"><?php echo date("H:i", strtotime($listing->time_until)) ?></span></h6>
+                    <h6>Available pickup times: between <span id="<?php print("timefrom" . $listing->id) ?>"><?php echo date("H:i", strtotime($listing->time_from)) ?></span> and <span id="<?php print("timeuntil" . $listing->id) ?>"><?php echo date("H:i", strtotime($listing->time_until)) ?></span></h6>
                     <br>
-                    <form class="form-inline row" method="post" action="confirm-order.php" onsubmit="return timecheck()">
+                    <form class="form-inline row" method="post" action="confirm-order.php" onsubmit="return timecheck(<?php print($listing->id) ?>)">
                         <span style="margin-right: 10px">Choose pickup time</span>
-                        <input type="time" class="form-control" id="time">
+                        <input type="time" class="form-control" id="<?php print($listing->id) ?>" name="pickup-time">
                         <span style="margin: 0 10px 0 10px"> and </span>
                         <button type="submit" class="btn btn-primary col-4" name="listing" value="<?php print($listing->id) ?>" >Order</button>
                     </form>

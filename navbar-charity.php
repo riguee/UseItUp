@@ -12,11 +12,11 @@
             <li class="nav-item">
                 <a class="nav-link" href="#">My account <span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item <?php if (basename($_SERVER['PHP_SELF']) == "charityorder.php") {print("active");} ?>">
-                <a class="nav-link" href="charityorder.php">My orders <span class="sr-only">(current)</span></a>
+            <li class="nav-item <?php if (basename($_SERVER['PHP_SELF']) == "charity-orders.php") {print("active");} ?>">
+                <a class="nav-link" href="charity-orders.php">My orders <span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item <?php if (basename($_SERVER['PHP_SELF']) == "Complaint.php") {print("active");} ?>">
-                <a class="nav-link" href="Complaint.php">Report a problem <span class="sr-only">(current)</span></a>
+            <li class="nav-item <?php if (basename($_SERVER['PHP_SELF']) == "complaint-form.php") {print("active");} ?>">
+                <a class="nav-link" href="complaint-form.php">Report a problem <span class="sr-only">(current)</span></a>
             </li>
         </ul>
         <?php if (basename($_SERVER['PHP_SELF']) != "mainlisting.php") { ?>

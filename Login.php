@@ -72,51 +72,48 @@ $query = "SELECT * FROM charities WHERE email='" . $email . "'";
 
 $result = $mysqli->query($query);
 
-if ( $result->num_rows == 0 ){ // User doesn't exist
+if ( $result->num_rows == 0 ) { // User doesn't exist
 //    $_SESSION['message'] = "User with that email doesn't exist!";
 
-    $query = "SELECT * FROM restuarants WHERE email='" . $email . "'";
+    $query = "SELECT * FROM restaurants WHERE email='" . $email . "'";
+    $result = $mysqli->query($query);
+    if ($result->num_rows == 0) {
+        // no user with that email
+    } else {
+        $user = $result->fetch_assoc();
 
-    if($_POST['password'] == $user['password']) {
+        if ($_POST['password'] == $user['password']) {
 
-        $_SESSION['email'] = $user['email'];
-        $_SESSION['name'] = $user['name'];
-        $_SESSION ['phone_number'] = $user['phone_number'];
-        $_SESSION['address'] = $user['address'];
-        $_SESSION['active'] = $user['active'];
+            $_SESSION['id'] = $user['id'];
+            $_SESSION['user_type'] = "restaurant";
 
-        // This is how we'll know the user is logged in
-        $_SESSION['logged_in'] = true;
+            // This is how we'll know the user is logged in
+            $_SESSION['logged_in'] = true;
 
-        header("location: RestaurantProfileAcct.php");
-    }
-    else {
-        $_SESSION['message'] = "You have entered wrong password, try again!";
-        header("location: error.php");
+            header("location: RestaurantProfileAcct.php");
+        } else {
+            $_SESSION['message'] = "You have entered wrong password, try again!";
+            header("location: error.php");
         }
-
-
-else { // User exists
+    }
+} else { // User exists
     $user = $result->fetch_assoc();
 
-    if($_POST['password'] == $user['password']) {
+    if ($_POST['password'] == $user['password']) {
 
-        $_SESSION['email'] = $user['email'];
-        $_SESSION['name'] = $user['name'];
-        $_SESSION ['phone_number'] = $user['phone_number'];
-        $_SESSION['address'] = $user['address'];
-        $_SESSION['active'] = $user['active'];
+        $_SESSION['id'] = $user['id'];
+        $_SESSION['user_type'] = "charity";
 
         // This is how we'll know the user is logged in
         $_SESSION['logged_in'] = true;
 
         header("location: CharityProfileAcct.php");
-    }
-    else {
+    } else {
         $_SESSION['message'] = "You have entered wrong password, try again!";
         header("location: error.php");
     }
 }
+
 ?>
 
 </body>

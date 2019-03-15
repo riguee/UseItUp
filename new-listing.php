@@ -41,7 +41,7 @@
                 required(document.getElementById("description"))==false ||
                 required(document.getElementById("from"))==false ||
                 required(document.getElementById("until"))==false) {
-                alert("please fill all fields marked *");
+                alert("Please fill in all the fields marked with a *.");
                 return false;
             }
 
@@ -95,16 +95,16 @@
             <option value="dish3">Dish 3</option>
         </select>
         <br>
-        <label for="title">or fill in information for a new dish:</label>
+        <label for="title">or fill in information for a new dish*</label>
         <input type="text" class="form-control" id="title" name="title" placeholder="Name of the dish">
         <br>
-        <label for="description">Description</label>
+        <label for="description">Description*</label>
         <textarea type="text" class="form-control" rows="5" id="description" name="description" placeholder="e.g. ingredients, flavour, etc."></textarea>
         <br>
         <label for="image">Choose an image</label>
         <input type="file" id="image" class="form-control-file" placeholder="image" name="fileToUpload" accept="image/gif, image/jpeg, image/png">
         <br>
-        <label for="portions">Quantity</label>
+        <label for="portions">Quantity*</label>
         <input type="number" name="portions" id="portions" class="form-control" min="1">
         <br>
         <label for="allergens">Allergens:</label>
@@ -142,7 +142,7 @@
         </select>
         <br>
         <br>
-        <input type="checkbox" class="form-check-input" id="save">
+        <input type="checkbox" class="form-check-input" id="save" name="save">
         <label for="save" style="font-weight: unset">Save this listing for next time</label>
         <br>
         <br>

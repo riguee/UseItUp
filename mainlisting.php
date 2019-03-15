@@ -27,7 +27,7 @@
             }
         }
 
-        function timecheck(id) {
+        function timeCheck(id) {
             var now = new Date();
             var time = toDate(document.getElementById(id).value, "h:m");
             var timefrom = toDate(document.getElementById("timefrom".concat(id)).innerHTML, "h:m");
@@ -46,6 +46,8 @@
                 return false;
             }
         }
+
+        function transferSearch()
     </script>
     <title>All listings</title>
 </head>
@@ -57,7 +59,7 @@
     <div class="container">
         <h1>Welcome back, <span class="accent">charity_name</span>.</h1>
         <form class="form-inline d-flex justify-content-center" method="post" action="">
-            <input type="search" class="form-control col-4" name="search" placeholder="Search for food" value="<?php if (isset($_POST['search'])) print($_POST['search']) ?>">
+            <input id="search" type="search" class="form-control col-4" name="search" placeholder="Search for food" value="<?php if (isset($_POST['search'])) print($_POST['search']) ?>">
             <button type="submit" class="btn btn-primary search-btn"><i class="fa fa-search"></i></button>
         </form>
         <br>
@@ -66,70 +68,71 @@
                 <div class="card">
                     <div class="card-header" id="heading"><button type="button" style="padding: 0" class="btn btn-link" data-toggle="collapse" data-target="#advanced-search">Advanced search<i style="margin-left: 10px" class="fas fa-chevron-down"></i></button></div>
                     <div id="advanced-search" class="collapse card-body">
-                        <form method="post" action="">
-                        <span style="margin-right: 10px">Sort by pick-up time:</span>
-                        <div class="form-check form-check-inline" style="margin: 0 0 10px 0">
-                            <input class="form-check-input" type="radio" name="distance" id="distance">
-                            <label style="margin-right: 5px" class="form-check-label" for="distance">earliest first</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="pickup-time" id="pickup-time">
-                            <label class="form-check-label" for="pickup-time">latest first</label>
-                        </div>
-                        <div class="form-inline" style="margin: 20px 0 10px 0">
-                            <span style="margin-right: 10px">Portions:</span>
-                            <select class="form-control" name="portions">
-                                <option>Show all</option>
-                                <option>0-49</option>
-                                <option>50-99</option>
-                                <option>100+</option>
-                            </select>
-                        </div>
-                        <br>
-                        <p>Refine your search by excluding specific allergens:</p>
-                            <div class="form-check" style="padding-left: 0px">
-                            <select name="allergen[]" class="selectpicker" multiple data-live-search="true">
-                                <?php
-                                $stmt = $conn->prepare("SELECT * FROM allergens");
-                                $stmt->execute();
-                                $result = $stmt->get_result();
-                                if (mysqli_num_rows($result) > 0) {
-                                    // output data of each row
-                                    while($row = $result->fetch_assoc()) {
-                                        echo "<option value='".$row["id"]."'>".$row["allergen"]."</option>";
-                                    }
-                                }
-                                ?>
-                            </select>
+                        <form method="post" action="" onsubmit="">
+                            <input type="search" name="advancedsearch" id="advancedsearch" value="" hidden>
+                            <span style="margin-right: 10px">Sort by pick-up time:</span>
+                            <div class="form-check form-check-inline" style="margin: 0 0 10px 0">
+                                <input class="form-check-input" type="radio" name="distance" id="distance">
+                                <label style="margin-right: 5px" class="form-check-label" for="distance">earliest first</label>
                             </div>
-                        <br>
-                        <span>Only show specific diets:</span>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="diet1">
-                            <label class="form-check-label" for="diet1">
-                                Vegetarian
-                            </label>
-                        </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="pickup-time" id="pickup-time">
+                                <label class="form-check-label" for="pickup-time">latest first</label>
+                            </div>
+                            <div class="form-inline" style="margin: 20px 0 10px 0">
+                                <span style="margin-right: 10px">Portions:</span>
+                                <select class="form-control" name="portions">
+                                    <option>Show all</option>
+                                    <option>0-49</option>
+                                    <option>50-99</option>
+                                    <option>100+</option>
+                                </select>
+                            </div>
+                            <br>
+                            <p>Refine your search by excluding specific allergens:</p>
+                                <div class="form-check" style="padding-left: 0px">
+                                <select name="allergen[]" class="selectpicker" multiple data-live-search="true">
+                                    <?php
+                                    $stmt = $conn->prepare("SELECT * FROM allergens");
+                                    $stmt->execute();
+                                    $result = $stmt->get_result();
+                                    if (mysqli_num_rows($result) > 0) {
+                                        // output data of each row
+                                        while($row = $result->fetch_assoc()) {
+                                            echo "<option value='".$row["id"]."'>".$row["allergen"]."</option>";
+                                        }
+                                    }
+                                    ?>
+                                </select>
+                                </div>
+                            <br>
+                            <span>Only show specific diets:</span>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="diet1">
+                                <label class="form-check-label" for="diet1">
+                                    Vegetarian
+                                </label>
+                            </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" value="" id="diet1">
                                 <label class="form-check-label" for="diet1">
                                     Vegan
                                 </label>
                             </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="diet2">
-                            <label class="form-check-label" for="diet2">
-                                Halal
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="diet3">
-                            <label class="form-check-label" for="diet3">
-                                Kosher
-                            </label>
-                        </div>
-                        <br>
-                        <button type="submit" class="btn btn-primary btn-block">Apply</button>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="diet2">
+                                <label class="form-check-label" for="diet2">
+                                    Halal
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="diet3">
+                                <label class="form-check-label" for="diet3">
+                                    Kosher
+                                </label>
+                            </div>
+                            <br>
+                            <button type="submit" class="btn btn-primary btn-block">Apply</button>
                         </form>
                     </div>
                 </div>
@@ -181,7 +184,7 @@
                     <?php } ?>
                     <h6>Available pickup times: between <span id="<?php print("timefrom" . $listing->id) ?>"><?php echo date("H:i", strtotime($listing->time_from)) ?></span> and <span id="<?php print("timeuntil" . $listing->id) ?>"><?php echo date("H:i", strtotime($listing->time_until)) ?></span></h6>
                     <br>
-                    <form class="form-inline row" method="post" action="confirm-order.php" onsubmit="return timecheck(<?php print($listing->id) ?>)">
+                    <form class="form-inline row" method="post" action="confirm-order.php" onsubmit="return timeCheck(<?php print($listing->id) ?>)">
                         <span style="margin-right: 10px">Choose pickup time</span>
                         <input type="time" class="form-control" id="<?php print($listing->id) ?>" name="pickup-time">
                         <span style="margin: 0 10px 0 10px"> and </span>

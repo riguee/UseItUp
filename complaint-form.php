@@ -10,11 +10,12 @@
 </head>
 <body>
 <?php
-$session = 'charity';
-if ($session == 'charity') {
+session_start();
+print_r($_SESSION);
+if ($_SESSION['user_type'] == 'charity') {
     include 'navbar-charity.php';
 }
-if ($session == 'restaurant') {
+if ($_SESSION['user_type'] == 'restaurant') {
     include 'navbar-restaurant.php';
 }?>
 <div class="container">

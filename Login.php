@@ -9,7 +9,7 @@
 </head>
 
 <body>
-
+<?php session_start(); ?>
 <h1>Welcome To UseItUp</h1>
 
 <div class="form">
@@ -17,7 +17,12 @@
     <div class="tab-content">
 
         <div id="login">
-
+            <?php if (isset($_SESSION['message'])) : ?>
+            <div>
+                <?php echo $_SESSION['message'];
+                unset($_SESSION['message']); ?>
+            </div>
+            <?php endif ?>
             <form action="Login.php" method="post" autocomplete="off">
 
                 <div class="field-wrap">
@@ -72,14 +77,14 @@ $query = "SELECT * FROM charities WHERE email='" . $email . "'";
 
 $result = $mysqli->query($query);
 
-if ( $result->num_rows == 0 ) { // User doesn't exist
-//    $_SESSION['message'] = "User with that email doesn't exist!";
+if ( $result->num_rows == 0 ) { // Charity user doesn't exist
 
     $query = "SELECT * FROM restaurants WHERE email='" . $email . "'";
     $result = $mysqli->query($query);
-    if ($result->num_rows == 0) {
-        // no user with that email
-    } else {
+    if ($result->num_rows == 0) { // restaurant user doesnt exist
+        $_SESSION['message'] = "You have entered wrong email, try again!";
+
+    } else { // restaurant user exists
         $user = $result->fetch_assoc();
 
         if ($_POST['password'] == $user['password']) {
@@ -93,10 +98,9 @@ if ( $result->num_rows == 0 ) { // User doesn't exist
             header("location: RestaurantProfileAcct.php");
         } else {
             $_SESSION['message'] = "You have entered wrong password, try again!";
-            header("location: error.php");
         }
     }
-} else { // User exists
+} else { // charity user exists
     $user = $result->fetch_assoc();
 
     if ($_POST['password'] == $user['password']) {
@@ -107,10 +111,9 @@ if ( $result->num_rows == 0 ) { // User doesn't exist
         // This is how we'll know the user is logged in
         $_SESSION['logged_in'] = true;
 
-        header("location: CharityProfileAcct.php");
+        header("location: mainlisting.php");
     } else {
         $_SESSION['message'] = "You have entered wrong password, try again!";
-        header("location: error.php");
     }
 }
 

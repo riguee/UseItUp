@@ -53,7 +53,7 @@ class Listing
             <div class="row">
                 <div class="col-2">
                     <div class="middle">
-                        <p>Pickup window:<br><?php echo $this->time_from; ?><br><?php echo $this->time_until; ?></p>
+                        <img src="<?php echo $this->image ?>" width="150 px">
                     </div>
                 </div>
                 <class="col-10">
@@ -83,11 +83,13 @@ class Listing
                         echo "No diets";
                     }
                     ?>
-                <img src="<?php echo $this->image ?>" width="150 px">
+                    <p>Pickup window:<br><?php echo $this->time_from; ?><br><?php echo $this->time_until; ?></p>
             </div>
         </div>
 
         <?php
     }
+
+
 
 }

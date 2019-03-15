@@ -85,43 +85,6 @@
  include "navbar-restaurant.php";
  ?>
 <div class="container">
-<<<<<<< HEAD:newlisting.php
-<h1>New listing</h1><br>
-    <form name="newlisting" autocomplete="off" enctype="multipart/form-data" action="createdlisting.php" onsubmit="return timecheck();" method="post">
-        <div class="form-group">
-            <label for="dishes">Select one of your saved dishes:</label>
-            <select class="form-control" name="dishes" id="dishes">
-                <option value="none">None</option>
-                <option value="dish1">Dish 1</option>
-                <option value="dish2">Dish 2</option>
-                <option value="dish3">Dish 3</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="title">or fill in information for a new dish:</label>
-                <input type="text" class="form-control" id="title" name="title" placeholder="Name of the dish">
-            </div>
-            <br><br>
-            <textarea type="text" class="form-control" rows="5" id="description" name="description" placeholder="dish details: ingredients, cooking, flavour..."></textarea>
-            <br><br><div  class="col-md-8 mx-auto">
-                Image:
-                <input type="file" class="form-control-file" placeholder="image" name="fileToUpload" accept="image/gif, image/jpeg, image/png"></div>
-            <br><br>
-            Quantity:
-            <input type="number" name="portions" class="form-control" min="1">
-            <br><br>
-            Allergens:
-            <select name="allergen[]" class="selectpicker" multiple data-live-search="true">
-                <?php
-                $stmt = $conn->prepare("SELECT * FROM allergens");
-                $stmt->execute();
-                $result = $stmt->get_result();
-                if (mysqli_num_rows($result) > 0) {
-                    // output data of each row
-                    while($row = $result->fetch_assoc()) {
-                        echo "<option value='".$row["id"]."'>".$row["allergen"]."</option>";
-                    }
-=======
 <h1>New listing</h1>
     <form name="newlisting" autocomplete="off" action="createdlisting.php" onsubmit="return timecheck();" method="post">
         <label for="dishes">Select one of your saved dishes:</label>
@@ -154,7 +117,6 @@
                 // output data of each row
                 while($row = $result->fetch_assoc()) {
                     echo "<option value='".$row["id"]."'>".$row["allergen"]."</option>";
->>>>>>> charles:new-listing.php
                 }
             }
             ?>
@@ -189,15 +151,9 @@
                 <input type="time" class="form-control" name="until" id="until" data-custom-pattern="Invalid date">
                 <br><br></div>
                 -->
-<<<<<<< HEAD:newlisting.php
-            <button type="submit" class="btn btn-primary col-md-12" value="Upload Image" id="submitlisting" >Submit</button>
-
-
-=======
         <button type="submit" class="btn btn-primary col-md-12" id="submitlisting" >Submit</button>
         <br>
         <br>
->>>>>>> charles:new-listing.php
     </form>
 </div>
 </body>

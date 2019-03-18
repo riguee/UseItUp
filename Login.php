@@ -7,9 +7,9 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <link href="common.css" rel="stylesheet" type="text/css">
 </head>
-
+<?php include 'navbar-charity.php' ?>
 <body>
-<?php session_start(); ?>
+
 <h1>Welcome To UseItUp</h1>
 
 <div class="form">
@@ -17,12 +17,7 @@
     <div class="tab-content">
 
         <div id="login">
-            <?php if (isset($_SESSION['message'])) : ?>
-            <div>
-                <?php echo $_SESSION['message'];
-                unset($_SESSION['message']); ?>
-            </div>
-            <?php endif ?>
+
             <form action="Login.php" method="post" autocomplete="off">
 
                 <div class="field-wrap">
@@ -39,7 +34,7 @@
                     <input type="password" required autocomplete="off" name="password"/>
                 </div>
 
-                <p class="forgot"><a href="forgot.php">Forgot Password?</a></p>
+                <p class="forgot"><a href="Forgot.php">Forgot Password?</a></p>
 
                 <button class="button button-block" name="login">Log In</button>
 
@@ -60,63 +55,68 @@
 
 
 <?php
+if (isset($_POST['email'])) {
+    $login_check = false; // Check for login success
 
-$mysqli = include 'connection.php';
-/* User login process, checks if user exists and password is correct */
+    $mysqli = include 'connection.php';
+    /* User login process, checks if user exists and password is correct */
 
-// Escape email to protect against SQL injections
+    $email = $_POST['email'];
 
-$email = $_POST['email'];
-//echo $email;
+    //$email = $mysqli->real_escape_string($email);
 
-//$email = $mysqli->real_escape_string($email);
+    //echo $email;
+    $query_rest = "SELECT * FROM restaurants WHERE email='$email'";
+    $query_char = "SELECT * FROM charities WHERE email ='$email'";
 
-//echo $email;
+    $result_rest = $mysqli->query($query_rest);
+    $result_char = $mysqli->query($query_char);
 
-$query = "SELECT * FROM charities WHERE email='" . $email . "'";
+    $total_results = $result_rest->num_rows + $result_char->num_rows;
 
-$result = $mysqli->query($query);
+    if ($total_results == 0) { // User doesn't exist
+        $login_check = false;
+    } else { // User exists, check password
+        $found = true; // check if the user is found
 
-if ( $result->num_rows == 0 ) { // Charity user doesn't exist
+        if ($result_rest->num_rows > 0) {
+            $service = "r";
+            $result = $result_rest;
+        } else {
+            $service = "c";
+            $result = $result_char;
+        }
 
-    $query = "SELECT * FROM restaurants WHERE email='" . $email . "'";
-    $result = $mysqli->query($query);
-    if ($result->num_rows == 0) { // restaurant user doesnt exist
-        $_SESSION['message'] = "You have entered wrong email, try again!";
-
-    } else { // restaurant user exists
         $user = $result->fetch_assoc();
 
-        if ($_POST['password'] == $user['password']) {
+        if (md5($_POST['password']) != $user['password']) {
+            $login_check = false;
+        } else { // Logged in
+            $login_check = true;
 
-            $_SESSION['id'] = $user['id'];
-            $_SESSION['user_type'] = "restaurant";
+            session_start();
 
-            // This is how we'll know the user is logged in
+            $_SESSION['service'] = $service;
+            $_SESSION['email'] = $email;
             $_SESSION['logged_in'] = true;
 
-            header("location: RestaurantProfileAcct.php");
-        } else {
-            $_SESSION['message'] = "You have entered wrong password, try again!";
+            if ($service == 'r') {
+                header("location: RestaurantProfileAcct.php");
+            }
+            else {
+                header("location: CharityProfileAcct.php");
+            }
         }
     }
-} else { // charity user exists
-    $user = $result->fetch_assoc();
 
-    if ($_POST['password'] == $user['password']) {
-
-        $_SESSION['id'] = $user['id'];
-        $_SESSION['user_type'] = "charity";
-
-        // This is how we'll know the user is logged in
-        $_SESSION['logged_in'] = true;
-
-        header("location: mainlisting.php");
+    if ($login_check == false) {
+        $_SESSION['message'] = "Wrong email or password. Please try again.";
+//        header("location: error.php");
+        include "error.php";
     } else {
-        $_SESSION['message'] = "You have entered wrong password, try again!";
+        $_SESSION['message'] = null;
     }
 }
-
 ?>
 
 </body>

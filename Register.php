@@ -87,9 +87,9 @@
 
         <div id = "char_div" class = "inv">
             <label>
-                id: <span class="req">*</span>
+                Charity ID: <span class="req">*</span>
             </label>
-            <input type="text" name="charity_id" autocomplete="off"/>
+            <input type="number" name="charity_id" autocomplete="off"/>
             <br>
         </div>
 
@@ -104,96 +104,104 @@
             <button type="submit" class="button button-block">Cancel</button>
         </div>
     </form>
-
-
 </div>
 
-</body>
-
 <?php
-
 if (isset($_POST["name"])) {
-    $conn = include('connection.php');
+    $mysqli = include('connection.php');
 
-    $type = $_POST["div_select"];
-    $name = $_POST["name"];
-    $email = $_POST["email"];
-    $password = $_POST["password"];
-    $address = $_POST["street_name"];
-    $phone = $_POST["phone"];
-    $hash = "hash";
+    //Setting POST variables
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $password = md5($_POST['password']);
+    $address = $_POST['address'];
+    $phone = $_POST['phone'];
+    $id = $_POST['charity_id'];
+    $div_select = $_POST['div_select'];
 
-    if ($type == "charity") {
-        $charity_id = $_POST["charity_id"];
-        $table = "charities";
-
-        // Table headers
-        $id_head = "id";
-        $name_head = "name";
-        $charity_number_head = "charity_number";
-        $address_head = "address";
-        $phone_head = "phone_number";
-        $email_head = "email";
-        $password_head = "password";
-    } elseif ($type == "restaurant") {
-        $table = "restaurants";
-
-        // Table headers
-        $id_head = "id";
-        $name_head = "name";
-        $address_head = "address";
-        $phone_head = "phone_number";
-        $email_head = "email";
-        $password_head = "password";
+    if ($div_select == 'restaurant') {
+        $service = 'restaurants';
+    } else {
+        $service = 'charities';
     }
 
-    $hash_head = 'hash';
+    // Check if user with that email already exists
+    // Each email can only be used for EITHER restaurant or charity
+    $query_rest = "SELECT * FROM restaurants WHERE email='" . $email . "'";
+    $query_char = "SELECT * FROM charities WHERE email='" . $email . "'";
 
-    $sql = "SELECT *  FROM " . $table . " WHERE email='" . $email . "'";
-    $results = $conn->query($sql);
+    $result_rest = $mysqli->query($query_rest);
+    $result_char = $mysqli->query($query_char);
 
-    if ($results->num_rows == 0) {
-        $sql = "SELECT " . $id_head . " FROM " . $table;
-        $results = $conn->query($sql);
-        $id = $results->num_rows + 1;
+    $total_results = $result_rest->num_rows + $result_char->num_rows;
 
-        $sql = "INSERT INTO " . $table . " (";
-        $sql = $sql . $id_head . "," . $name_head;
-        $sql_val = $id . ",'" . $name . "'";
-
-        if ($type == "charity") {
-            $sql = $sql . "," . $charity_number_head;
-            $sql_val = $sql_val . "," . $charity_id;
-        }
-
-//        $sql = $sql . "," . $street_name_head . "," . $building_name_head . ",";
-//        $sql_val = $sql_val . ",'" . $street_name . "','" . $building_name . "','";
-
-        if ($type == "charity") {
-            $sql = $sql . $city_head . "," . $postcode_head;
-            $sql_val = $sql_val . $city . "','" . $postcode;
-        } elseif ($type == "restaurant") {
-            $sql = $sql . $postcode_head . "," . $city_head;
-            $sql_val = $sql_val . $postcode . "','" . $city;
-        }
-
-        $sql = $sql . "," . $phone_head . "," . $email_head . "," . $password_head . "," . $hash_head;
-        $sql_val = $sql_val . "'," . $phone . ",'" . $email . "','" . $password . "','" . $hash;
-
-        $sql = $sql . ") VALUES (" . $sql_val . "')";
-
-        echo $sql;
-
-        if ($conn->query($sql) == true) {
-            echo("Account created.");
-        } else {
-            echo $conn->error;
-        }
+    if ($total_results > 0) {
+        $_SESSION['message'] = 'User with this email already exists! Please try again';
+        include "error.php";
+//        header("location: error.php");
     } else {
-        print("This account already exists.");
+        // Email doesn't match
+        // Insert into service
+
+        $sql = "INSERT INTO $service (id, name, phone_number, email, password, address, active";
+        if ($service == 'charities') {
+            $sql = $sql . ", charity_id";
+        }
+        $sql = $sql . ") VALUES (";
+        if ($service == 'charities') {
+            $num = $mysqli->query("SELECT * FROM $service");
+            $num = $num->num_rows + 1;
+            $sql = $sql . $num;
+        }
+        else {
+            $sql = $sql . "NULL";
+        }
+        $sql = $sql . ", '$name', $phone, '$email', '$password', '$address', FALSE";
+        if ($service == 'charities') {
+            $sql = $sql . ", $id";
+        }
+        $sql = $sql . ")";
+
+//        echo $sql;
+
+        if ($mysqli->query($sql)) {
+            // Successful
+            $service = $service[0];
+
+            session_start();
+
+            $_SESSION['service'] = $service;
+            $_SESSION['email'] = $email;
+            $_SESSION['logged_in'] = true;
+
+            $_SESSION['message'] = "Confirmation link has been sent to $email, please your account by clicking on the link in the message!";
+
+            // Send registration confirmation link (verify.php)
+            $to = $email;
+            $subject = 'Account Verification';
+            $message_body = '
+                Hello ' . $first_name . ',
+        
+                Thank you for signing up!
+        
+                Please click this link to activate your account:
+        
+                http://localhost/login-system/Verify.php?email=' . $email . '&hash=' . $password . '&service=' . $service;
+
+            mail($to, $subject, $message_body);
+
+//            header("location: RestaurantProfileAcct.php");
+            echo "Verification link: http://localhost:63342/COMP0034_GroupC-master%204/Verify.php?email=$email&hash=$password&service=$service";
+
+        } else {
+            // Failed
+            $_SESSION['message'] = 'Registration failed!';
+//            header("location: error.php");
+            include "error.php";
+        }
     }
 }
 ?>
-
 </body>
+
 </html>

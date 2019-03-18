@@ -142,6 +142,9 @@
         </select>
         <br>
         <br>
+        <input type="checkbox" name="remember" id="remmemberme" value="1">
+        <label for="remmemberme">Remember this dish.</label>
+        <br><br>
         <!--
             <br><br><div class="col-md-6 mx-auto">
                 Pickup time <br>

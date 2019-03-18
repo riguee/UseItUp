@@ -47,7 +47,10 @@
             }
         }
 
-        function transferSearch()
+        function transferSearch() {
+            var search = document.getElementById("search").value;
+            document.getElementById("advancedsearchbar").value = search;
+        }
     </script>
     <title>All listings</title>
 </head>
@@ -59,7 +62,7 @@
     <div class="container">
         <h1>Welcome back, <span class="accent">charity_name</span>.</h1>
         <form class="form-inline d-flex justify-content-center" method="post" action="">
-            <input id="search" type="search" class="form-control col-4" name="search" placeholder="Search for food" value="<?php if (isset($_POST['search'])) print($_POST['search']) ?>">
+            <input id="search" type="search" class="form-control col-4" name="search" placeholder="Search for food" value="<?php if (isset($_POST['search'])) {print($_POST['search']);} elseif (isset($_POST['advanced-search'])) {print($_POST['advanced-search']);} ?>">
             <button type="submit" class="btn btn-primary search-btn"><i class="fa fa-search"></i></button>
         </form>
         <br>
@@ -68,39 +71,37 @@
                 <div class="card">
                     <div class="card-header" id="heading"><button type="button" style="padding: 0" class="btn btn-link" data-toggle="collapse" data-target="#advanced-search">Advanced search<i style="margin-left: 10px" class="fas fa-chevron-down"></i></button></div>
                     <div id="advanced-search" class="collapse card-body">
-                        <form method="post" action="" onsubmit="">
-                            <input type="search" name="advancedsearch" id="advancedsearch" value="" hidden>
+                        <form method="post" action="" onsubmit="return transferSearch()">
+                            <input type="search" name="advanced-search" id="advancedsearchbar" value="" hidden>
                             <span style="margin-right: 10px">Sort by pick-up time:</span>
                             <div class="form-check form-check-inline" style="margin: 0 0 10px 0">
-                                <input class="form-check-input" type="radio" name="distance" id="distance">
-                                <label style="margin-right: 5px" class="form-check-label" for="distance">earliest first</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="pickup-time" id="pickup-time">
-                                <label class="form-check-label" for="pickup-time">latest first</label>
+                                <input class="form-check-input" type="radio" name="sort-by" id="earliest" value="earliest" <?php if (isset($_POST['sort-by'])) {if ($_POST['sort-by'] == 'earliest') {print('checked');}} else {print('checked');} ?>>
+                                <label style="margin-right: 5px; font-weight: unset" class="form-check-label" for="earliest">earliest first</label>
+                                <input class="form-check-input" type="radio" name="sort-by" id="latest" value="latest" <?php if (isset($_POST['sort-by']) && $_POST['sort-by'] == 'latest') {print('checked');} ?>>
+                                <label style="font-weight: unset" class="form-check-label" for="latest">latest first</label>
                             </div>
                             <div class="form-inline" style="margin: 20px 0 10px 0">
-                                <span style="margin-right: 10px">Portions:</span>
-                                <select class="form-control" name="portions">
-                                    <option>Show all</option>
-                                    <option>0-49</option>
-                                    <option>50-99</option>
-                                    <option>100+</option>
+                                <label style="margin-right: 10px; font-weight: unset" for="portions">Portions:</label>
+                                <select class="form-control" name="portions" id="portions">
+                                    <option <?php if (isset($_POST['portions'])) {if ($_POST['portions'] == 'all') {print('selected="selected"');}} else {print('selected="selected"');} ?> value="all">Show all</option>
+                                    <option value="low" <?php if (isset($_POST['portions']) && $_POST['portions'] == 'low') {print('selected="selected"');} ?>>0-49</option>
+                                    <option value="medium" <?php if (isset($_POST['portions']) && $_POST['portions'] == 'medium') {print('selected="selected"');} ?>>50-99</option>
+                                    <option value="high" <?php if (isset($_POST['portions']) && $_POST['portions'] == 'high') {print('selected="selected"');} ?>>100+</option>
                                 </select>
                             </div>
                             <br>
-                            <p>Refine your search by excluding specific allergens:</p>
+                            <label for="allergens" style="font-weight: unset">Refine your search by excluding specific allergens:</label>
                                 <div class="form-check" style="padding-left: 0px">
-                                <select name="allergen[]" class="selectpicker" multiple data-live-search="true">
+                                <select name="allergen[]" class="selectpicker" multiple data-live-search="true" id="allergens">
                                     <?php
                                     $stmt = $conn->prepare("SELECT * FROM allergens");
                                     $stmt->execute();
                                     $result = $stmt->get_result();
                                     if (mysqli_num_rows($result) > 0) {
                                         // output data of each row
-                                        while($row = $result->fetch_assoc()) {
-                                            echo "<option value='".$row["id"]."'>".$row["allergen"]."</option>";
-                                        }
+                                        while($row = $result->fetch_assoc()) { ?>
+                                            <option <?php if(in_array($row["id"], $_POST['allergen'])) {print('selected="selected"');} ?> value="<?php print($row["id"])?>"><?php echo $row["allergen"] ?></option>
+                                        <?php }
                                     }
                                     ?>
                                 </select>
@@ -108,26 +109,26 @@
                             <br>
                             <span>Only show specific diets:</span>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="diet1">
-                                <label class="form-check-label" for="diet1">
+                                <input class="form-check-input" type="checkbox" value="vegetarian" id="vegetarian" name="diet[]" <?php if (in_array("vegetarian", $_POST['diet'])) {print("checked");} ?>>
+                                <label style="font-weight: unset" class="form-check-label" for="vegetarian">
                                     Vegetarian
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="diet1">
-                                <label class="form-check-label" for="diet1">
+                                <input class="form-check-input" type="checkbox" value="vegan" id="vegan" name="diet[]" <?php if (in_array("vegan", $_POST['diet'])) {print("checked");} ?>>
+                                <label style="font-weight: unset" class="form-check-label" for="vegan">
                                     Vegan
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="diet2">
-                                <label class="form-check-label" for="diet2">
+                                <input class="form-check-input" type="checkbox" value="halal" id="halal" name="diet[]" <?php if (in_array("halal", $_POST['diet'])) {print("checked");} ?>>
+                                <label style="font-weight: unset" class="form-check-label" for="halal">
                                     Halal
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="diet3">
-                                <label class="form-check-label" for="diet3">
+                                <input class="form-check-input" type="checkbox" value="kosher" id="kosher" name="diet[]" <?php if (in_array("kosher", $_POST['diet'])) {print("checked");} ?>>
+                                <label style="font-weight: unset" class="form-check-label" for="kosher">
                                     Kosher
                                 </label>
                             </div>
@@ -140,18 +141,23 @@
         </div>
             <br>
         <?php
-        if (isset($_POST['search'])) {
-            $search = $_POST['search'];
-        }
-        else {
-            $search = "";
-        }
         include 'connection.php';
         include 'Listings.php';
-        $search_funct = $conn->prepare("SELECT id FROM listings WHERE (listings.title LIKE CONCAT('%',?,'%') OR listings.description LIKE CONCAT('%',?,'%')) AND listings.id NOT IN (SELECT listing_id FROM order_listings)");
-        $search_funct->bind_param("ss", $search, $search);
-        $search_funct->execute();
-        $result = $search_funct->get_result();
+        if (isset($_POST['advanced-search'])) {
+            include 'advanced-search.php';
+        }
+        else {
+            if (isset($_POST['search'])) {
+                $search = $_POST['search'];
+            }
+            else {
+                $search = "";
+            }
+            $search_funct = $conn->prepare("SELECT id FROM listings WHERE (listings.title LIKE CONCAT('%',?,'%') OR listings.description LIKE CONCAT('%',?,'%')) AND listings.id NOT IN (SELECT listing_id FROM order_listings) AND CONCAT(listings.day_posted, \" \", listings.time_until) > NOW()");
+            $search_funct->bind_param("ss", $search, $search);
+            $search_funct->execute();
+            $result = $search_funct->get_result();
+        }
         while ($row = $result->fetch_assoc()) {
             $listing = new Listing();
             $listing->setListingFromId($row['id']);?>

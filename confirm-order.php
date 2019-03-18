@@ -142,7 +142,6 @@ if($count > 0): ?>
                             echo $available_listing->allergen[$count-1];
                             ?></h6>
                     <?php } ?>
-                    <h6>Available pickup times: between <?php echo date("H:i", strtotime($available_listing->time_from)) ?> and <?php echo date("H:i", strtotime($available_listing->time_until)) ?></h6>
                     <br>
                     <form method="post" action="confirm-order.php">
                         <select hidden class="form-control col-4" name="pickup-time">

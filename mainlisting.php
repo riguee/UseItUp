@@ -109,25 +109,25 @@
                             <br>
                             <span>Only show specific diets:</span>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="vegetarian" id="vegetarian" name="diet[]" <?php if (in_array("vegetarian", $_POST['diet'])) {print("checked");} ?>>
+                                <input class="form-check-input" type="checkbox" value="3" id="vegetarian" name="diet[]" <?php if (in_array("3", $_POST['diet'])) {print("checked");} ?>>
                                 <label style="font-weight: unset" class="form-check-label" for="vegetarian">
                                     Vegetarian
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="vegan" id="vegan" name="diet[]" <?php if (in_array("vegan", $_POST['diet'])) {print("checked");} ?>>
+                                <input class="form-check-input" type="checkbox" value="4" id="vegan" name="diet[]" <?php if (in_array("4", $_POST['diet'])) {print("checked");} ?>>
                                 <label style="font-weight: unset" class="form-check-label" for="vegan">
                                     Vegan
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="halal" id="halal" name="diet[]" <?php if (in_array("halal", $_POST['diet'])) {print("checked");} ?>>
+                                <input class="form-check-input" type="checkbox" value="1" id="halal" name="diet[]" <?php if (in_array("1", $_POST['diet'])) {print("checked");} ?>>
                                 <label style="font-weight: unset" class="form-check-label" for="halal">
                                     Halal
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="kosher" id="kosher" name="diet[]" <?php if (in_array("kosher", $_POST['diet'])) {print("checked");} ?>>
+                                <input class="form-check-input" type="checkbox" value="2" id="kosher" name="diet[]" <?php if (in_array("2", $_POST['diet'])) {print("checked");} ?>>
                                 <label style="font-weight: unset" class="form-check-label" for="kosher">
                                     Kosher
                                 </label>
@@ -172,21 +172,20 @@
                     <?php if (!empty($listing->allergen)) { ?>
                     <h6>Allergens: <?php
                         $count = count($listing->allergen);
-                        for ($i = 0; $i<$count-1; $i++) {
-                            echo $listing->allergen[$i].", ";
+                        for ($i = 0; $i < $count - 1; $i++) {
+                            echo $listing->allergen[$i] . ", ";
                         }
-                        echo $listing->allergen[$count-1];
+                        echo $listing->allergen[$count - 1];
+                        }
                         ?></h6>
+                    <?php if (isset($listing->diet)) { ?>
                         <h6>Suitable for: <?php
-
-                            if (isset($listing->diet)) {
-                                $count = count($listing->diet);
-                                for ($i = 0; $i<$count-1; $i++) {
-                                    echo $listing->diet[$i].", ";
-                                }
+                            $count = count($listing->diet);
+                            for ($i = 0; $i<$count-1; $i++) {
+                                echo $listing->diet[$i].", ";
                             }
-                            echo $listing->diet[$count-1];
-                            ?></h6>
+                    echo $listing->diet[$count-1];
+                    ?></h6>
                     <?php } ?>
                     <h6>Available pickup times: between <span id="<?php print("timefrom" . $listing->id) ?>"><?php echo date("H:i", strtotime($listing->time_from)) ?></span> and <span id="<?php print("timeuntil" . $listing->id) ?>"><?php echo date("H:i", strtotime($listing->time_until)) ?></span></h6>
                     <br>

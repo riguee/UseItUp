@@ -1,6 +1,7 @@
 <?php
-$query  = "SELECT id FROM listings WHERE (listings.title LIKE CONCAT('%',?,'%') OR listings.description LIKE CONCAT('%',?,'%')) AND listings.id NOT IN (SELECT listing_id FROM order_listings) AND CONCAT(listings.day_posted, \" \", listings.time_until) > NOW()";
+$query  = "SELECT DISTINCT listings.id, listings.time_from, listings.time_until FROM listings LEFT JOIN diet_listings ON listings.id = diet_listings.listing_id WHERE (listings.title LIKE CONCAT('%',?,'%') OR listings.description LIKE CONCAT('%',?,'%')) AND listings.id NOT IN (SELECT listing_id FROM order_listings) AND CONCAT(listings.day_posted, \" \", listings.time_until) > NOW()";
 if (isset($_POST['allergen'])) {
+    $i = 0;
     foreach ($_POST['allergen'] as $allergen) {
         if ($i == 0) {
             $allergens = $allergen;
@@ -11,7 +12,7 @@ if (isset($_POST['allergen'])) {
         }
         $i++;
     }
-    $query = "SELECT listings.id FROM listings WHERE listings.id NOT IN (SELECT DISTINCT id FROM listings JOIN allergen_listings ON listings.id = allergen_listings.listing_id WHERE allergen_listings.allergen_id IN (" . $allergens . ")) AND listings.id NOT IN (SELECT listing_id FROM order_listings) AND CONCAT(listings.day_posted, \" \", listings.time_until) > NOW() AND  (listings.title LIKE CONCAT('%',?,'%') OR listings.description LIKE CONCAT('%',?,'%'))";
+    $query = "SELECT DISTINCT listings.id, listings.time_from, listings.time_until FROM listings LEFT JOIN diet_listings ON listings.id = diet_listings.listing_id WHERE listings.id NOT IN (SELECT DISTINCT id FROM listings JOIN allergen_listings ON listings.id = allergen_listings.listing_id WHERE allergen_listings.allergen_id IN (" . $allergens . ")) AND listings.id NOT IN (SELECT listing_id FROM order_listings) AND CONCAT(listings.day_posted, \" \", listings.time_until) > NOW() AND (listings.title LIKE CONCAT('%',?,'%') OR listings.description LIKE CONCAT('%',?,'%'))";
 }
 if ($_POST['portions'] == 'low') {
     $query .= " AND portions < 50";
@@ -21,6 +22,20 @@ elseif ($_POST['portions'] == 'medium') {
 }
 elseif ($_POST['portions'] == 'high') {
     $query .= " AND portions > 99";
+}
+if (isset($_POST['diet'])) {
+    $i = 0;
+    foreach ($_POST['diet'] as $diet) {
+        if ($i == 0) {
+            $diets = $diet;
+        }
+        else {
+            $diets .= ", ";
+            $diets .= $diet;
+        }
+        $i++;
+    }
+    $query .= " AND diet_listings.diet_id IN (" . $diets . ")";
 }
 if ($_POST['sort-by'] == 'earliest') {
     $query .= " ORDER BY time_from";

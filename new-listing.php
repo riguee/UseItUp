@@ -67,14 +67,27 @@
                 alert("Please allow at least a 15 minute time window for the pickup.");
                 return false;
             }
-            else {
+
+            /*else {
                 if (confirm("Pickup time from " + fromtime + " time until " + until + ".")) {
-                    return true;
-                } else {
-                    return false;
-                }
+
+                    var image = document.getElementById('image');
+                    var ext =  image.split('.').pop();
+                    alert (ext);
+
+                    if (ext != "jpg" || ext != "JPEG" || ext != "jpeg" || ext != "png")
+                    {
+                        alert("there is something wrong");
+                        return false;
+                    }
+                    else {
+                        return true;
+                    }
+                }*/
+
             }
         }
+
     </script>
     <title>New listing</title>
 </head>
@@ -83,26 +96,77 @@
 <?php
  include"connection.php";
  include "navbar-restaurant.php";
+ $session = 1;
  ?>
+<script>
+
+</script>
+
 <div class="container">
 <h1>New listing</h1>
-    <form name="newlisting" enctype="multipart/form-data" autocomplete="off" action="createdlisting.php" onsubmit="return timecheck();" method="post">
-        <label for="dishes">Select one of your saved dishes:</label>
-        <select class="form-control" name="dishes" id="dishes">
-            <option value="none">None</option>
-            <option value="dish1">Dish 1</option>
-            <option value="dish2">Dish 2</option>
-            <option value="dish3">Dish 3</option>
+    <form name="selectsaved" action="" onsubmit="return checkSelectSavedDish();" method="post">
+        <label for="dishes" onchange="">Select one of your saved dishes:</label>
+        <div class="row">
+            <div class="col-10">
+        <?php
+        $stmt = $conn->prepare("SELECT * FROM listings WHERE saved = 1 AND restaurant_id = " . $session);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        if (mysqli_num_rows($result) > 0) {
+            echo "<select class=\"form-control\" name=\"dishes\" id=\"dishes\">
+                    <option selected value disabled> -- select an option -- </option>";
+            // output data of each row
+            while($row = $result->fetch_assoc()) {
+                echo "<option value='".$row["id"]."'>".$row["title"]."</option>";
+            }
+        }
+        else {
+            echo "<br><n/>You have no saved dish. Create a listing and chose to save it at the end of the form :-). <br>";
+        }
+
+
+        ?>
         </select>
+        </div>
+        <div class="col-2">
+            <button type="submit" class="btn">submit</button>
+        </div>
+        </div>
+    </form>
+    <?php
+    if (isset($_POST['dishes'])) {
+        $query = "SELECT * FROM listings where id = ". $_POST['dishes'];
+        $savedstmt = $conn->query($query);
+        $savedstmt = $savedstmt->fetch_assoc();
+        $allergens = $conn->query("SELECT allergen_id FROM allergen_listings WHERE listing_id =". $_POST['dishes']);
+        if (mysqli_num_rows($allergens) > 0) {
+            $allergens_array = array();
+            while($row = $allergens->fetch_assoc()) {
+                $tmp = $row['allergen_id'];
+                array_push($allergens_array, $tmp);
+            }
+        }
+        $diets = $conn->query("SELECT diet_id FROM diet_listings WHERE listing_id =". $_POST['dishes']);
+        if (mysqli_num_rows($diets) > 0) {
+            $diets_array = array();
+            while($row = $diets->fetch_assoc()) {
+                $tmp = $row['diet_id'];
+                array_push($diets_array, $tmp);
+            }
+        }
+
+    }
+    ?>
+    <form name="newlisting" enctype="multipart/form-data" autocomplete="off" action="createdlisting.php" onsubmit="return timecheck();" method="post">
         <br>
-        <label for="title">or fill in information for a new dish:</label>
-        <input type="text" class="form-control" id="title" name="title" placeholder="Name of the dish">
+        <label for="title">or <br> fill in information for a new dish:</label>
+        <input type="text" class="form-control" id="title" name="title" placeholder="Name of the dish" value="<?php if (isset($_POST['dishes'])) { echo $savedstmt['title'];}?>">
         <br>
         <label for="description">Description</label>
-        <textarea type="text" class="form-control" rows="5" id="description" name="description" placeholder="e.g. ingredients, flavour, etc."></textarea>
+        <textarea type="text" class="form-control" rows="5" id="description" name="description" placeholder="e.g. ingredients, flavour, etc."><?php if (isset($_POST['dishes'])) { echo $savedstmt['description'];}?></textarea>
         <br>
         <label for="image">Choose an image</label>
-        <input type="file" id="image" class="form-control-file" placeholder="image" name="fileToUpload" accept="image/gif, image/jpeg, image/png">
+        <input type="file" id="image" class="form-control-file" placeholder="image" name="fileToUpload" accept="image/gif, image/jpeg, image/png" >
         <br>
         <label for="portions">Quantity</label>
         <input type="number" name="portions" id="portions" class="form-control" min="1">
@@ -115,8 +179,9 @@
             $result = $stmt->get_result();
             if (mysqli_num_rows($result) > 0) {
                 // output data of each row
-                while($row = $result->fetch_assoc()) {
-                    echo "<option value='".$row["id"]."'>".$row["allergen"]."</option>";
+                while($row = $result->fetch_assoc()) {?>
+                    <option value='<?php echo $row["id"]?>'<?php if (isset($_POST['dishes'])) {if(in_array($row["id"], $allergens_array)){echo "selected";}}?> > <?php echo $row["allergen"]?></option>
+                    <?php
                 }
             }
             ?>
@@ -131,8 +196,9 @@
             $dietresult = $diets->get_result();
             if (mysqli_num_rows($dietresult) > 0) {
                 // output data of each row
-                while($dietrow = $dietresult->fetch_assoc()) {
-                    echo "<option value='".$dietrow["id"]."'>".$dietrow["diet"]."</option>";
+                while($dietrow = $dietresult->fetch_assoc()) {?>
+                    <option value='<?php echo $dietrow["id"]?>'<?php if (isset($_POST['dishes'])) {if(in_array($dietrow["id"], $diets_array)){echo "selected";}}?> > <?php echo $dietrow["diet"]?></option>
+                    <?php
                 }
             }
             else {
@@ -142,8 +208,8 @@
         </select>
         <br>
         <br>
-        <input type="checkbox" name="remember" id="remmemberme" value="1">
-        <label for="remmemberme">Remember this dish.</label>
+        <input type="checkbox" name="remember" id="remmemberme" value="1" <?php if (isset($_POST['dishes'])) {echo "disabled";}?>>
+        <label for="remmemberme" >Remember this dish.</label>
         <br><br>
         <!--
             <br><br><div class="col-md-6 mx-auto">

@@ -107,7 +107,7 @@
     <form name="selectsaved" action="" onsubmit="return checkSelectSavedDish();" method="post">
         <label for="dishes" onchange="">Select one of your saved dishes:</label>
         <div class="row">
-            <div class="col-10">
+            <div class="col-11">
         <?php
         $stmt = $conn->prepare("SELECT * FROM listings WHERE saved = 1 AND restaurant_id = " . $session);
         $stmt->execute();
@@ -128,8 +128,8 @@
         ?>
         </select>
         </div>
-        <div class="col-2">
-            <button type="submit" class="btn">submit</button>
+        <div class="col-1">
+            <button type="submit" class="btn btn-primary">submit</button>
         </div>
         </div>
     </form>

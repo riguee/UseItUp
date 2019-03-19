@@ -5,7 +5,7 @@ class Restaurant
     public $id, $name, $phone, $email, $address, $postcode, $license_number, $listings;
     function setRestaurantFromId($id) {
         include 'connection.php';
-        $query = "SELECT address, email, license_number, name, phone, postcode FROM restaurants WHERE id = ". $id;
+        $query = "SELECT address, email, name, phone, postcode FROM restaurants WHERE id = ". $id;
         $result = mysqli_query($conn, $query);
         $result = $result->fetch_assoc();
         $this->id = $id;

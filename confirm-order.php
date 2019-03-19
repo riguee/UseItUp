@@ -37,7 +37,6 @@ foreach ($listing_IDs as $listing_id) {
 include 'Restaurants.php';
 $restaurant = new Restaurant();
 $restaurant->setRestaurantFromId($listing->restaurant_id);
-
 ?>
 <div class="card">
     <h5 class="card-header">From <a href="#"><?php echo $restaurant->name ?></a></h5>

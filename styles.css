@@ -88,3 +88,11 @@ a:hover {
 label {
     font-weight: 500;
 }
+
+.inv {
+    display : none
+}
+
+.vis {
+    display : block
+}

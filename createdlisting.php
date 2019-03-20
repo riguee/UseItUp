@@ -85,6 +85,10 @@ else {
 $createlisting = $conn->prepare("UPDATE listings SET image = ? WHERE id=" . $new_id);
 $createlisting->bind_param("s", $target_file);
 $createlisting->execute();
+
+if (isset($_POST['remember'])) {
+    $conn->query("UPDATE listings SET saved = 1 WHERE id = " . $new_id);
+}
 if (isset($_POST["allergen"])) {
     foreach ($_POST["allergen"] as $curr_allergen_id) {
         $setallergens = $conn->prepare("INSERT INTO allergen_listings (listing_id, allergen_id) VALUES (?, ?)");

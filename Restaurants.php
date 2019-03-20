@@ -14,7 +14,6 @@ class Restaurant
         $this->email = $result['email'];
         $this->address = $result['address'];
         $this->postcode = $result['postcode'];
-        $this->license_number = $result['license_number'];
 
         $query = "SELECT listings.id FROM listings JOIN restaurants ON listings.restaurant_id = restaurants.id WHERE restaurants.id = ". $id;
         $result = mysqli_query($conn, $query);

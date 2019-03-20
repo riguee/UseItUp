@@ -165,8 +165,14 @@
         <label for="description">Description</label>
         <textarea type="text" class="form-control" rows="5" id="description" name="description" placeholder="e.g. ingredients, flavour, etc."><?php if (isset($_POST['dishes'])) { echo $savedstmt['description'];}?></textarea>
         <br>
-        <label for="image">Choose an image</label>
-        <input type="file" id="image" class="form-control-file" placeholder="image" name="fileToUpload" accept="image/gif, image/jpeg, image/png" >
+        <?php if(isset($_POST['dishes'])){
+            echo "<input type=\"hidden\" id=\"savedimg\" name=\"savedimg\" value=". $savedstmt['image'] .">";
+        }
+        else {
+            echo "<label for=\"image\">Choose an image</label>
+        <input type=\"file\" id=\"image\" class=\"form-control-file\" placeholder=\"image\" name=\"fileToUpload\" accept=\"image/gif, image/jpeg, image/png\" >";
+        }
+        ?>
         <br>
         <label for="portions">Quantity</label>
         <input type="number" name="portions" id="portions" class="form-control" min="1">

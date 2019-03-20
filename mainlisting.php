@@ -100,7 +100,7 @@
                                     if (mysqli_num_rows($result) > 0) {
                                         // output data of each row
                                         while($row = $result->fetch_assoc()) { ?>
-                                            <option <?php if(in_array($row["id"], $_POST['allergen'])) {print('selected="selected"');} ?> value="<?php print($row["id"])?>"><?php echo $row["allergen"] ?></option>
+                                            <option <?php if(isset($_POST['allergen'])&&  in_array($row["id"], $_POST['allergen'])) {print('selected="selected"');} ?> value="<?php print($row["id"])?>"><?php echo $row["allergen"] ?></option>
                                         <?php }
                                     }
                                     ?>
@@ -109,25 +109,25 @@
                             <br>
                             <span>Only show specific diets:</span>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="3" id="vegetarian" name="diet[]" <?php if (in_array("3", $_POST['diet'])) {print("checked");} ?>>
+                                <input class="form-check-input" type="checkbox" value="3" id="vegetarian" name="diet[]" <?php if (isset($_POST['diet']) && in_array("3", $_POST['diet'])) {print("checked");} ?>>
                                 <label style="font-weight: unset" class="form-check-label" for="vegetarian">
                                     Vegetarian
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="4" id="vegan" name="diet[]" <?php if (in_array("4", $_POST['diet'])) {print("checked");} ?>>
+                                <input class="form-check-input" type="checkbox" value="4" id="vegan" name="diet[]" <?php if (isset($_POST['diet']) && in_array("4", $_POST['diet'])) {print("checked");} ?>>
                                 <label style="font-weight: unset" class="form-check-label" for="vegan">
                                     Vegan
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="1" id="halal" name="diet[]" <?php if (in_array("1", $_POST['diet'])) {print("checked");} ?>>
+                                <input class="form-check-input" type="checkbox" value="1" id="halal" name="diet[]" <?php if (isset($_POST['diet']) && in_array("1", $_POST['diet'])) {print("checked");} ?>>
                                 <label style="font-weight: unset" class="form-check-label" for="halal">
                                     Halal
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="2" id="kosher" name="diet[]" <?php if (in_array("2", $_POST['diet'])) {print("checked");} ?>>
+                                <input class="form-check-input" type="checkbox" value="2" id="kosher" name="diet[]" <?php if (isset($_POST['diet']) && in_array("2", $_POST['diet'])) {print("checked");} ?>>
                                 <label style="font-weight: unset" class="form-check-label" for="kosher">
                                     Kosher
                                 </label>

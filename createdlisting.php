@@ -16,6 +16,7 @@
 include 'navbar-restaurant.php';
 include 'connection.php';?>
 <div class="container">
+    <h3>You uploaded the following listing:</h3>
 <?php
 $restaurant_session = 1;
 $title = $_POST["title"];
@@ -35,7 +36,7 @@ VALUES (?, ?, ?, ?, ?, NOW(),1)");
 $createlisting->bind_param("sssss", $title, $description, $portion, $timefrom, $timeuntil);
 $createlisting->execute();
 $new_id = mysqli_insert_id($conn);
-if (isset($_FILES['fileToUpload'])){
+if (isset($_FILES['fileToUpload']) && !isset($_POST['savedimg'])){
 $target_dir = "uploads/";
 $target_file = $target_dir . $new_id ;
 $uploadOk = 1;
@@ -74,6 +75,9 @@ if ($uploadOk == 0) {
         echo "Sorry, there was an error uploading your file.";
     }
 }
+}
+elseif(isset($_POST['savedimg'])) {
+    $target_file = $_POST['savedimg'];
 }
 else {
     $target_file = "uploads/dish.png";

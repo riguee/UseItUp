@@ -42,6 +42,12 @@ h1 {
     border-color: #cca140 !important;
 }
 
+.btn-check {
+    width: 100%;
+    float: bottom;
+    margin-bottom: 0;
+}
+
 .details {
     text-align: center;
     margin: 30px;

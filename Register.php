@@ -5,6 +5,7 @@
     <title>UseItUp SignUp page</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
     <style>
         .inv {
             display : none
@@ -19,13 +20,9 @@
 <body bgcolor="#fcfff5">
 <div id="signup">
     <h1>Sign Up for Free</h1>
-
-<!--    <div>-->
-<!--        -->
-<!--    </div>-->
     <form action="Register.php" method="post" autocomplete="off">
         <label>Type of Account: </label>
-        <select id="div_select" name="div_select" onchange="change(this.value)">
+        <select id="selecttype" name="selecttype" <!--onchange="change(this.value)"-->>
             <option value="restaurant">Restaurant</option>
             <option value="charity">Charity</option>
         </select>
@@ -33,6 +30,7 @@
         <br>
         <br>
 
+        <!--
         <script>
             function change(value) {
                 if (value == "restaurant") {
@@ -53,6 +51,7 @@
                 }
             }
         </script>
+        -->
 
 
         <label>
@@ -108,7 +107,7 @@
 
 <?php
 if (isset($_POST["name"])) {
-    $mysqli = include('connection.php');
+    include('connection.php');
 
     //Setting POST variables
     $name = $_POST['name'];

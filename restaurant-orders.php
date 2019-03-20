@@ -21,8 +21,22 @@ include 'connection.php';
 include 'Orders.php';
 include 'Listings.php';
 include 'Charities.php';
-$restaurant_session = 1;
-include 'navbar-restaurant.php';
+session_start();
+if (empty($_SESSION)) {
+    header( "location: Login.php" );
+}
+elseif ($_SESSION['user_type'] == 'charity') {
+    header( "location: mainlisting.php" );
+}
+elseif ($_SESSION['user_type'] == 'restaurant') {
+    include 'navbar-restaurant.php';
+}
+else {
+    header( "location: Logout.php" );
+}
+
+$restaurant_session = $_SESSION['id'];
+
 ?>
 <div class="container">
     <h1>Orders</h1>

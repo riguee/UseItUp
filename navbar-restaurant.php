@@ -3,7 +3,9 @@
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-
+<?php
+$email = $_SESSION['email'];
+?>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item <?php if (basename($_SERVER['PHP_SELF']) == "new-listing.php") {print("active");} ?>">
@@ -19,5 +21,7 @@
                 <a class="nav-link" href="complaint-form.php">Report a problem <span class="sr-only">(current)</span></a>
             </li>
         </ul>
+        Welcome <?php echo $email ?>
+        <a style="margin-left: 10px" href="Logout.php">Log out</a>
     </div>
 </nav>

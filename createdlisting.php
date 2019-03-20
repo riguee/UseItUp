@@ -16,6 +16,7 @@
 include 'navbar-restaurant.php';
 include 'connection.php';?>
 <div class="container">
+    <h3>You uploaded the following listing:</h3>
 <?php
 $restaurant_session = 1;
 $title = $_POST["title"];
@@ -35,7 +36,7 @@ VALUES (?, ?, ?, ?, ?, NOW(),1)");
 $createlisting->bind_param("sssss", $title, $description, $portion, $timefrom, $timeuntil);
 $createlisting->execute();
 $new_id = mysqli_insert_id($conn);
-if (isset($_FILES['fileToUpload'])){
+if (isset($_FILES['fileToUpload']) && !isset($_POST['savedimg'])){
 $target_dir = "uploads/";
 $target_file = $target_dir . $new_id ;
 $uploadOk = 1;
@@ -75,12 +76,19 @@ if ($uploadOk == 0) {
     }
 }
 }
+elseif(isset($_POST['savedimg'])) {
+    $target_file = $_POST['savedimg'];
+}
 else {
     $target_file = "uploads/dish.png";
 }
 $createlisting = $conn->prepare("UPDATE listings SET image = ? WHERE id=" . $new_id);
 $createlisting->bind_param("s", $target_file);
 $createlisting->execute();
+
+if (isset($_POST['remember'])) {
+    $conn->query("UPDATE listings SET saved = 1 WHERE id = " . $new_id);
+}
 if (isset($_POST["allergen"])) {
     foreach ($_POST["allergen"] as $curr_allergen_id) {
         $setallergens = $conn->prepare("INSERT INTO allergen_listings (listing_id, allergen_id) VALUES (?, ?)");

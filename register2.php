@@ -61,6 +61,7 @@
                     document.getElementById($element_btn).value = "The restaurant is open on " + day + "s.";
                     document.getElementById($element_btn).classList.remove("btn-secondary");
                     document.getElementById($element_btn).classList.add("btn-primary");
+                    document.getElementById(day).checked = true;
                 }
                 else {
                     document.getElementById($element_from).removeAttribute("disabled");
@@ -70,6 +71,7 @@
                     document.getElementById($element_btn).value = "The restaurant is closed on " + day + "s.";
                     document.getElementById($element_btn).classList.remove("btn-primary");
                     document.getElementById($element_btn).classList.add("btn-secondary");
+                    document.getElementById(day).checked = false;
                 }
 
             }
@@ -123,7 +125,8 @@
                     <input type="time" class="form-control" id="monday_until" name="monday_until" required>
                 </div>
                 <div class="col-4"><br>
-                    <input type="button" class="btn btn-secondary btn-check" id="closed_monday" value="The restaurant is closed on mondays" name="closed_monday" onclick="disable('monday');">
+                    <input type="button" class="btn btn-secondary btn-check" id="closed_monday" value="The restaurant is closed on mondays" onclick="disable('monday');">
+                    <input type="checkbox" name="closed_monday" id="monday" value="1" style="display: none;">
                 </div>
             </div><br>
             <div class="row">
@@ -136,7 +139,8 @@
                     <input type="time" class="form-control" id="tuesday_until" name="tuesday_until" required>
                 </div>
                 <div class="col-4"><br>
-                    <input type="button" class="btn btn-secondary btn-check" id="closed_tuesday" value="The restaurant is closed on tuesdays" name="closed_tuesday" onclick="disable('tuesday');">
+                    <input type="button" class="btn btn-secondary btn-check" id="closed_tuesday" value="The restaurant is closed on tuesdays" onclick="disable('tuesday');">
+                    <input type="checkbox" name="closed_tuesday" id="tuesday" value="1" style="display: none;">
                 </div>
             </div><br>
             <div class="row">
@@ -149,7 +153,8 @@
                     <input type="time" class="form-control" id="wednesday_until" name="wednesday_until" required>
                 </div>
                 <div class="col-4"><br>
-                    <input type="button" class="btn btn-secondary btn-check" id="closed_wednesday" value="The restaurant is closed on wednesdays" name="closed_wednesday" onclick="disable('wednesday');">
+                    <input type="button" class="btn btn-secondary btn-check" id="closed_wednesday" value="The restaurant is closed on wednesdays" onclick="disable('wednesday');">
+                    <input type="checkbox" name="closed_wednesday" id="wednesday" value="1" style="display: none;">
                 </div>
             </div><br>
             <div class="row">
@@ -163,6 +168,7 @@
                 </div>
                 <div class="col-4"><br>
                     <input type="button" class="btn btn-secondary btn-check" id="closed_thursday" value="The restaurant is closed on thursdays" name="closed_thursday" onclick="disable('thursday');">
+                    <input type="checkbox" name="closed_thursday" id="thursday" value="1" style="display: none;">
                 </div>
             </div><br>
             <div class="row">
@@ -176,6 +182,7 @@
                 </div>
                 <div class="col-4"><br>
                     <input type="button" class="btn btn-secondary btn-check" id="closed_friday" value="The restaurant is closed on fridays" name="closed_friday" onclick="disable('friday');">
+                    <input type="checkbox" name="closed_friday" id="friday" value="1" style="display: none;">
                 </div>
             </div><br>
             <div class="row">
@@ -189,6 +196,7 @@
                 </div>
                 <div class="col-4"><br>
                     <input type="button" class="btn btn-secondary btn-check" id="closed_saturday" value="The restaurant is closed on saturdays" name="closed_saturday" onclick="disable('saturday');">
+                    <input type="checkbox" name="closed_saturday" id="saturday" value="1" style="display: none;">
                 </div>
             </div><br>
             <div class="row">
@@ -202,6 +210,7 @@
                 </div>
                 <div class="col-4"><br>
                     <input type="button" class="btn btn-secondary btn-check" id="closed_sunday" value="The restaurant is closed on sundays" name="closed_sunday" onclick="disable('sunday');">
+                    <input type="checkbox" name="closed_sunday" id="sunday" value="1" style="display: none;">
                 </div>
             </div>
         </div>

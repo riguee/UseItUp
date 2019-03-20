@@ -14,7 +14,7 @@ if (isset($_POST["name"])) {
     if ($div_select == "charity") {
         $charitynumber = $_POST['charity_id'];
     }
-    if ($div_select == "charity") {
+    if ($div_select == "restaurant") {
         $days = array('monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday');
         foreach ($days as $day){
             if (isset($_POST['closed_' . $day])) {
@@ -28,7 +28,6 @@ if (isset($_POST["name"])) {
         }
     }
 
-    echo $name . $email . $password . $address . $phone . $div_select;
 
     if ($div_select == "charity") {
         $stmt = $conn->query("SELECT * FROM charities WHERE email = '" . $email . "'");

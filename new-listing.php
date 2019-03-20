@@ -95,16 +95,18 @@
 <body>
 <?php
  include"connection.php";
- include "navbar-restaurant.php";
     session_start();
-    if ($_SESSION['user_type'] == 'charity') {
-        header('mainlisting.php');
+    if (empty($_SESSION)) {
+        header( "location: Login.php" );
     }
-    if ($_SESSION['user_type'] == 'restaurant') {
+    elseif ($_SESSION['user_type'] == 'charity') {
+        header( "location: mainlisting.php" );
+    }
+    elseif ($_SESSION['user_type'] == 'restaurant') {
         include 'navbar-restaurant.php';
     }
     else {
-        header('Login.php');
+        header( "location: Logout.php" );
     }
 
     ?>
@@ -149,16 +151,16 @@
         $savedstmt = $conn->query($query);
         $savedstmt = $savedstmt->fetch_assoc();
         $allergens = $conn->query("SELECT allergen_id FROM allergen_listings WHERE listing_id =". $_POST['dishes']);
+        $allergens_array = array();
         if (mysqli_num_rows($allergens) > 0) {
-            $allergens_array = array();
             while($row = $allergens->fetch_assoc()) {
                 $tmp = $row['allergen_id'];
                 array_push($allergens_array, $tmp);
             }
         }
         $diets = $conn->query("SELECT diet_id FROM diet_listings WHERE listing_id =". $_POST['dishes']);
+        $diets_array = array();
         if (mysqli_num_rows($diets) > 0) {
-            $diets_array = array();
             while($row = $diets->fetch_assoc()) {
                 $tmp = $row['diet_id'];
                 array_push($diets_array, $tmp);

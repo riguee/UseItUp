@@ -56,10 +56,10 @@ if (isset($_POST['email'])) {
         $found = true; // check if the user is found
 
         if ($result_rest->num_rows > 0) {
-            $service = "r";
+            $service = "restaurant";
             $result = $result_rest;
         } else {
-            $service = "c";
+            $service = "charity";
             $result = $result_char;
         }
 
@@ -72,11 +72,12 @@ if (isset($_POST['email'])) {
 
             session_start();
 
-            $_SESSION['service'] = $service;
+            $_SESSION['user_type'] = $service;
             $_SESSION['email'] = $email;
             $_SESSION['logged_in'] = true;
+            $_SESSION['id'] = $user['id'];
 
-            if ($service == 'r') {
+            if ($service == 'restaurant') {
                 header("location: RestaurantProfileAcct.php");
             }
             else {

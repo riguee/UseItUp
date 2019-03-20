@@ -11,7 +11,7 @@
 <body>
 <div id="signup">
     <h1>Sign Up for Free</h1>
-    <form action="" method="post" autocomplete="off">
+    <form action="create-account.php" method="post" autocomplete="off">
         <label for="selecttype">Type of Account: </label>
         <select class="custom-select" name="selecttype" id="selecttype" onchange="change(this.value)">
             <option selected value disabled> -- select an option -- </option>
@@ -27,6 +27,20 @@
                 if (value == "charity") {
                     document.getElementById("char_div").style.display = "block";
                     document.getElementById("rest_div").style.display = "none";
+                    document.getElementById('monday_from').required = false;
+                    document.getElementById('monday_until').required = false;
+                    document.getElementById('tuesday_from').required = false;
+                    document.getElementById('tuesday_until').required = false;
+                    document.getElementById('wednesday_from').required = false;
+                    document.getElementById('wednesday_until').required = false;
+                    document.getElementById('thursday_from').required = false;
+                    document.getElementById('thursday_until').required = false;
+                    document.getElementById('friday_from').required = false;
+                    document.getElementById('friday_until').required = false;
+                    document.getElementById('saturday_from').required = false;
+                    document.getElementById('saturday_until').required = false;
+                    document.getElementById('sunday_from').required = false;
+                    document.getElementById('sunday_until').required = false;
                 }
                 else {
                     document.getElementById("char_div").style.display = "none";
@@ -109,7 +123,7 @@
                     <input type="time" class="form-control" id="monday_until" name="monday_until" required>
                 </div>
                 <div class="col-4"><br>
-                    <input type="button" class="btn btn-secondary btn-check" id="closed_monday" value="The restaurant is closed on mondays" name="closed_mondays" onclick="disable('monday');">
+                    <input type="button" class="btn btn-secondary btn-check" id="closed_monday" value="The restaurant is closed on mondays" name="closed_monday" onclick="disable('monday');">
                 </div>
             </div><br>
             <div class="row">
@@ -122,7 +136,7 @@
                     <input type="time" class="form-control" id="tuesday_until" name="tuesday_until" required>
                 </div>
                 <div class="col-4"><br>
-                    <input type="button" class="btn btn-secondary btn-check" id="closed_tuesday" value="The restaurant is closed on tuesdays" name="closed_tuesdays" onclick="disable('tuesday');">
+                    <input type="button" class="btn btn-secondary btn-check" id="closed_tuesday" value="The restaurant is closed on tuesdays" name="closed_tuesday" onclick="disable('tuesday');">
                 </div>
             </div><br>
             <div class="row">
@@ -135,7 +149,7 @@
                     <input type="time" class="form-control" id="wednesday_until" name="wednesday_until" required>
                 </div>
                 <div class="col-4"><br>
-                    <input type="button" class="btn btn-secondary btn-check" id="closed_wednesday" value="The restaurant is closed on wednesdays" name="closed_wednesdays" onclick="disable('wednesday');">
+                    <input type="button" class="btn btn-secondary btn-check" id="closed_wednesday" value="The restaurant is closed on wednesdays" name="closed_wednesday" onclick="disable('wednesday');">
                 </div>
             </div><br>
             <div class="row">
@@ -148,7 +162,7 @@
                     <input type="time" class="form-control" id="thursday_until" name="thursday_until" required>
                 </div>
                 <div class="col-4"><br>
-                    <input type="button" class="btn btn-secondary btn-check" id="closed_thursday" value="The restaurant is closed on thursdays" name="closed_thursdays" onclick="disable('thursday');">
+                    <input type="button" class="btn btn-secondary btn-check" id="closed_thursday" value="The restaurant is closed on thursdays" name="closed_thursday" onclick="disable('thursday');">
                 </div>
             </div><br>
             <div class="row">
@@ -161,7 +175,7 @@
                     <input type="time" class="form-control" id="friday_until" name="friday_until" required>
                 </div>
                 <div class="col-4"><br>
-                    <input type="button" class="btn btn-secondary btn-check" id="closed_friday" value="The restaurant is closed on fridays" name="closed_fridays" onclick="disable('friday');">
+                    <input type="button" class="btn btn-secondary btn-check" id="closed_friday" value="The restaurant is closed on fridays" name="closed_friday" onclick="disable('friday');">
                 </div>
             </div><br>
             <div class="row">
@@ -174,7 +188,7 @@
                     <input type="time" class="form-control" id="saturday_until" name="saturday_until" required>
                 </div>
                 <div class="col-4"><br>
-                    <input type="button" class="btn btn-secondary btn-check" id="closed_saturday" value="The restaurant is closed on saturdays" name="closed_saturdays" onclick="disable('saturday');">
+                    <input type="button" class="btn btn-secondary btn-check" id="closed_saturday" value="The restaurant is closed on saturdays" name="closed_saturday" onclick="disable('saturday');">
                 </div>
             </div><br>
             <div class="row">
@@ -187,7 +201,7 @@
                     <input type="time" class="form-control" id="sunday_until" name="sunday_until" required>
                 </div>
                 <div class="col-4"><br>
-                    <input type="button" class="btn btn-secondary btn-check" id="closed_sunday" value="The restaurant is closed on sundays" name="closed_sundays" onclick="disable('sunday');">
+                    <input type="button" class="btn btn-secondary btn-check" id="closed_sunday" value="The restaurant is closed on sundays" name="closed_sunday" onclick="disable('sunday');">
                 </div>
             </div>
         </div>
@@ -199,46 +213,12 @@
     <br>
     <form action="Login.php" autocomplete="off">
         <div>
-            <button type="submit" class="btn btn-block btn-secondary">Cancel</button>
+            <button type="reset" class="btn btn-block btn-secondary">Cancel</button>
         </div>
     </form>
 </div>
 
-<?php
-include('connection.php');
 
-if (isset($_POST["name"])) {
-
-    //Setting POST variables
-    $name = $_POST['name'];
-    $email = $_POST['email'];
-    $password = md5($_POST['password']);
-    $address = $_POST['address'];
-    $phone = $_POST['phone'];
-    $div_select = $_POST['selecttype'];
-    if ($div_select == "charity") {
-        $charitynumber = $_POST['charity_id'];
-    }
-
-    echo $name . $email . $password . $address . $phone . $div_select;
-
-    if ($div_select == "charity") {
-        $stmt = $conn->query("SELECT * FROM charities WHERE email = '" . $email . "'");
-        if (mysqli_num_rows($stmt)>0) {
-            echo "<script>alert('Sorry that email address is already used')</script>";
-            return false;
-        }
-    } elseif ($div_select == "restaurant") {
-        $stmt = $conn->query("SELECT * FROM restaurants WHERE email = '" . $email . "'");
-        if (mysqli_num_rows($stmt)>0) {
-            echo "<script>alert('Sorry that email address is already used')</script>";
-            return false;
-        }
-    }
-}
-
-
-    ?>
 </div>
 </body>
 </html>

@@ -162,39 +162,43 @@
             $listing = new Listing();
             $listing->setListingFromId($row['id']);?>
         <div class="card container-fluid" style="margin:10px 0 10px 0">
-            <div class="card-body row" style="min-height: 300px">
-                <img class="col-3" src="https://thumbs.dreamstime.com/z/chef-showing-pasta-11270828.jpg" style="height: 250px">
-                <div class="col-9">
-                    <h4><?php echo $listing->title ?></h4>
-                    <h6>by <a href="#"><?php echo $listing->restaurant_name ?></a>.</h6>
-                    <p><?php echo $listing->description ?></p>
-                    <h6>Portions: <?php echo $listing->portions ?></h6>
-                    <?php if (!empty($listing->allergen)) { ?>
-                    <h6>Allergens: <?php
-                        $count = count($listing->allergen);
-                        for ($i = 0; $i < $count - 1; $i++) {
-                            echo $listing->allergen[$i] . ", ";
-                        }
-                        echo $listing->allergen[$count - 1];
-                        }
-                        ?></h6>
-                    <?php if (isset($listing->diet)) { ?>
-                        <h6>Suitable for: <?php
-                            $count = count($listing->diet);
-                            for ($i = 0; $i<$count-1; $i++) {
-                                echo $listing->diet[$i].", ";
+            <div class="card-body" style="min-height: 300px">
+                <div class="row">
+                    <div class="col-3">
+                        <img src="<?php print($listing->image) ?>" style="max-height: 250px; max-width: 100%; border-radius: 5px">
+                    </div>
+                    <div class="col-9">
+                        <h4><?php echo $listing->title ?></h4>
+                        <h6>by <a href="#"><?php echo $listing->restaurant_name ?></a>.</h6>
+                        <p><?php echo $listing->description ?></p>
+                        <h6>Portions: <?php echo $listing->portions ?></h6>
+                        <?php if (!empty($listing->allergen)) { ?>
+                        <h6>Allergens: <?php
+                            $count = count($listing->allergen);
+                            for ($i = 0; $i < $count - 1; $i++) {
+                                echo $listing->allergen[$i] . ", ";
                             }
-                    echo $listing->diet[$count-1];
-                    ?></h6>
-                    <?php } ?>
-                    <h6>Available pickup times: between <span id="<?php print("timefrom" . $listing->id) ?>"><?php echo date("H:i", strtotime($listing->time_from)) ?></span> and <span id="<?php print("timeuntil" . $listing->id) ?>"><?php echo date("H:i", strtotime($listing->time_until)) ?></span></h6>
-                    <br>
-                    <form class="form-inline row" method="post" action="confirm-order.php" onsubmit="return timeCheck(<?php print($listing->id) ?>)">
-                        <span style="margin-right: 10px">Choose pickup time</span>
-                        <input type="time" class="form-control" id="<?php print($listing->id) ?>" name="pickup-time">
-                        <span style="margin: 0 10px 0 10px"> and </span>
-                        <button type="submit" class="btn btn-primary col-4" name="listing" value="<?php print($listing->id) ?>" >Order</button>
-                    </form>
+                            echo $listing->allergen[$count - 1];
+                            }
+                            ?></h6>
+                        <?php if (isset($listing->diet)) { ?>
+                            <h6>Suitable for: <?php
+                                $count = count($listing->diet);
+                                for ($i = 0; $i<$count-1; $i++) {
+                                    echo $listing->diet[$i].", ";
+                                }
+                        echo $listing->diet[$count-1];
+                        ?></h6>
+                        <?php } ?>
+                        <h6>Available pickup times: between <span id="<?php print("timefrom" . $listing->id) ?>"><?php echo date("H:i", strtotime($listing->time_from)) ?></span> and <span id="<?php print("timeuntil" . $listing->id) ?>"><?php echo date("H:i", strtotime($listing->time_until)) ?></span></h6>
+                        <br>
+                        <form class="form-inline row" method="post" action="confirm-order.php" onsubmit="return timeCheck(<?php print($listing->id) ?>)">
+                            <span style="margin-right: 10px">Choose pickup time</span>
+                            <input type="time" class="form-control" id="<?php print($listing->id) ?>" name="pickup-time">
+                            <span style="margin: 0 10px 0 10px"> and </span>
+                            <button type="submit" class="btn btn-primary col-4" name="listing" value="<?php print($listing->id) ?>" >Order</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

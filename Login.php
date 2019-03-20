@@ -2,56 +2,32 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>UseItUp Login Page</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-    <link href="common.css" rel="stylesheet" type="text/css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link href="styles.css" rel="stylesheet" type="text/css">
+    <title>Login</title>
 </head>
-<?php include 'navbar-charity.php' ?>
+
 <body>
-
 <h1>Welcome To UseItUp</h1>
-
-<div class="form">
-
-    <div class="tab-content">
-
-        <div id="login">
-
-            <form action="Login.php" method="post" autocomplete="off">
-
-                <div class="field-wrap">
-                    <label>
-                        Email Address<span class="req">*</span>
-                    </label>
-                    <input type="email" required autocomplete="off" name="email"/>
-                </div>
-
-                <div class="field-wrap">
-                    <label>
-                        Password<span class="req">*</span>
-                    </label>
-                    <input type="password" required autocomplete="off" name="password"/>
-                </div>
-
-                <p class="forgot"><a href="Forgot.php">Forgot Password?</a></p>
-
-                <button class="button button-block" name="login">Log In</button>
-
-            </form>
-
-            <form action="Register.php" method="post" autocomplete="off">
-
-                <button class="button button-block" name="register">Register</button>
-
-
-            </form>
-
+<div class="container">
+    <form action="Login.php" method="post" autocomplete="off">
+        <div class="form-group">
+            <label for="email">Email address</label>
+            <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" required>
         </div>
-
-    </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" aria-describedby="forgot" id="password" name="password" placeholder="Password" required>
+        </div>
+        <p class="forgot"><a href="Forgot.php">Forgot password?</a></p>
+        <button type="submit" class="btn btn-primary btn-block">Log in</button>
+    </form>
+    <br>
+    <a href="Register.php" class="btn btn-secondary btn-block" name="register">Don't have an account? Register</a>
 
 </div>
+
 
 
 <?php

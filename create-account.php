@@ -49,8 +49,16 @@ if (isset($_POST["name"])) {
         } else {
             $stmt = $conn->prepare("INSERT INTO charities (id, name, email, phone, address, postcode, charity_number, password)VALUES (NULL, ?, ?, ?, ?, ?, ?, ?)");
             $stmt->bind_param('sssssss', $name, $email, $phone, $address, $postcode, $charitynumber, $password);
-            $stmt->execute();
-            echo "<script>alert('You have created an account')</script>";
+            if ($stmt->execute()){
+                echo "<script>alert('You have created an account')</script>";
+                session_start();
+                $_SESSION['user_type'] = $div_select;
+                $_SESSION['email'] = $email;
+                $_SESSION['logged_in'] = true;
+                $_SESSION['id'] =  mysqli_insert_id($conn);
+            } else {
+                echo "Registration failed. Click <a href='register2.php'>here</a> to try again.";
+            }
         }
     } elseif ($div_select == "restaurant") {
         $stmt = $conn->query("SELECT * FROM restaurants WHERE email = '" . $email . "'");
@@ -63,9 +71,20 @@ if (isset($_POST["name"])) {
  VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0)");
                 $stmt->bind_param('ssssssssssssssssssss', $name, $phone, $email, $address, $postcode, $password, $monday_from, $monday_until, $tuesday_from,
                     $tuesday_until, $wednesday_from, $wednesday_until, $thursday_from, $thursday_until, $friday_from, $friday_until, $saturday_from, $saturday_until, $sunday_from, $sunday_until);
-                $stmt->execute();
-                echo "<script>alert('You have created an account')</script>";
+                if ($stmt->execute()) {
+                    echo "<script>alert('You have created an account')</script>";
+                    session_start();
+                    $_SESSION['user_type'] = $div_select;
+                    $_SESSION['email'] = $email;
+                    $_SESSION['logged_in'] = true;
+                    $_SESSION['id'] =  mysqli_insert_id($conn);
+                } else {
+                    echo "Registration failed. Click <a href='register2.php'>here</a> to try again.";
+                }
+
         }
+    } else {
+        header("location: register2.php" );
     }
 }
 

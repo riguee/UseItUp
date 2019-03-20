@@ -11,12 +11,17 @@
 <body>
 <?php
 session_start();
-print_r($_SESSION);
-if ($_SESSION['user_type'] == 'charity') {
+if (empty($_SESSION)) {
+    header( "location: Login.php" );
+}
+elseif ($_SESSION['user_type'] == 'charity') {
     include 'navbar-charity.php';
 }
-if ($_SESSION['user_type'] == 'restaurant') {
+elseif ($_SESSION['user_type'] == 'restaurant') {
     include 'navbar-restaurant.php';
+}
+else {
+    header( "location: Logout.php" );
 }?>
 <div class="container">
     <h1>Complaint Form</h1>
@@ -28,7 +33,7 @@ if ($_SESSION['user_type'] == 'restaurant') {
         <small class="form-text text-muted">If your complaint concerns a specific order, please write the order's ID as the subject of the complaint.</small>
         <br>
         <label for="complaint">Description</label>
-        <textarea name="complaint" id="complaint" class="form-control" rows="4" cols="50" placeholder="<?php if ($session == 'restaurant') {print("e.g. The charity did not show up or showed up late");} ?> <?php if ($session == 'charity') {print("e.g. The restaurant had closed or there was a mistake in the order");} ?>"></textarea>
+        <textarea name="complaint" id="complaint" class="form-control" rows="4" cols="50" placeholder="<?php if ($_SESSION['user_type'] == 'restaurant') {print("e.g. The charity did not show up or showed up late");} ?> <?php if ($_SESSION['user_type'] == 'charity') {print("e.g. The restaurant had closed or there was a mistake in the order");} ?>"></textarea>
         <br>
         <p>By submitting a complaint you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a>.</p>
         <button type="submit" class="btn btn-primary btn-block">Submit</button>

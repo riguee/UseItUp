@@ -96,8 +96,18 @@
 <?php
  include"connection.php";
  include "navbar-restaurant.php";
- $session = 1;
- ?>
+    session_start();
+    if ($_SESSION['user_type'] == 'charity') {
+        header('mainlisting.php');
+    }
+    if ($_SESSION['user_type'] == 'restaurant') {
+        include 'navbar-restaurant.php';
+    }
+    else {
+        header('Login.php');
+    }
+
+    ?>
 <script>
 
 </script>
@@ -109,7 +119,7 @@
         <div class="row">
             <div class="col-11">
         <?php
-        $stmt = $conn->prepare("SELECT * FROM listings WHERE saved = 1 AND restaurant_id = " . $session);
+        $stmt = $conn->prepare("SELECT * FROM listings WHERE saved = 1 AND restaurant_id = " . $_SESSION['id']);
         $stmt->execute();
         $result = $stmt->get_result();
         if (mysqli_num_rows($result) > 0) {

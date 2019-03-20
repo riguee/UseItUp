@@ -32,17 +32,23 @@
             var time = toDate(document.getElementById(id).value, "h:m");
             var timefrom = toDate(document.getElementById("timefrom".concat(id)).innerHTML, "h:m");
             var timeuntil = toDate(document.getElementById("timeuntil".concat(id)).innerHTML, "h:m");
-            if (time >= timefrom && time < timeuntil) {
-                if (time > now) {
-                    return true;
+            if (document.getElementById(id).value.length > 0) {
+                if (time >= timefrom && time < timeuntil) {
+                    if (time > now) {
+                        return true;
+                    }
+                    else {
+                        alert("The time you selected is in the past.");
+                        return false;
+                    }
                 }
                 else {
-                    alert("The time you selected is in the past.");
+                    alert("The time you selected is not in the available range.");
                     return false;
                 }
             }
             else {
-                alert("The time you selected is not in the available range.");
+                alert("You have to input a pickup time.")
                 return false;
             }
         }

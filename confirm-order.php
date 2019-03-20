@@ -126,32 +126,36 @@ if($count > 0): ?>
         $available_listing = new Listing();
         $available_listing->setListingFromId($restaurant_listing); ?>
         <div class="card">
-            <div class="card-body row">
-                <img class="col-3 listing-img" src="https://thumbs.dreamstime.com/z/spaghetti-chef-7961514.jpg">
-                <div class="col-9">
-                    <h4><?php echo $available_listing->title ?></h4>
-                    <h6>by <a href="#"><?php echo $available_listing->restaurant_name ?></a>.</h6>
-                    <p><?php echo $available_listing->description ?></p>
-                    <h6>Portions: <?php echo $available_listing->portions ?>.</h6>
-                    <?php if (!empty($available_listing->allergen)) { ?>
-                        <h6>Allergens: <?php
-                            $count = count($available_listing->allergen);
-                            for ($i = 0; $i<$count-1; $i++) {
-                            echo $available_listing->allergen[$i].", ";
-                            }
-                            echo $available_listing->allergen[$count-1];
-                            ?></h6>
-                    <?php } ?>
-                    <br>
-                    <form method="post" action="confirm-order.php">
-                        <select hidden class="form-control col-4" name="pickup-time">
-                            <option selected><?php echo $_POST['pickup-time'] ?></option>
-                        </select>
-                        <select hidden class="form-control col-4" name="added-listing">
-                            <option selected><?php echo $available_listing->id ?></option>
-                        </select>
-                        <button type="submit" name="listings" class="btn btn-primary" value="<?php print base64_encode(serialize($listing_IDs)) ?>">Add to order</button>
-                    </form>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-3">
+                        <img src="<?php print($available_listing->image) ?>" style="max-height: 250px; max-width: 100%; border-radius: 5px">
+                    </div>
+                    <div class="col-9">
+                        <h4><?php echo $available_listing->title ?></h4>
+                        <h6>by <a href="#"><?php echo $available_listing->restaurant_name ?></a>.</h6>
+                        <p><?php echo $available_listing->description ?></p>
+                        <h6>Portions: <?php echo $available_listing->portions ?>.</h6>
+                        <?php if (!empty($available_listing->allergen)) { ?>
+                            <h6>Allergens: <?php
+                                $count = count($available_listing->allergen);
+                                for ($i = 0; $i<$count-1; $i++) {
+                                echo $available_listing->allergen[$i].", ";
+                                }
+                                echo $available_listing->allergen[$count-1];
+                                ?></h6>
+                        <?php }     ?>
+                        <br>
+                        <form method="post" action="confirm-order.php">
+                            <select hidden class="form-control col-4" name="pickup-time">
+                                <option selected><?php echo $_POST['pickup-time'] ?></option>
+                            </select>
+                            <select hidden class="form-control col-4" name="added-listing">
+                                <option selected><?php echo $available_listing->id ?></option>
+                            </select>
+                            <button type="submit" name="listings" class="btn btn-primary" value="<?php print base64_encode(serialize($listing_IDs)) ?>">Add to order</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

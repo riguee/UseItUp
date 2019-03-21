@@ -10,6 +10,17 @@
 <body>
 <div class="container">
 <?php
+session_start();
+if (!empty($_SESSION)) {
+    if ($_SESSION['user_type'] == 'charity') {
+        header("location: mainlisting.php");
+    } elseif ($_SESSION['user_type'] == 'restaurant') {
+        header("location: new-listing.php");
+    } else {
+        header("location: Logout.php");
+    }
+}
+
 include('connection.php');
 
 if (isset($_POST["name"])) {
@@ -86,6 +97,9 @@ if (isset($_POST["name"])) {
     } else {
         header("location: register2.php" );
     }
+}
+else {
+    header("location: register2.php" );
 }
 
 

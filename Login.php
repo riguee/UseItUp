@@ -24,7 +24,7 @@
         <button type="submit" class="btn btn-primary btn-block">Log in</button>
     </form>
     <br>
-    <a href="Register.php" class="btn btn-secondary btn-block" name="register">Don't have an account? Register</a>
+    <a href="register2.php" class="btn btn-secondary btn-block" name="register">Don't have an account? Register</a>
 
 </div>
 

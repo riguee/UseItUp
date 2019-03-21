@@ -12,6 +12,18 @@ h1 {
     color: #e7bb41;
 }
 
+.btn-link{
+    border:none;
+    outline:none;
+    background:none;
+    cursor:pointer;
+    color:#e0a800;
+    padding:0;
+    text-decoration:underline;
+    font-family:inherit;
+    font-size:inherit;
+}
+
 .btn-primary {
     background-color: #9eb25d;
     border-color: #9eb25d;

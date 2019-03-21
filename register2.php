@@ -60,7 +60,20 @@ if (!empty($_SESSION)) {
                 else {
                     document.getElementById("char_div").style.display = "none";
                     document.getElementById("rest_div").style.display = "block";
-
+                    document.getElementById('monday_from').required = true;
+                    document.getElementById('monday_until').required = true;
+                    document.getElementById('tuesday_from').required = true;
+                    document.getElementById('tuesday_until').required = true;
+                    document.getElementById('wednesday_from').required = true;
+                    document.getElementById('wednesday_until').required = true;
+                    document.getElementById('thursday_from').required = true;
+                    document.getElementById('thursday_until').required = true;
+                    document.getElementById('friday_from').required = true;
+                    document.getElementById('friday_until').required = true;
+                    document.getElementById('saturday_from').required = true;
+                    document.getElementById('saturday_until').required = true;
+                    document.getElementById('sunday_from').required = true;
+                    document.getElementById('sunday_until').required = true;
                 }
             }
 
@@ -237,7 +250,7 @@ if (!empty($_SESSION)) {
     <br>
     <form action="Login.php" autocomplete="off">
         <div>
-            <button type="reset" class="btn btn-block btn-secondary">Cancel</button>
+            <a href="Login.php" class="btn btn-secondary btn-block" name="register">Already have an account? Log in</a>
         </div>
     </form>
 </div>

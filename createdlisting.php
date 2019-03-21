@@ -13,8 +13,22 @@
 
 
 <?php
+include 'connection.php';
+session_start();
+if (empty($_SESSION)) {
+header( "location: Login.php" );
+}
+elseif ($_SESSION['user_type'] == 'charity') {
+header( "location: mainlisting.php" );
+}
+elseif ($_SESSION['user_type'] == 'restaurant') {
 include 'navbar-restaurant.php';
-include 'connection.php';?>
+}
+else {
+header( "location: Logout.php" );
+}
+?>
+
 <div class="container">
     <h3>You uploaded the following listing:</h3>
 <?php

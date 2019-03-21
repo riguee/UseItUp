@@ -15,7 +15,7 @@
 $servername = "localhost";
 $username = "root";
 $password = "root";
-$db = "useitup2";
+$db = "useitup";
 
 $conn = new mysqli($servername, $username, $password, $db);
 

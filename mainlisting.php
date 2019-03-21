@@ -63,7 +63,20 @@
     <body>
     <?php
     include 'connection.php';
-    include 'navbar-charity.php';
+    session_start();
+    if (empty($_SESSION)) {
+        header( "location: Login.php" );
+    }
+    elseif ($_SESSION['user_type'] == 'charity') {
+        include 'navbar-charity.php';
+    }
+    elseif ($_SESSION['user_type'] == 'restaurant') {
+        header( "location: new-listing.php" );
+    }
+    else {
+        header( "location: Logout.php" );
+    }
+
     ?>
     <div class="container">
         <h1>Welcome back, <span class="accent">charity_name</span>.</h1>

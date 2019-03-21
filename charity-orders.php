@@ -11,7 +11,21 @@
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 </head>
 <body>
-<?php include 'navbar-charity.php' ?>
+<?php session_start();
+if (empty($_SESSION)) {
+header( "location: Login.php" );
+}
+elseif ($_SESSION['user_type'] == 'charity') {
+include 'navbar-charity.php';
+}
+elseif ($_SESSION['user_type'] == 'restaurant') {
+header( "location: new-listing.php" );
+}
+else {
+header( "location: Logout.php" );
+}
+?>
+
 <div class="container">
 <h1>Orders</h1>
 <h2>Upcoming orders</h2><br>
@@ -23,7 +37,7 @@ include 'Restaurants.php';
 include 'Listings.php';
 
 
-$charity_session = 4;
+$charity_session = $_SESSION['id'];
 $query = "SELECT id FROM orders WHERE charity_id = ". $charity_session. " AND CONCAT(pickup_day, \" \", pickup_time) > NOW() ORDER BY pickup_day, pickup_time";
 $results = $conn->query($query);
 

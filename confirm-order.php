@@ -10,7 +10,20 @@
     <title>Confirm order</title>
 </head>
 <body>
-<?php include 'navbar-charity.php' ?>
+<?php session_start();
+if (empty($_SESSION)) {
+    header( "location: Login.php" );
+}
+elseif ($_SESSION['user_type'] == 'charity') {
+    include 'navbar-charity.php';
+}
+elseif ($_SESSION['user_type'] == 'restaurant') {
+    header( "location: new-listing.php" );
+}
+else {
+    header( "location: Logout.php" );
+}
+?>
 <div class="container">
 <h1>Your order</h1>
 <?php
@@ -104,7 +117,7 @@ $restaurant->setRestaurantFromId($listing->restaurant_id);
 <br>
 <br>
 <?php
-$query = "SELECT id FROM listings WHERE restaurant_id = " . $restaurant->id . " AND listings.id NOT IN (SELECT listing_id FROM order_listings)";
+$query = "SELECT id FROM listings WHERE restaurant_id = " . $restaurant->id . " AND listings.id NOT IN (SELECT listing_id FROM order_listings) AND CONCAT(listings.day_posted, \" \", listings.time_until) > NOW()";
 $result = mysqli_query($conn, $query);
 $available_listings = array();
 for ($i = 1; $i <= mysqli_num_rows($result); $i++) {

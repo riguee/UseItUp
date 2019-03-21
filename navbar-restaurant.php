@@ -4,7 +4,7 @@
         <span class="navbar-toggler-icon"></span>
     </button>
 <?php
-$email = $_SESSION['email'];
+$name = $_SESSION['name'];
 ?>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
@@ -21,7 +21,7 @@ $email = $_SESSION['email'];
                 <a class="nav-link" href="complaint-form.php">Report a problem <span class="sr-only">(current)</span></a>
             </li>
         </ul>
-        Welcome <?php echo $email ?>
+        Welcome <?php echo $name ?>
         <a style="margin-left: 10px" href="Logout.php">Log out</a>
     </div>
 </nav>

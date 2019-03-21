@@ -24,7 +24,7 @@
         <button type="submit" class="btn btn-primary btn-block">Log in</button>
     </form>
     <br>
-    <a href="register2.php" class="btn btn-secondary btn-block" name="register">Don't have an account? Register</a>
+    <a href="register.php" class="btn btn-secondary btn-block" name="register">Don't have an account? Register</a>
 
 </div>
 
@@ -34,7 +34,7 @@
 session_start();
 if (!empty($_SESSION)) {
     if ($_SESSION['user_type'] == 'charity') {
-        header("location: mainlisting.php");
+        header("location: main-listing.php");
     } elseif ($_SESSION['user_type'] == 'restaurant') {
         header("location: new-listing.php");
     } else {
@@ -88,12 +88,13 @@ if (isset($_POST['email'])) {
             $_SESSION['email'] = $email;
             $_SESSION['logged_in'] = true;
             $_SESSION['id'] = $user['id'];
+            $_SESSION['name'] = $user['name'];
 
             if ($service == 'restaurant') {
-                header("location: RestaurantProfileAcct.php");
+                header("location: new-listing.php");
             }
             else {
-                header("location: CharityProfileAcct.php");
+                header("location: main-listing.php");
             }
         }
     }

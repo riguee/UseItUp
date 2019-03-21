@@ -13,7 +13,7 @@
 session_start();
 if (!empty($_SESSION)) {
     if ($_SESSION['user_type'] == 'charity') {
-        header("location: mainlisting.php");
+        header("location: main-listing.php");
     } elseif ($_SESSION['user_type'] == 'restaurant') {
         header("location: new-listing.php");
     } else {
@@ -68,7 +68,7 @@ if (isset($_POST["name"])) {
                 $_SESSION['logged_in'] = true;
                 $_SESSION['id'] =  mysqli_insert_id($conn);
             } else {
-                echo "Registration failed. Click <a href='register2.php'>here</a> to try again.";
+                echo "Registration failed. Click <a href='register.php'>here</a> to try again.";
             }
         }
     } elseif ($div_select == "restaurant") {
@@ -89,17 +89,18 @@ if (isset($_POST["name"])) {
                     $_SESSION['email'] = $email;
                     $_SESSION['logged_in'] = true;
                     $_SESSION['id'] =  mysqli_insert_id($conn);
+                    $_SESSION['name'] = $name;
                 } else {
-                    echo "Registration failed. Click <a href='register2.php'>here</a> to try again.";
+                    echo "Registration failed. Click <a href='register.php'>here</a> to try again.";
                 }
 
         }
     } else {
-        header("location: register2.php" );
+        header("location: register.php" );
     }
 }
 else {
-    header("location: register2.php" );
+    header("location: register.php" );
 }
 
 

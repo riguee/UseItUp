@@ -13,7 +13,7 @@
 session_start();
 if (!empty($_SESSION)) {
     if ($_SESSION['user_type'] == 'charity') {
-        header("location: mainlisting.php");
+        header("location: main-listing.php");
     } elseif ($_SESSION['user_type'] == 'restaurant') {
         header("location: new-listing.php");
     } else {

@@ -79,7 +79,7 @@
 
     ?>
     <div class="container">
-        <h1>Welcome back, <span class="accent">charity_name</span>.</h1>
+        <h1>Welcome back, <span class="accent"><?php echo $_SESSION['name']?></span>.</h1>
         <form class="form-inline d-flex justify-content-center" method="post" action="">
             <input id="search" type="search" class="form-control col-4" name="search" placeholder="Search for food" value="<?php if (isset($_POST['search'])) {print($_POST['search']);} elseif (isset($_POST['advanced-search'])) {print($_POST['advanced-search']);} ?>">
             <button type="submit" class="btn btn-primary search-btn"><i class="fa fa-search"></i></button>

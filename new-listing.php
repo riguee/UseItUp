@@ -100,7 +100,7 @@
         header( "location: Login.php" );
     }
     elseif ($_SESSION['user_type'] == 'charity') {
-        header( "location: mainlisting.php" );
+        header( "location: main-listing.php" );
     }
     elseif ($_SESSION['user_type'] == 'restaurant') {
         include 'navbar-restaurant.php';

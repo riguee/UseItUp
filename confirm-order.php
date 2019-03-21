@@ -98,7 +98,7 @@ $restaurant->setRestaurantFromId($listing->restaurant_id);
         </div>
         <div class="row">
             <div class="col-md-5" style="margin: 15px auto">
-                <a href="mainlisting.php" class="btn btn-block btn-danger" >Cancel order</a>
+                <a href="main-listing.php" class="btn btn-block btn-danger" >Cancel order</a>
             </div>
             <div class="col-md-5" style="margin: 15px auto">
                 <select hidden name="restaurant">

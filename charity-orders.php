@@ -38,6 +38,7 @@ include 'Listings.php';
 
 
 $charity_session = $_SESSION['id'];
+echo $charity_session;
 $query = "SELECT id FROM orders WHERE charity_id = ". $charity_session. " AND CONCAT(pickup_day, \" \", pickup_time) > NOW() ORDER BY pickup_day, pickup_time";
 $results = $conn->query($query);
 

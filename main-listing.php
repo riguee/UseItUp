@@ -189,7 +189,7 @@
                     <div class="col-9">
                         <h4><?php echo $listing->title ?></h4>
                         <form action="restaurant-account.php" method="post"> <h6>by
-                                <button type="submit" name="your_name" value="<?php echo $listing->restaurant_id ?>" class="btn-link"><?php echo $listing->restaurant_name ?></button>
+                                <button type="submit" name="restaurant" value="<?php echo $listing->restaurant_id ?>" class="btn-link"><?php echo $listing->restaurant_name ?></button>
                             .</h6></form>
                         <p><?php echo $listing->description ?></p>
                         <h6>Portions: <?php echo $listing->portions ?></h6>
@@ -211,7 +211,12 @@
                         echo $listing->diet[$count-1];
                         ?></h6>
                         <?php } ?>
-                        <h6>Available pickup times: between <span id="<?php print("timefrom" . $listing->id) ?>"><?php echo date("H:i", strtotime($listing->time_from)) ?></span> and <span id="<?php print("timeuntil" . $listing->id) ?>"><?php echo date("H:i", strtotime($listing->time_until)) ?></span></h6>
+                        <h6>Available pickup times: between
+                            <span id="<?php print("timefrom" . $listing->id) ?>"><?php echo date("H:i", strtotime($listing->time_from)) ?>
+                            </span> and
+                            <span id="<?php print("timeuntil" . $listing->id) ?>"><?php echo date("H:i", strtotime($listing->time_until)) ?>
+                            </span>
+                        </h6>
                         <br>
                         <form class="form-inline row" method="post" action="confirm-order.php" onsubmit="return timeCheck(<?php print($listing->id) ?>)">
                             <span style="margin-right: 10px">Choose pickup time</span>

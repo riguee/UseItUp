@@ -37,6 +37,7 @@
     }
     ?>
     <script>
+
         function edit() {
             if (document.getElementById('email').hasAttribute('readonly')){
                 document.getElementById('email').removeAttribute("readonly");
@@ -200,5 +201,21 @@
             ?>
             <button type='submit' class='btn btn-primary' id='confirm' hidden disabled>Confirm changes</button>
         </form>
+        <hr>
+        <h1>Your available upcoming listings</h1>
     </div>
+        <?php
+        if  ($_SESSION['user_type'] == 'restaurant') {
+            $result = $conn->query("SELECT id FROM listings WHERE listings.id NOT IN (SELECT listing_id FROM order_listings) AND CONCAT(listings.day_posted, \" \", listings.time_until) > NOW() AND restaurant_id = " . $_SESSION['id']);
+            if (mysqli_num_rows($result) > 0) {
+                while ($row = $result->fetch_assoc()) {
+                $listing = new Listing();
+                $listing->setListingFromId($row['id']);
+                $listing->displayMyAccount();
+                }
+            }
+        }
+        ?>
+
+
 </body>

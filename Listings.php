@@ -91,6 +91,68 @@ class Listing
         <?php
     }
     function displayAccount() {?>
+    <div class="card" style="margin: 20px">
+        <h5 class="card-header"><?php echo $this->title; ?></h5>
+        <div class="row">
+            <div class="col-4">
+                <img src="<?php print($this->image) ?>" style="max-height: 250px; max-width: 100%; border-radius: 5px">
+            </div>
+            <div class="col-8">
+                Dish description: <?php echo $this->description; ?><br>
+                Number of portions: <?php echo $this->portions; ?><br>
+                Allergens <?php
+                if(isset($this->allergen)) {
+                    foreach ($this->allergen as $this_allergen) {
+                        echo "  ".$this_allergen. "  ";
+                    }
+                    echo "<br>";
+                }
+                else {
+                    echo "No allergen. ";
+                }
+
+
+                if(isset($this->diet)) {
+                    echo "Suitable for : ";
+                    foreach ($this->diet as $this_diet) {
+                        echo "  ".$this_diet."  ";
+                    }
+                    echo "<br>";
+                }
+                else {
+                    echo "No diets";
+                }
+                ?>
+                <p>Available pickup times: between
+                    <span id="<?php print("timefrom" . $this->id) ?>"><?php echo date("H:i", strtotime($this->time_from)) ?>
+                            </span> and
+                    <span id="<?php print("timeuntil" . $this->id) ?>"><?php echo date("H:i", strtotime($this->time_until)) ?>
+                            </span>
+                </p>
+                <?php
+                if ($_SESSION['user_type']== "charity") {?>
+                    <form class="form-inline row" method="post" action="confirm-order.php" onsubmit="return timeCheck(<?php print($this->id) ?>)">
+                        <span style="margin-right: 10px">Choose pickup time</span>
+                        <input type="time" class="form-control" id="<?php print($this->id) ?>" name="pickup-time">
+                        <span style="margin: 0 10px 0 10px"> and </span>
+                        <button type="submit" class="btn btn-primary col-4" name="listing" value="<?php print($this->id) ?>" >Order</button>
+                    </form>
+                    <?php
+                }
+                ?>
+            </div>
+        </div>
+    </div>
+
+    <?php
+}
+    function displayMyAccount() {?>
+        <script>
+            function cancelconfirm() {
+                var r = confirm("Are you sure you want to cancel this listing?");
+                return r;
+            }
+        </script>
         <div class="card" style="margin: 20px">
             <h5 class="card-header"><?php echo $this->title; ?></h5>
             <div class="row">
@@ -101,45 +163,35 @@ class Listing
                     Dish description: <?php echo $this->description; ?><br>
                     Number of portions: <?php echo $this->portions; ?><br>
                     Allergens <?php
-                        if(isset($this->allergen)) {
-                            foreach ($this->allergen as $this_allergen) {
-                                echo "  ".$this_allergen. "  ";
-                            }
-                            echo "<br>";
+                    if(isset($this->allergen)) {
+                        foreach ($this->allergen as $this_allergen) {
+                            echo "  ".$this_allergen. "  ";
                         }
-                        else {
-                            echo "No allergen. ";
-                        }
+                        echo "<br>";
+                    }
+                    else {
+                        echo "No allergen. ";
+                    }
 
 
-                        if(isset($this->diet)) {
-                            echo "Suitable for : ";
-                            foreach ($this->diet as $this_diet) {
-                                echo "  ".$this_diet."  ";
-                            }
-                            echo "<br>";
+                    if(isset($this->diet)) {
+                        echo "Suitable for : ";
+                        foreach ($this->diet as $this_diet) {
+                            echo "  ".$this_diet."  ";
                         }
-                        else {
-                            echo "No diets";
-                        }
-                        ?>
-                        <p>Available pickup times: between
-                            <span id="<?php print("timefrom" . $this->id) ?>"><?php echo date("H:i", strtotime($this->time_from)) ?>
-                            </span> and
-                            <span id="<?php print("timeuntil" . $this->id) ?>"><?php echo date("H:i", strtotime($this->time_until)) ?>
-                            </span>
-                        </p>
-                    <?php
-                    if ($_SESSION['user_type']== "charity") {?>
-                        <form class="form-inline row" method="post" action="confirm-order.php" onsubmit="return timeCheck(<?php print($this->id) ?>)">
-                            <span style="margin-right: 10px">Choose pickup time</span>
-                            <input type="time" class="form-control" id="<?php print($this->id) ?>" name="pickup-time">
-                            <span style="margin: 0 10px 0 10px"> and </span>
-                            <button type="submit" class="btn btn-primary col-4" name="listing" value="<?php print($this->id) ?>" >Order</button>
-                        </form>
-                        <?php
+                        echo "<br>";
+                    }
+                    else {
+                        echo "No diets";
                     }
                     ?>
+                    <p>Available pickup times: between
+                        <span id="<?php print("timefrom" . $this->id) ?>"><?php echo date("H:i", strtotime($this->time_from)) ?>
+                            </span> and
+                        <span id="<?php print("timeuntil" . $this->id) ?>"><?php echo date("H:i", strtotime($this->time_until)) ?>
+                            </span>
+                    </p>
+                    <form action="cancel-listing.php" onsubmit="return cancelconfirm();" method="post"><button type="submit" class="btn btn-danger" value="<?php print($this->id) ?>" name="listing">Delete listing</button></form>
                 </div>
             </div>
         </div>

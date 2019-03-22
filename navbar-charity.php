@@ -11,7 +11,7 @@
             <li class="nav-item <?php if (basename($_SERVER['PHP_SELF']) == "main-listing.php") {print("active");} ?>">
                 <a class="nav-link" href="main-listing.php">Search for food <span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item" <?php if (basename($_SERVER['PHP_SELF']) == "my-account.php") {print("active");} ?>">
+            <li class="nav-item <?php if (basename($_SERVER['PHP_SELF']) == "my-account.php") {print("active");} ?>">
                 <a class="nav-link" href="my-account.php">My account <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item <?php if (basename($_SERVER['PHP_SELF']) == "charity-orders.php") {print("active");} ?>">
@@ -27,7 +27,7 @@
             <button class="btn btn-outline-warning my-2 my-sm-0" type="submit"><i class="fa fa-search"></i></button>
         </form>
         <?php } */?>-->
-        Welcome <?php echo $name ?>
-        <a style="margin-left: 10px" href="Logout.php">Log out</a>
+        <span style="color:white">Welcome, <span class="accent"><?php echo $name ?></span>.</span>
+        <a class="btn btn-light" style="margin-left: 10px" href="logout.php">Log out</a>
     </div>
 </nav>

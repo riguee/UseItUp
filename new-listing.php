@@ -106,7 +106,7 @@
         include 'navbar-restaurant.php';
     }
     else {
-        header( "location: Logout.php" );
+        header( "location: logout.php" );
     }
 
     ?>

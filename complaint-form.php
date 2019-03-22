@@ -21,7 +21,7 @@ elseif ($_SESSION['user_type'] == 'restaurant') {
     include 'navbar-restaurant.php';
 }
 else {
-    header( "location: Logout.php" );
+    header( "location: logout.php" );
 }?>
 <div class="container">
     <h1>Complaint Form</h1>
@@ -35,7 +35,6 @@ else {
         <label for="complaint">Description</label>
         <textarea name="complaint" id="complaint" class="form-control" rows="4" cols="50" placeholder="<?php if ($_SESSION['user_type'] == 'restaurant') {print("e.g. The charity did not show up or showed up late");} ?> <?php if ($_SESSION['user_type'] == 'charity') {print("e.g. The restaurant had closed or there was a mistake in the order");} ?>"></textarea>
         <br>
-        <p>By submitting a complaint you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a>.</p>
         <button type="submit" class="btn btn-primary btn-block">Submit</button>
     </form>
 </div>

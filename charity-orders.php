@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <link href="styles.css" rel="stylesheet" type="text/css">
-    <title>Charity order</title>
+    <title>My orders</title>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -22,7 +22,7 @@ elseif ($_SESSION['user_type'] == 'restaurant') {
 header( "location: new-listing.php" );
 }
 else {
-header( "location: Logout.php" );
+header( "location: logout.php" );
 }
 ?>
 
@@ -71,7 +71,7 @@ if (mysqli_num_rows($results) > 0) {
 
     }
 } else {
-    echo "<br>You have no past order.";
+    echo "You have no past order.";
 }
 
 

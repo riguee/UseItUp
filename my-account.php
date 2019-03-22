@@ -24,7 +24,7 @@
     } elseif ($_SESSION['user_type'] == 'restaurant') {
         include 'navbar-restaurant.php';
     } else {
-        header( "location: Logout.php" );
+        header( "location: logout.php" );
     }
     $id = $_SESSION['id'];
     $restaurant = new Restaurant();
@@ -48,7 +48,7 @@
                 document.getElementById('confirm').hidden = false;
                 document.getElementById('confirm').disabled = false;
                 document.getElementById('edit').classList.remove("btn-primary");
-                document.getElementById('edit').classList.add("btn-secondary");
+                document.getElementById('edit').classList.add("btn-danger");
                 document.getElementById('edit').innerHTML = "Cancel changes";
                 document.getElementById('hours').classList.add('hours');
                 document.getElementById('edit_hours').classList.remove('hours');
@@ -68,8 +68,8 @@
                 }
                 document.getElementById('confirm').hidden = true;
                 document.getElementById('confirm').disabled = true;
-                document.getElementById('edit').classList.remove("btn-secondary");
-                document.getElementById('edit').classList.add("btn-primary");
+                document.getElementById('edit').classList.remove("btn-danger");
+                document.getElementById('edit').classList.add("btn-secondary");
                 document.getElementById('edit').innerHTML = "Edit details";
                 document.getElementById('hours').classList.remove('hours');
                 document.getElementById('edit_hours').classList.add('hours');
@@ -106,7 +106,6 @@
 
     <div class="container">
     <h1><?php echo $user->name ?></h1>
-    <button type='button' class='btn btn-primary' onclick='edit();' id='edit'>Edit details</button>
     <div class="col-6 mx-auto">
         <form method="post" action="edit-account.php">
             <input type="hidden" name="user_type" value="<?php echo $_SESSION['user_type'] ?>">
@@ -201,9 +200,13 @@
             ?>
             <button type='submit' class='btn btn-primary' id='confirm' hidden disabled>Confirm changes</button>
         </form>
+
+
+    </div>
+        <button type='button' class='btn btn-secondary col-4 offset-4' onclick='edit();' id='edit'>Edit details</button>
         <hr>
         <h1>Your available upcoming listings</h1>
-    </div>
+
         <?php
         if  ($_SESSION['user_type'] == 'restaurant') {
             $result = $conn->query("SELECT id FROM listings WHERE listings.id NOT IN (SELECT listing_id FROM order_listings) AND CONCAT(listings.day_posted, \" \", listings.time_until) > NOW() AND restaurant_id = " . $_SESSION['id']);

@@ -75,7 +75,7 @@ if (!isset($_POST['restaurant']) && $_SESSION['user_type'] == 'charity') {
 } elseif ($_SESSION['user_type'] == 'restaurant' && $_SESSION['id'] == $_POST['restaurant']) {
     include 'navbar-restaurant.php';
 } else {
-    header( "location: Logout.php" );
+    header( "location: logout.php" );
 }
 ?>
 <div class="container">

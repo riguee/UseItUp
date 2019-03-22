@@ -22,6 +22,6 @@ $name = $_SESSION['name'];
             </li>
         </ul>
         Welcome <?php echo $name ?>
-        <a style="margin-left: 10px" href="Logout.php">Log out</a>
+        <a style="margin-left: 10px" href="logout.php">Log out</a>
     </div>
 </nav>

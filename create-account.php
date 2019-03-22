@@ -17,7 +17,7 @@ if (!empty($_SESSION)) {
     } elseif ($_SESSION['user_type'] == 'restaurant') {
         header("location: new-listing.php");
     } else {
-        header("location: Logout.php");
+        header("location: logout.php");
     }
 }
 

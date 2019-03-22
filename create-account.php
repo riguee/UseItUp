@@ -62,7 +62,8 @@ if (isset($_POST["name"])) {
             $stmt->bind_param('sssssss', $name, $email, $phone, $address, $postcode, $charitynumber, $password);
             if ($stmt->execute()){
                 echo "<script>alert('You have created an account')</script>";
-                session_start();
+
+                $_SESSION['name'] = $name;
                 $_SESSION['user_type'] = $div_select;
                 $_SESSION['email'] = $email;
                 $_SESSION['logged_in'] = true;

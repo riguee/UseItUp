@@ -137,7 +137,7 @@ if (!empty($_SESSION)) {
             <label for="charity_id">
                 Charity ID:*
             </label>
-            <input type="text" class="form-control" id="charity_id" name="charity_id" placeholder="Your charity ID" autocomplete="off"/>
+            <input type="text" class="form-control" id="charity_id" name="charityid" placeholder="Your charity ID" autocomplete="off"/>
             <br><br>
         </div>
         <div id = "rest_div" style="display: none;">

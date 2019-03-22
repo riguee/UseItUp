@@ -34,7 +34,7 @@ if (isset($_POST["name"])) {
     $phone = $_POST['phone'];
     $div_select = $_POST['selecttype'];
     if ($div_select == "charity") {
-        $charitynumber = $_POST['charity_id'];
+        $charitynumber = $_POST['charityid'];
     }
     if ($div_select == "restaurant") {
         $days = array('monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday');
@@ -103,6 +103,7 @@ if (isset($_POST["name"])) {
 else {
     header("location: register.php" );
 }
+header("location: my-account.php" );
 
 
 ?>

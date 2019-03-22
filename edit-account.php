@@ -21,7 +21,7 @@ if (isset($_POST["user_type"])) {
     $phone = $_POST['phone'];
     $div_select = $_POST['user_type'];
     if ($div_select == "charity") {
-        $charitynumber = $_POST['charity_id'];
+        $charitynumber = $_POST['charityid'];
         $stmt = $conn->prepare("UPDATE charities SET email = ?, phone = ?, address = ?, postcode = ?, charity_number = ? WHERE id = " . $_SESSION['id']);
         $stmt->bind_param(sssss, $email, $phone, $address, $postcode, $charitynumber);
         $stmt->execute();
@@ -38,7 +38,7 @@ if (isset($_POST["user_type"])) {
             }
 
         }
-        $stmt = $conn->prepare("UPDATE restaurants SET `name` = ?, `phone` = ?, `email` = ?, `address` = ?, `postcode` = ?, `monday_from` = ?, `monday_until` = ?, `tuesday_from` = ?, `tuesday_until` = ?, `wednesday_from` = ?, `wednesday_until` = ?, `thursday_from` = ?, `thursday_until` = ?, `friday_from` = ?, `friday_until` = ?, `saturday_from` = ?, `saturday_until` = ?, `sunday_from` = ?, `sunday_until` = ? WHERE id =" . $_SESSION['id']);
+        $stmt = $conn->prepare("UPDATE restaurants SET `name` = ?, `phone` = ?, `email` = ?, `address` = ?, `postcode` = ?, `monday_from` = , `monday_until` = ?, `tuesday_from` = ?, `tuesday_until` = ?, `wednesday_from` = ?, `wednesday_until` = ?, `thursday_from` = ?, `thursday_until` = ?, `friday_from` = ?, `friday_until` = ?, `saturday_from` = ?, `saturday_until` = ?, `sunday_from` = ?, `sunday_until` = ? WHERE id =" . $_SESSION['id']);
         $stmt->bind_param('sssssssssssssssssss', $name, $phone, $email, $address, $postcode, $monday_from, $monday_until, $tuesday_from,
             $tuesday_until, $wednesday_from, $wednesday_until, $thursday_from, $thursday_until, $friday_from, $friday_until, $saturday_from, $saturday_until, $sunday_from, $sunday_until);
         $stmt->execute();

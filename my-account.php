@@ -44,6 +44,7 @@
                 document.getElementById('phone').removeAttribute("readonly");
                 document.getElementById('address').removeAttribute("readonly");
                 document.getElementById('postcode').removeAttribute("readonly");
+                if (typeof(document.getElementById('charityid'))!='undefined') {document.getElementById('charityid').removeAttribute("readonly")}
                 document.getElementById('confirm').hidden = false;
                 document.getElementById('confirm').disabled = false;
                 document.getElementById('edit').classList.remove("btn-primary");
@@ -51,7 +52,6 @@
                 document.getElementById('edit').innerHTML = "Cancel changes";
                 document.getElementById('hours').classList.add('hours');
                 document.getElementById('edit_hours').classList.remove('hours');
-                if (typeof(document.getElementById('charity_id'))!='undefined') {document.getElementById('charity_id').removeAttribute("readonly")}
             }
             else {
                 document.getElementById('email').readOnly = true;
@@ -62,9 +62,9 @@
                 document.getElementById('address').value = "<?php echo $user->address ?>";
                 document.getElementById('postcode').readOnly = true;
                 document.getElementById('postcode').value = "<?php echo $user->postcode ?>";
-                if (typeof(document.getElementById('charity_id'))!='undefined') {
-                    document.getElementById('charity_id').readOnly = true;
-                    document.getElementById('charity_id').value = "<?php /*echo $user->charity_number*/ ?>";
+                if (typeof(document.getElementById('charityid'))!='undefined') {
+                    document.getElementById('charityid').readOnly = true;
+                    document.getElementById('charityid').value = "<?php echo $user->charity_number ?>";
                 }
                 document.getElementById('confirm').hidden = true;
                 document.getElementById('confirm').disabled = true;
@@ -127,7 +127,7 @@
             if ($_SESSION['user_type'] == 'charity') {
                 echo "<div class=\"row\">
                 <div class=\"col-4\">Charity ID </div>
-                <div class=\"col-8\"><input class=\"form-control-plaintext\" type=\"text\" name=\"charity_id\" placeholder=\"charity id\" id=\"charity_id\" value=\"". $user->charity_number ."\" readonly>
+                <div class=\"col-8\"><input class='form-control-plaintext' type='text' name='charityid' placeholder='charity id' id=\"charityid\" value=\"". $user->charity_number ."\" readonly>
                 </div>";
             } elseif ($_SESSION['user_type'] == "restaurant") {
                 echo "<div id='hours'>";

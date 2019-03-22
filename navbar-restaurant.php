@@ -11,8 +11,8 @@ $name = $_SESSION['name'];
             <li class="nav-item <?php if (basename($_SERVER['PHP_SELF']) == "new-listing.php") {print("active");} ?>">
                 <a class="nav-link" href="new-listing.php">Upload a listing <span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">My account <span class="sr-only">(current)</span></a>
+            <li class="nav-item" <?php if (basename($_SERVER['PHP_SELF']) == "my-account.php") {print("active");} ?>>
+                <a class="nav-link" href="my-account.php">My account <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item <?php if (basename($_SERVER['PHP_SELF']) == "restaurant-orders.php") {print("active");} ?>">
                 <a class="nav-link" href="restaurant-orders.php">Orders <span class="sr-only">(current)</span></a>

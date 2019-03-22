@@ -40,9 +40,9 @@ if (isset($_POST["name"])) {
         $days = array('monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday');
         foreach ($days as $day){
             if (isset($_POST['closed_' . $day])) {
-                ${$day . "_from"} = NULL;
-                ${$day . "_until"} = NULL;
-            }
+            ${$day . "_from"} = NULL;
+            ${$day . "_until"} = NULL;
+        }
             else {
                 ${$day. "_from"} = $_POST[$day . '_from'];
                 ${$day . "_until"} = $_POST[$day . '_until'];

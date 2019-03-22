@@ -12,6 +12,10 @@ h1 {
     color: #e7bb41;
 }
 
+.hours {
+    display: none;
+}
+
 .btn-link{
     border:none;
     outline:none;

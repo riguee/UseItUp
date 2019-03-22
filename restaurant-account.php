@@ -49,24 +49,35 @@
             return false;
         }
     }
+
+    function displayopening() {
+        if (document.getElementById('hours').classList.contains('hours')){
+            document.getElementById('hours').classList.remove('hours');
+            document.getElementById('display_hours').innerHTML = 'Hide pickup hours'
+        }
+        else {
+            document.getElementById('hours').classList.add('hours');
+            document.getElementById('display_hours').innerHTML = 'Show pickup hours'
+        }
+    }
+
 </script>
 <?php
 session_start();
-if (empty($_SESSION)) {
-    header( "location: Login.php" );
-}
-elseif ($_SESSION['user_type'] == 'charity') {
-    include 'navbar-charity.php';
-}
-elseif ($_SESSION['user_type'] == 'restaurant') {
-    header( "location: new-listing.php" );
-}
-else {
-    header( "location: Logout.php" );
-}
 if (!isset($_POST['restaurant']) && $_SESSION['user_type'] == 'charity') {
     header( "location: main-listing.php" );
-} ?>
+} elseif (empty($_SESSION)) {
+    header( "location: Login.php" );
+} elseif ($_SESSION['user_type'] == 'charity') {
+    include 'navbar-charity.php';
+} elseif ($_SESSION['user_type'] == 'restaurant' && $_SESSION['id'] != $_POST['restaurant']) {
+    header( "location: new-listing.php" );
+} elseif ($_SESSION['user_type'] == 'restaurant' && $_SESSION['id'] == $_POST['restaurant']) {
+    include 'navbar-restaurant.php';
+} else {
+    header( "location: Logout.php" );
+}
+?>
 <div class="container">
 <?php
 include 'Restaurants.php';
@@ -76,21 +87,61 @@ $rest_id = $_POST['restaurant'];
 $restaurant = new Restaurant();
 $restaurant->setRestaurantFromId($rest_id);
 ?>
-<h1><?php echo $restaurant->name ?></h1>
-
+    <h1><?php echo $restaurant->name ?></h1>
+    <div class="col-6 mx-auto">
         <div class="row">
             <div class="col-4">Email</div>
-            <div class="col-8"><?php echo $restaurant->email ?></div>
+            <div class="col-8"><input class="form-control-plaintext" type="email" name="email" placeholder="email" id="email" value="<?php echo $restaurant->email ?>" readonly></div>
         </div>
         <div class="row">
             <div class="col-4">Phone</div>
-            <div class="col-8"><?php echo $restaurant->phone ?></div>
+            <div class="col-8"><input class="form-control-plaintext" type="text" name="phone" placeholder="phone number" id="phone" value="<?php echo $restaurant->phone ?>" readonly></div>
         </div>
         <div class="row">
             <div class="col-4">Address</div>
-            <div class="col-8"><?php echo $restaurant->address ?>,  <?php echo $restaurant->postcode ?></div>
+            <div class="col-8"><input class="form-control-plaintext" type="text" name="address" placeholder="address" id="address" value="<?php echo $restaurant->address ?>" readonly>
+                <input class="form-control-plaintext" type="text" name="postcode" placeholder="postcode" id="postcode" value="<?php echo $restaurant->postcode ?>" readonly></div>
         </div>
-    </div>
+
+<?php
+echo "<button class='btn btn-block btn-primary' id='display_hours' onclick='displayopening();'>Show pickup hours</button><br> ";
+echo "<div id='hours' class='hours'>";
+$days = array('monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday');
+foreach ($days as $day) {
+    if ($restaurant->{$day . "_from"} != NULL) {
+        ?>
+        <div class="row">
+            <div class="col-6">
+                <label for="<?php echo $day . "_from" ?>"><?php echo $day . " from:" ?></label>
+                <input type="time" class="form-control" id="<?php echo $day . "_from" ?>"
+                       value="<?php echo $restaurant->{$day . "_from"} ?>" name="<?php echo $day . "_from" ?>"
+                       readonly>
+            </div>
+            <div class="col-6">
+                <label for="<?php echo $day . "_until" ?>">until:</label>
+                <input type="time" class="form-control" id="<?php echo $day . "_until" ?>"
+                       name="<?php echo $day . "_until" ?>" value="<?php echo $restaurant->{$day . "_until"} ?>" readonly>
+            </div>
+        </div><br>
+        <?php
+    }  else {
+        ?><div class="row">
+        <div class="col-12"><br>
+            <input type="button" class="btn btn-secondary btn-check" id="<?php echo "closed_" . $day ?>"
+                   value="The restaurant is closed on <?php echo $day . "s" ?>"
+                   onclick="disable('<?php echo $day ?>');" disabled>
+            <input type="checkbox" name="<?php echo "closed_" . $day ?>" id="<?php echo $day ?>"
+                   value="1" style="display: none;">
+        </div>
+        </div><br>
+    <?php }
+}
+echo "</div>";
+?>
+
+
+</div>
+
 <?php
 $query = "SELECT id FROM listings WHERE restaurant_id =  " . $restaurant->id . "  AND listings.id NOT IN (SELECT listing_id FROM order_listings) AND CONCAT(listings.day_posted, \" \", listings.time_until) > NOW()";
 $result = mysqli_query($conn, $query);

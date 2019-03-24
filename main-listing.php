@@ -172,7 +172,7 @@
             else {
                 $search = "";
             }
-            $search_funct = $conn->prepare("SELECT id FROM listings WHERE (listings.title LIKE CONCAT('%',?,'%') OR listings.description LIKE CONCAT('%',?,'%')) AND listings.id NOT IN (SELECT listing_id FROM order_listings) AND CONCAT(listings.day_posted, \" \", listings.time_until) > NOW()");
+            $search_funct = $conn->prepare("SELECT id FROM listings WHERE (listings.title LIKE CONCAT('%',?,'%') OR listings.description LIKE CONCAT('%',?,'%')) AND listings.id NOT IN (SELECT listing_id FROM order_listings) AND CONCAT(listings.day_posted, \" \", listings.time_until) > NOW() ");
             $search_funct->bind_param("ss", $search, $search);
             $search_funct->execute();
             $result = $search_funct->get_result();

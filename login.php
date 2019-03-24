@@ -11,7 +11,7 @@
 <body>
 <h1>Welcome To UseItUp</h1>
 <div class="container">
-    <form action="Login.php" method="post" autocomplete="off">
+    <form action="login.php" method="post" autocomplete="off">
         <div class="form-group">
             <label for="email">Email address</label>
             <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" required>

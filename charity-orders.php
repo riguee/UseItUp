@@ -13,7 +13,7 @@
 <body>
 <?php session_start();
 if (empty($_SESSION)) {
-header( "location: Login.php" );
+header( "location: login.php" );
 }
 elseif ($_SESSION['user_type'] == 'charity') {
 include 'navbar-charity.php';
@@ -52,7 +52,7 @@ if (mysqli_num_rows($results) > 0) {
 
     }
 } else {
-    echo "You have no upcoming order. Orders will appear here before they are picked up.<br><br>";
+    echo "You have no upcoming orders. Orders will appear here before they are picked up.<br><br>";
 }
 echo "<hr>";
 echo "<h2>Past orders</h2><br>";
@@ -71,7 +71,7 @@ if (mysqli_num_rows($results) > 0) {
 
     }
 } else {
-    echo "You have no past order.";
+    echo "You have no past orders. Orders will appear here once they have been picked up.";
 }
 
 

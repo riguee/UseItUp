@@ -23,7 +23,7 @@ include 'Listings.php';
 include 'Charities.php';
 session_start();
 if (empty($_SESSION)) {
-    header( "location: Login.php" );
+    header( "location: login.php" );
 }
 elseif ($_SESSION['user_type'] == 'charity') {
     header( "location: main-listing.php" );

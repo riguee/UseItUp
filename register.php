@@ -248,9 +248,9 @@ if (!empty($_SESSION)) {
         </div>
     </form>
     <br>
-    <form action="Login.php" autocomplete="off">
+    <form action="login.php" autocomplete="off">
         <div>
-            <a href="Login.php" class="btn btn-secondary btn-block" name="register">Already have an account? Log in</a>
+            <a href="login.php" class="btn btn-secondary btn-block" name="register">Already have an account? Log in</a>
         </div>
     </form>
 </div>

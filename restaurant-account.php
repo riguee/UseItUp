@@ -67,7 +67,7 @@ session_start();
 if (!isset($_POST['restaurant']) && $_SESSION['user_type'] == 'charity') {
     header( "location: main-listing.php" );
 } elseif (empty($_SESSION)) {
-    header( "location: Login.php" );
+    header( "location: login.php" );
 } elseif ($_SESSION['user_type'] == 'charity') {
     include 'navbar-charity.php';
 } elseif ($_SESSION['user_type'] == 'restaurant' && $_SESSION['id'] != $_POST['restaurant']) {

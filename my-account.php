@@ -10,7 +10,6 @@
     <title>My account</title>
 </head>
 <body>
-
     <?php
     include 'Restaurants.php';
     include 'Charities.php';
@@ -18,7 +17,7 @@
     include 'connection.php';
     session_start();
     if (empty($_SESSION)) {
-        header( "location: Login.php" );
+        header( "location: login.php" );
     } elseif ($_SESSION['user_type'] == 'charity') {
         include 'navbar-charity.php';
     } elseif ($_SESSION['user_type'] == 'restaurant') {
@@ -44,7 +43,7 @@
                 document.getElementById('phone').removeAttribute("readonly");
                 document.getElementById('address').removeAttribute("readonly");
                 document.getElementById('postcode').removeAttribute("readonly");
-                if (typeof(document.getElementById('charityid'))!='undefined') {document.getElementById('charityid').removeAttribute("readonly")}
+                // if (typeof(document.getElementById('charityid'))!='undefined') {document.getElementById('charityid').removeAttribute("readonly")}
                 document.getElementById('confirm').hidden = false;
                 document.getElementById('confirm').disabled = false;
                 document.getElementById('edit').classList.remove("btn-primary");
@@ -104,111 +103,148 @@
         }
     </script>
 
+    <h1>My account</h1>
     <div class="container">
-    <h1><?php echo $user->name ?></h1>
-    <div class="col-6 mx-auto">
-        <form method="post" action="edit-account.php">
-            <input type="hidden" name="user_type" value="<?php echo $_SESSION['user_type'] ?>">
-            <div class="row">
-                <div class="col-4">Email</div>
-                <div class="col-8"><input class="form-control-plaintext" type="email" name="email" placeholder="email" id="email" value="<?php echo $user->email ?>" readonly></div>
+        <form>
+            <div class="col-sm-10 col-md-6 my-1 mx-auto">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">Name</div>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Name" value="<?php echo $user->name ?>" readonly>
+                </div>
             </div>
-            <div class="row">
-                <div class="col-4">Phone</div>
-                <div class="col-8"><input class="form-control-plaintext" type="text" name="phone" placeholder="phone number" id="phone" value="<?php echo $user->phone ?>" readonly></div>
+            <div class="col-sm-10 col-md-6 my-1 mx-auto">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">Email</div>
+                    </div>
+                    <input type="email" name="email" class="form-control" placeholder="Email" id="email" value="<?php echo $user->email ?>" readonly>
+                </div>
             </div>
-            <div class="row">
-                <div class="col-4">Address</div>
-                <div class="col-8"><input class="form-control-plaintext" type="text" name="address" placeholder="address" id="address" value="<?php echo $user->address ?>" readonly>
-                    <input class="form-control-plaintext" type="text" name="postcode" placeholder="postcode" id="postcode" value="<?php echo $user->postcode ?>" readonly></div>
+            <div class="col-sm-10 col-md-6 my-1 mx-auto">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">Phone</div>
+                    </div>
+                    <input type="text" name="phone" class="form-control" placeholder="Phone" id="phone" value="<?php echo $user->phone ?>" readonly>
+                </div>
+            </div>
+            <div class="col-sm-10 col-md-6 my-1 mx-auto">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">Address</div>
+                    </div>
+                    <input type="text" name="address" class="form-control" placeholder="Address" id="address" value="<?php echo $user->address ?>" readonly>
+                </div>
+            </div>
+            <div class="col-sm-10 col-md-6 my-1 mx-auto">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">Postcode</div>
+                    </div>
+                    <input type="text" name="postcode" class="form-control" placeholder="Postcode" id="postcode" value="<?php echo $user->postcode ?>" readonly>
+                </div>
             </div>
             <?php
-            if ($_SESSION['user_type'] == 'charity') {
-                echo "<div class=\"row\">
-                <div class=\"col-4\">Charity ID </div>
-                <div class=\"col-8\"><input class='form-control-plaintext' type='text' name='charityid' placeholder='charity id' id=\"charityid\" value=\"". $user->charity_number ."\" readonly>
-                </div>";
-            } elseif ($_SESSION['user_type'] == "restaurant") {
-                echo "<div id='hours'>";
+            if ($_SESSION['user_type'] == 'charity') { ?>
+                <div class="col-sm-10 col-md-6 my-1 mx-auto">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">Charity number</div>
+                        </div>
+                        <input type="text" name="charityid" class="form-control" placeholder="Charity number" id="charityid" value="<?php echo $user->charity_number ?>" readonly>
+                    </div>
+                </div>
+            <?php
+            } elseif ($_SESSION['user_type'] == "restaurant") { ?>
+                <div id='hours'>
+                    <hr>
+                    <h3 style="text-align: center">Available times for pick-up</h3>
+                <?php
                 $days = array('monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday');
                 foreach ($days as $day) {
                     if ($user->{$day . "_from"} != NULL) {
                         ?>
-                        <div class="row">
-                            <div class="col-6">
-                                <label for="<?php echo $day . "_from_display" ?>"><?php echo $day . " from:" ?></label>
-                                <input type="time" class="form-control" id="<?php echo $day . "_from_display" ?>"
-                                       value="<?php echo $user->{$day . "_from"} ?>" name="<?php echo $day . "_from_display" ?>"
-                                       readonly>
+                        <div class="col-sm-10 col-md-6 my-1 mx-auto">
+                            <label for="<?php echo $day . "_from_display" ?>"><?php echo ucfirst($day) ?></label>
+                            <div class="input-group" style="margin-bottom: 10px">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">From</div>
+                                </div>
+                                <input type="time" id="<?php echo $day . "_from_display" ?>" class="form-control" value="<?php echo $user->{$day . "_from"} ?>" name="<?php echo $day . "_from_display" ?>" readonly>
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">Until</div>
+                                </div>
+                                <input type="time" class="form-control" id="<?php echo $day . "_until_display" ?>" value="<?php echo $user->{$day . "_until"} ?>" name="<?php echo $day . "_until_display" ?>" readonly>
                             </div>
-                            <div class="col-6">
-                                <label for="<?php echo $day . "_until_display" ?>">until:</label>
-                                <input type="time" class="form-control" id="<?php echo $day . "_until_display" ?>"
-                                       name="<?php echo $day . "_until_display" ?>" value="<?php echo $user->{$day . "_until"} ?>" readonly>
-                            </div>
-                        </div><br>
+                        </div>
                         <?php
                     }  else {
-                        ?><div class="row">
-                        <div class="col-12"><br>
-                            <input type="button" class="btn btn-secondary btn-check" id="<?php echo "display_closed_" . $day ?>"
-                                   value="The restaurant is closed on <?php echo $day . "s" ?>" disabled>
+                        ?>
+                        <div class="col-sm-10 col-md-6 my-1 mx-auto">
+                            <label for="<?php echo $day . "_from_display" ?>"><?php echo ucfirst($day) ?></label>
+                            <input id="<?php echo $day . "_from_display" ?>" type="button" class="btn btn-secondary btn-check" style="margin-bottom: 10px" id="<?php echo "display_closed_" . $day ?>"
+                                   value="Food cannot be picked up on <?php echo ucfirst($day) . "s" ?>" disabled>
                         </div>
-                        </div><br>
                     <?php }
-                }
-                echo "</div>";
-                echo "<div class='hours' id='edit_hours'>";
+                } ?>
+                </div>
+                <div class='hours' id='edit_hours'>
+                    <?php
                 foreach ($days as $day) {
                     if ($user->{$day . "_from"} != NULL) {?>
-                        <div class="row">
-                            <div class="col-4">
-                                <label for="<?php echo $day . "_from" ?>"><?php echo $day . " from:" ?></label>
-                                <input type="time" value="<?php echo $user->{$day . "_from"} ?>" class="form-control" id="<?php echo $day . "_from" ?>" name="<?php echo $day . "_from" ?>">
+                        <div class="col-sm-10 col-md-6 my-1 mx-auto">
+                            <label for="<?php echo $day . "_from" ?>"><?php echo ucfirst($day) ?></label>
+                            <div class="input-group" style="margin-bottom: 10px">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">From</div>
+                                </div>
+                                <input type="time" id="<?php echo $day . "_from" ?>" class="form-control" value="<?php echo $user->{$day . "_from"} ?>" name="<?php echo $day . "_from" ?>">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">Until</div>
+                                </div>
+                                <input type="time" class="form-control" id="<?php echo $day . "_until" ?>" value="<?php echo $user->{$day . "_until"} ?>" name="<?php echo $day . "_until" ?>" >
                             </div>
-                            <div class="col-4">
-                                <label for="<?php echo $day . "_until" ?>">until:</label>
-                                <input type="time" value="<?php echo $user->{$day . "_until"} ?>" class="form-control" id="<?php echo $day . "_until" ?>" name="<?php echo $day . "_until" ?>">
-                            </div>
-                            <div class="col-4"><br>
-                                <input type="button" class="btn btn-secondary btn-check" id="<?php echo "closed_" . $day ?>" value="The restaurant is closed on <?php echo $day . "s" ?>" onclick="disable('<?php echo $day ?>');">
-                                <input type="checkbox" name="<?php echo "closed_" . $day ?>" id="<?php echo  $day ?>" value="1" style="display: none;">
-                            </div>
-                        </div><br>
+                        </div>
+                        <input type="button" class="btn btn-secondary btn-check" id="<?php echo "closed_" . $day ?>" value="The restaurant is closed on <?php echo $day . "s" ?>" onclick="disable('<?php echo $day ?>');">
+                        <input type="checkbox" name="<?php echo "closed_" . $day ?>" id="<?php echo  $day ?>" value="1" style="display: none;">
+                        <br>
                         <?php
                     } else { ?>
-                        <div class="row">
-                            <div class="col-4">
-                                <label for="<?php echo $day . "_from" ?>"><?php echo $day . " from:" ?></label>
-                                <input type="time" value="<?php echo $user->{$day . "_from"} ?>" class="form-control" id="<?php echo $day . "_from" ?>" name="<?php echo $day . "_from" ?>" disabled>
+                        <div class="col-sm-10 col-md-6 my-1 mx-auto">
+                            <label for="<?php echo $day . "_from" ?>"><?php echo ucfirst($day) ?></label>
+                            <div class="input-group" style="margin-bottom: 10px">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">From</div>
+                                </div>
+                                <input type="time" id="<?php echo $day . "_from" ?>" class="form-control" value="<?php echo $user->{$day . "_from"} ?>" name="<?php echo $day . "_from" ?>" disabled>
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">Until</div>
+                                </div>
+                                <input type="time" class="form-control" id="<?php echo $day . "_until" ?>" value="<?php echo $user->{$day . "_until"} ?>" name="<?php echo $day . "_until" ?>" disabled>
                             </div>
-                            <div class="col-4">
-                                <label for="<?php echo $day . "_until" ?>">until:</label>
-                                <input type="time" value="<?php echo $user->{$day . "_until"} ?>" class="form-control" id="<?php echo $day . "_until" ?>" name="<?php echo $day . "_until" ?>" disabled>
-                            </div>
-                            <div class="col-4"><br>
-                                <input type="button" class="btn btn-primary btn-check" id="<?php echo "closed_" . $day ?>" value="The restaurant is open on <?php echo $day . "s" ?>" onclick="disable('<?php echo $day ?>');">
-                                <input type="checkbox" name="<?php echo "closed_" . $day ?>" id="<?php echo  $day ?>" value="1" style="display: none;">
-                            </div>
-                        </div><br>
-
+                        </div>
+                        <input type="button" class="btn btn-secondary btn-check" id="<?php echo "closed_" . $day ?>" value="The restaurant is open on <?php echo $day . "s" ?>" onclick="disable('<?php echo $day ?>');">
+                        <input type="checkbox" name="<?php echo "closed_" . $day ?>" id="<?php echo  $day ?>" value="1" style="display: none;">
+                        <br>
                         <?php
                     }
-                }
-                echo "</div>";
+                } ?>
+                </div>
+            <?php
             }
             ?>
-            <button type='submit' class='btn btn-primary' id='confirm' hidden disabled>Confirm changes</button>
+            <button type='submit' class='btn btn-primary btn-block' id='confirm' hidden disabled>Confirm changes</button>
         </form>
+        <button style="margin-top:10px" type='button' class='btn btn-secondary btn-block' onclick='edit();' id='edit'>Edit details</button>
 
-
-    </div>
-        <button type='button' class='btn btn-secondary col-4 offset-4' onclick='edit();' id='edit'>Edit details</button>
-        <hr>
-        <h1>Your available upcoming listings</h1>
 
         <?php
-        if  ($_SESSION['user_type'] == 'restaurant') {
+        if  ($_SESSION['user_type'] == 'restaurant') { ?>
+        <hr>
+        <h1>Your available upcoming listings</h1>
+        <?php
             $result = $conn->query("SELECT id FROM listings WHERE listings.id NOT IN (SELECT listing_id FROM order_listings) AND CONCAT(listings.day_posted, \" \", listings.time_until) > NOW() AND restaurant_id = " . $_SESSION['id']);
             if (mysqli_num_rows($result) > 0) {
                 while ($row = $result->fetch_assoc()) {
@@ -220,5 +256,5 @@
         }
         ?>
 
-
+    </div>
 </body>

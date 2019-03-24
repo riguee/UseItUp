@@ -19,7 +19,7 @@ include 'Listings.php';
 include 'connection.php';
 session_start();
 if (empty($_SESSION)) {
-    header( "location: Login.php" );
+    header( "location: index.php" );
 } elseif ($_SESSION['user_type'] == 'charity') {
     include 'navbar-charity.php';
 } elseif ($_SESSION['user_type'] == 'restaurant') {

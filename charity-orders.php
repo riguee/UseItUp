@@ -13,7 +13,7 @@
 <body>
 <?php session_start();
 if (empty($_SESSION)) {
-header( "location: login.php" );
+header( "location: index.php" );
 }
 elseif ($_SESSION['user_type'] == 'charity') {
 include 'navbar-charity.php';

@@ -9,11 +9,11 @@
     <meta charset="UTF-8">
     <title>Restaurant account</title>
 </head>
-<body>
+<body>e
 <?php
 session_start();
 if (empty($_SESSION)) {
-    header( "location: login.php" );
+    header( "location: index.php" );
 } elseif (!isset($_POST['charity'])) {
     header("location: main-listing.php");
 } elseif ($_SESSION['user_type'] == 'charity') {

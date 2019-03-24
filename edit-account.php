@@ -46,3 +46,4 @@ if (isset($_POST["user_type"])) {
     header("location: my-account.php");
 
 }
+header("location: my-account.php");

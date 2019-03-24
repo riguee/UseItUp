@@ -11,8 +11,8 @@ $name = $_SESSION['name'];
             <li class="nav-item <?php if (basename($_SERVER['PHP_SELF']) == "new-listing.php") {print("active");} ?>">
                 <a class="nav-link" href="new-listing.php">Upload a listing <span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item" <?php if (basename($_SERVER['PHP_SELF']) == "my-account.php") {print("active");} ?>>
-                <a class="nav-link" href="my-account.php">My account <span class="sr-only">(current)</span></a>
+            <li class="nav-item <?php if (basename($_SERVER['PHP_SELF']) == "my-account-restaurant.php") {print("active");} ?>">
+                <a class="nav-link" href="my-account-restaurant.php">My account <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item <?php if (basename($_SERVER['PHP_SELF']) == "restaurant-orders.php") {print("active");} ?>">
                 <a class="nav-link" href="restaurant-orders.php">Orders <span class="sr-only">(current)</span></a>
@@ -21,7 +21,7 @@ $name = $_SESSION['name'];
                 <a class="nav-link" href="complaint-form.php">Report a problem <span class="sr-only">(current)</span></a>
             </li>
         </ul>
-        Welcome <?php echo $name ?>
-        <a style="margin-left: 10px" href="logout.php">Log out</a>
+        <span style="color:white">Welcome, <span class="accent"><?php echo $name ?></span>.</span>
+        <a class="btn btn-light" style="margin-left: 10px" href="logout.php">Log out</a>
     </div>
 </nav>

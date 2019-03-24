@@ -33,17 +33,19 @@ if (isset($_POST["user_type"])) {
                 ${$day . "_from"} = $_POST[$day . '_from'];
                 ${$day . "_until"} = $_POST[$day . '_until'];
             } else {
-                ${$day . "_from"} = "";
-                ${$day . "_until"} = "";
+                ${$day . "_from"} = NULL;
+                ${$day . "_until"} = NULL;
             }
 
         }
-        $stmt = $conn->prepare("UPDATE restaurants SET `name` = ?, `phone` = ?, `email` = ?, `address` = ?, `postcode` = ?, `monday_from` = , `monday_until` = ?, `tuesday_from` = ?, `tuesday_until` = ?, `wednesday_from` = ?, `wednesday_until` = ?, `thursday_from` = ?, `thursday_until` = ?, `friday_from` = ?, `friday_until` = ?, `saturday_from` = ?, `saturday_until` = ?, `sunday_from` = ?, `sunday_until` = ? WHERE id =" . $_SESSION['id']);
+        $stmt = $conn->prepare("UPDATE restaurants SET `name` = ?, `phone` = ?, `email` = ?, `address` = ?, `postcode` = ?, `monday_from` = ?, `monday_until` = ?, `tuesday_from` = ?, `tuesday_until` = ?, `wednesday_from` = ?, `wednesday_until` = ?, `thursday_from` = ?, `thursday_until` = ?, `friday_from` = ?, `friday_until` = ?, `saturday_from` = ?, `saturday_until` = ?, `sunday_from` = ?, `sunday_until` = ? WHERE id =" . $_SESSION['id']);
         $stmt->bind_param('sssssssssssssssssss', $name, $phone, $email, $address, $postcode, $monday_from, $monday_until, $tuesday_from,
             $tuesday_until, $wednesday_from, $wednesday_until, $thursday_from, $thursday_until, $friday_from, $friday_until, $saturday_from, $saturday_until, $sunday_from, $sunday_until);
         $stmt->execute();
+        header("location: my-account-restaurant.php");
     }
-    header("location: my-account.php");
+
 
 }
+
 header("location: my-account.php");

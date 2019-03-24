@@ -6,15 +6,21 @@
 -- Generation Time: Mar 18, 2019 at 01:46 PM
 -- Server version: 5.7.23
 -- PHP Version: 7.2.10
-
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
+
+CREATE USER 'useitup'@'localhost';GRANT USAGE ON *.* TO 'useitup'@'localhost'
+REQUIRE NONE WITH MAX_QUERIES_PER_HOUR 0 MAX_CONNECTIONS_PER_HOUR 0 MAX_UPDATES_PER_HOUR 0 MAX_USER_CONNECTIONS 0;
 
 --
 -- Database: `useitup`
 --
 
--- --------------------------------------------------------
+CREATE DATABASE useitup;
+
+GRANT ALL PRIVILEGES ON `useitup`.* TO 'useitup'@'localhost' WITH GRANT OPTION;
+
+USE useitup;
 
 --
 -- Table structure for table `allergens`
@@ -115,7 +121,7 @@ CREATE TABLE `charities` (
 --
 
 INSERT INTO `charities` (`id`, `name`, `email`, `phone`, `address`, `postcode`, `charity_number`, `password`, `active`) VALUES
-(1, 'Food For Good', 'info@foodforgood.org', '07666555656', '12 Food Square, London', 'S98JK0', 8383882, '123456', 0),
+(1, 'Food For Good', 'info@foodforgood.com', '07666555656', '12 Food Square, London', 'S98JK0', 8383882, '72b302bf297a228a75730123efef7c41', 0),
 (2, 'Hungry Hippos', 'hungry@hippos.com', '07988765432', '67 Hippopotamus Street, London', 'WC198JM', 923847, '', 0),
 (3, 'Mother Teresa', 'teresa@vatican.org', '07111110922', '1 Vatican Place, London', 'WCI98JM', 2384734, '', 0),
 (4, 'The Jeremy Bentham Foundation', 'jeremy@bentham.com', '07234762348', '99 Bentham Street, London', 'OE993N2', 478321, '', 0),
@@ -287,28 +293,28 @@ CREATE TABLE `listings` (
 --
 
 INSERT INTO `listings` (`id`, `title`, `description`, `portions`, `time_from`, `time_until`, `day_posted`, `restaurant_id`, `image`, `saved`) VALUES
-(1, 'Banana sandwich', 'Two slices of bread and one whole unpeeled banana.', 50, '04:00:00', '16:00:00', '2019-03-18', 1, '', 0),
-(2, 'Banana soup', 'It\'s warm water with pieces of banana floating.', 30, '04:00:00', '16:00:00', '2019-03-18', 1, '', 0),
-(3, 'Banana stew', 'Beef and banana in our special banana sauce.', 55, '04:00:00', '16:00:00', '2019-03-18', 1, '', 0),
-(4, 'Vegan burger', 'One raw mushroom between two slices of bread.', 67, '12:00:00', '20:00:00', '2019-03-18', 7, '', 0),
-(5, 'Double burger with extra bacon', 'An entire cow and an entire pig in a burger.', 80, '12:00:00', '20:00:00', '2019-03-18', 7, '', 0),
-(6, 'Falafel Sandwich (small)', '3 falafels.', 66, '14:00:00', '20:00:00', '2019-03-18', 4, '', 0),
-(7, 'Falafel sandwich (large)', '23 falafels.', 90, '14:00:00', '20:00:00', '2019-03-18', 4, '', 0),
-(8, 'A glass of ketchup', 'Our homemade ketchup in a disposable plastic cup.', 30, '10:00:00', '19:00:00', '2019-03-18', 6, '', 0),
-(9, 'Ketchup ice cream', 'Our signature ketchup ice cream.', 45, '10:00:00', '15:00:00', '2019-03-18', 6, '', 0),
-(10, 'Mustard ice cream', 'Our signature ketchup ice cream with a twist.', 56, '10:00:00', '16:00:00', '2019-03-18', 6, '', 0),
-(11, 'Spinach pancake', 'Delicious and vegan.', 87, '09:00:00', '19:00:00', '2019-03-18', 2, '', 0),
-(12, 'Lentils pancake', 'Delicious and vegan.', 89, '09:00:00', '19:00:00', '2019-03-18', 2, '', 0),
-(13, 'Pancake milkshake', 'Pancakes blended with vanilla ice cream.', 65, '09:00:00', '19:00:00', '2019-03-18', 2, '', 0),
-(14, 'Hot dog pancake', 'A traditional hot dog with pancake instead of the bun.', 45, '09:00:00', '19:00:00', '2019-03-18', 2, '', 0),
-(15, 'Pepperoni pizza', '', 76, '05:00:00', '12:00:00', '2019-03-18', 5, '', 0),
-(16, 'Pizza Margherita', '', 30, '05:00:00', '15:00:00', '2019-03-18', 5, '', 0),
-(17, 'Caesar salad (small)', '', 30, '09:00:00', '22:00:00', '2019-03-18', 3, '', 0),
-(18, 'Caesar salad (large)', '', 40, '09:00:00', '22:00:00', '2019-03-18', 3, '', 0),
-(19, 'Cheeseburger salad', 'A salad with a side of cheeseburger.', 20, '09:00:00', '22:00:00', '2019-03-18', 3, '', 0),
-(20, 'Banana salad', 'Chopped bananas tossed in our signature vinaigrette.', 21, '09:00:00', '22:00:00', '2019-03-18', 3, '', 0),
-(21, 'Banana smoothie', 'the dish is a smoothie', 4356789, '10:00:00', '20:00:00', '2019-03-18', 1, 'uploads/', 0),
-(22, 'Banana omelet', 'eggs and bananas', 344, '19:00:00', '23:59:59', '2019-03-18', 1, 'uploads/', 0);
+(1, 'Banana sandwich', 'Two slices of bread and one whole unpeeled banana.', 50, '04:00:00', '16:00:00', '2019-03-24', 1, 'uploads/1', 1),
+(2, 'Banana soup', 'It\'s warm water with pieces of banana floating.', 30, '04:00:00', '16:00:00', '2019-03-24', 1, 'uploads/2', 1),
+(3, 'Banana stew', 'Beef and banana in our special banana sauce.', 55, '04:00:00', '16:00:00', '2019-03-24', 1, 'uploads/3', 1),
+(4, 'Vegan burger', 'One raw mushroom between two slices of bread.', 67, '12:00:00', '20:00:00', '2019-03-24', 7, 'uploads/4', 1),
+(5, 'Double burger with extra bacon', 'An entire cow and an entire pig in a burger.', 80, '12:00:00', '20:00:00', '2019-03-24', 7, 'uploads/5', 1),
+(6, 'Falafel Sandwich (small)', '3 falafels.', 66, '14:00:00', '20:00:00', '2019-03-24', 4, 'uploads/6', 1),
+(7, 'Falafel sandwich (large)', '23 falafels.', 90, '14:00:00', '20:00:00', '2019-03-24', 4, 'uploads/7', 1),
+(8, 'A glass of ketchup', 'Our homemade ketchup in a disposable plastic cup.', 30, '10:00:00', '19:00:00', '2019-03-24', 6, 'uploads/8', 1),
+(9, 'Ketchup ice cream', 'Our signature ketchup ice cream.', 45, '10:00:00', '15:00:00', '2019-03-24', 6, 'uploads/9', 1),
+(10, 'Mustard ice cream', 'Our signature ketchup ice cream with a twist.', 56, '10:00:00', '16:00:00', '2019-03-24', 6, 'uploads/10', 1),
+(11, 'Spinach pancake', 'Delicious and vegan.', 87, '09:00:00', '19:00:00', '2019-03-24', 2, 'uploads/11', 1),
+(12, 'Lentils pancake', 'Delicious and vegan.', 89, '09:00:00', '19:00:00', '2019-03-24', 2, 'uploads/12', 1),
+(13, 'Pancake milkshake', 'Pancakes blended with vanilla ice cream.', 65, '09:00:00', '19:00:00', '2019-03-24', 2, 'uploads/13', 1),
+(14, 'Hot dog pancake', 'A traditional hot dog with pancake instead of the bun.', 45, '09:00:00', '19:00:00', '2019-03-24', 2, 'uploads/14', 1),
+(15, 'Pepperoni pizza', '', 76, '05:00:00', '12:00:00', '2019-03-24', 5, 'uploads/dish.png', 1),
+(16, 'Pizza Margherita', '', 30, '05:00:00', '15:00:00', '2019-03-24', 5, 'uploads/dish.png', 1),
+(17, 'Caesar salad (small)', '', 30, '09:00:00', '22:00:00', '2019-03-24', 3, 'uploads/17', 1),
+(18, 'Caesar salad (large)', '', 40, '09:00:00', '22:00:00', '2019-03-24', 3, 'uploads/18', 1),
+(19, 'Cheeseburger salad', 'A salad with a side of cheeseburger.', 20, '09:00:00', '22:00:00', '2019-03-24', 3, 'uploads/19', 1),
+(20, 'Banana salad', 'Chopped bananas tossed in our signature vinaigrette.', 21, '09:00:00', '22:00:00', '2019-03-24', 3, 'uploads/20', 1),
+(21, 'Banana smoothie', 'the dish is a smoothie', 4356789, '10:00:00', '20:00:00', '2019-03-24', 1, 'uploads/21', 1),
+(22, 'Banana omelet', 'Eggs and bananas', 344, '19:00:00', '23:59:59', '2019-03-24', 1, 'uploads/22', 1);
 
 -- --------------------------------------------------------
 
@@ -326,6 +332,13 @@ CREATE TABLE `orders` (
   `pickup_day` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`id`, `charity_id`, `restaurant_id`, `pickup_time`, `comments`, `picked_up`, `pickup_day`) VALUES
+(2, 1, 1, '15:59:00', 'njknjnjk,l,k ', 1, '2019-03-24');
+
 -- --------------------------------------------------------
 
 --
@@ -336,6 +349,14 @@ CREATE TABLE `order_listings` (
   `order_id` int(11) NOT NULL,
   `listing_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `order_listings`
+--
+
+INSERT INTO `order_listings` (`order_id`, `listing_id`) VALUES
+(2, 1),
+(2, 3);
 
 -- --------------------------------------------------------
 
@@ -373,7 +394,7 @@ CREATE TABLE `restaurants` (
 --
 
 INSERT INTO `restaurants` (`id`, `name`, `phone`, `email`, `address`, `postcode`, `password`, `monday_from`, `monday_until`, `tuesday_from`, `tuesday_until`, `wednesday_from`, `wednesday_until`, `thursday_from`, `thursday_until`, `friday_from`, `friday_until`, `saturday_from`, `saturday_until`, `sunday_from`, `sunday_until`, `active`) VALUES
-(1, 'Banana Land', '07123234454', 'banana@land.com', '67 Banana Street, London', 'WT8PMJX', '', '19:00:00', '24:00:00', '19:00:00', '24:00:00', '19:00:00', '24:00:00', '19:00:00', '24:00:00', '19:00:00', '24:00:00', '18:00:00', '22:00:00', NULL, NULL, 0),
+(1, 'Banana Land', '07123234454', 'banana@land.com', '67 Banana Street, London', 'WT8PMJX', '72b302bf297a228a75730123efef7c41', '19:00:00', '24:00:00', '19:00:00', '24:00:00', NULL, NULL, '19:00:00', '24:00:00', '19:00:00', '24:00:00', '18:00:00', '22:00:00', NULL, NULL, 0),
 (2, 'Pancake Palace', '07348765098', 'pancake@palace.com', '89 Pancake Street, London', 'NU9HC33', '', NULL, NULL, '22:00:00', '24:00:00', '22:00:00', '24:00:00', '22:00:00', '24:00:00', '22:00:00', '24:00:00', '22:00:00', '24:00:00', '22:00:00', '23:00:00', 0),
 (3, 'Salad Mania', '07444459008', 'salad@mania.com', '22 Salad Street, London', 'J98EH28', '', '18:00:00', '22:00:00', '18:00:00', '22:00:00', '18:00:00', '22:00:00', '18:00:00', '22:00:00', '18:00:00', '22:00:00', '18:00:00', '22:00:00', '18:00:00', '22:00:00', 0),
 (4, 'Falafel Fiesta', '07645537281', 'falafel@fiesta.com', '66 Falafel Street, London', 'HDS2J99', '', NULL, NULL, '18:00:00', '20:30:00', '18:00:00', '20:30:00', '18:00:00', '20:30:00', '18:00:00', '20:30:00', '18:00:00', '20:00:00', NULL, NULL, 0),
@@ -496,7 +517,7 @@ ALTER TABLE `listings`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `restaurants`

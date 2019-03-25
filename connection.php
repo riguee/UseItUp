@@ -9,3 +9,6 @@ if ($conn->connect_error) {
     echo "something went wrong";
     die("Connection failed: " . $conn->connect_error);
 }
+else {
+    return $conn;
+}

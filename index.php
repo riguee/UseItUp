@@ -32,6 +32,7 @@
 
 <?php
 session_start();
+
 if (!empty($_SESSION)) {
     if ($_SESSION['user_type'] == 'charity') {
         header("location: main-listing.php");

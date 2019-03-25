@@ -182,7 +182,7 @@
         }
         else {
             echo "<label for=\"image\">Choose an image</label>
-        <input type=\"file\" id=\"image\" class=\"form-control-file\" placeholder=\"image\" name=\"fileToUpload\" accept=\"image/gif, image/jpeg, image/png\" >";
+        <input type=\"file\" id=\"image\" class=\"form-control-file\" name=\"fileToUpload\"  >";
         }
         ?>
         <br>

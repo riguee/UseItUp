@@ -116,6 +116,15 @@
 
 <div class="container">
 <h1>New listing</h1>
+    <?php
+    $today = strtolower(date("l"));
+    $query = "SELECT " . $today . "_from, " . $today . "_until FROM restaurants WHERE id = " . $_SESSION['id'];
+    $check = $conn->query($query);
+    $check_result = $check->fetch_assoc();
+    if ($check_result[$today . '_from'] == NULL) {
+        echo "You have not specified opening hours on " . $today . "s. <br> You can change your pickup hours on the 'my account' tab. ";
+    } else {
+    ?>
     <form name="selectsaved" action="" onsubmit="return checkSelectSavedDish();" method="post">
         <label for="dishes" onchange="">Select one of your saved dishes:</label>
         <div class="row">
@@ -241,7 +250,7 @@
         <button type="submit" class="btn btn-primary col-md-12" id="submitlisting" value="Upload Image" >Submit</button>
         <br>
         <br>
-    </form>
+    </form> <?php } ?>
 </div>
 </body>
 </html>

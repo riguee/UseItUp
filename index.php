@@ -101,6 +101,8 @@ if (isset($_POST['email'])) {
     }
 
     if ($login_check == false) {
+
+
         $_SESSION['message'] = "Wrong email or password. Please try again.";
 //        header("location: error.php");
         include "error.php";

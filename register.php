@@ -21,12 +21,10 @@ if (!empty($_SESSION)) {
     }
 }
 
-
-
 ?>
 <div id="signup">
     <h1>Sign Up for Free</h1>
-    <form action="create-account.php" method="post" autocomplete="off">
+    <form action="create-account.php" method="post" autocomplete="off" onsubmit="return checkPassword(this)">
         <label for="selecttype">Type of Account: </label>
         <select class="custom-select" name="selecttype" id="selecttype" onchange="change(this.value)">
             <option selected value disabled> -- select an option -- </option>
@@ -35,7 +33,6 @@ if (!empty($_SESSION)) {
         </select>
         <br>
         <br>
-
 
         <script>
             function change(value) {
@@ -103,17 +100,41 @@ if (!empty($_SESSION)) {
                 }
 
             }
+
+            function checkPassword(form) {
+                if (form.password.value != "") {
+                    var re = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
+
+                    if (!re.test(form.password.value)) {
+                        alert("The password you have entered is not valid! It needs to have at least one uppercase, one lowercase, one number, and be of six characters.");
+                        form.password.focus();
+
+                        return false;
+                    }
+                }
+
+                return true;
+            }
+
+            function checkForm(bool) {
+                if (bool) {
+                    return "create-account.php";
+                }
+                else {
+                    return "register.php";
+                }
+            }
         </script>
 
 
         <label for="name">
             Name:*
         </label>
-        <input type="text" class="form-control" name="name" id="name" placeholder="The name of your company" autocomplete="off" required/>
+        <input type="text" class="form-control" name="name" id="name"  placeholder="The name of your company" autocomplete="off" maxlength="15" required/>
         <label>
             Email:*
         </label>
-        <input type="email" class="form-control" name="email" placeholder="The email of your company" autocomplete="off" required/>
+        <input type="email" class="form-control" name="email"  placeholder="The email of your company" autocomplete="off" maxlength="30" required/>
         <label for="password">
             Password:*
         </label>
@@ -132,7 +153,7 @@ if (!empty($_SESSION)) {
         <label for="phone">
             Phone:
         </label>
-        <input type="text" class="form-control" name="phone" id="phone" placeholder="The phone number of your company">
+        <input type="number" class="form-control" name="phone" id="phone" placeholder="The phone number of your company">
         <div id = "char_div" style="display: none;">
             <label for="charity_id">
                 Charity ID:*

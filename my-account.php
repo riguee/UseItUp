@@ -25,7 +25,7 @@ if (empty($_SESSION)) {
 } elseif ($_SESSION['user_type'] == 'restaurant') {
     header( "location: my-account-restaurant.php" );
 } else {
-    header( "location: Logout.php" );
+    header( "location: logout.php" );
 }
 $id = $_SESSION['id'];
 

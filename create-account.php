@@ -50,7 +50,6 @@ if (isset($_POST["name"])) {
         }
     }
 
-
     if ($div_select == "charity") {
         $stmt = $conn->query("SELECT * FROM charities WHERE email = '" . $email . "'");
         if (mysqli_num_rows($stmt)>0) {

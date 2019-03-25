@@ -11,6 +11,7 @@
 <body>
 <h1>Welcome To UseItUp</h1>
 <div class="container">
+    <p><img src="useitup.png" alt="UseItUp" class="center"></p>
     <form action="index.php" method="post" autocomplete="off">
         <div class="form-group">
             <label for="email">Email address</label>

@@ -45,6 +45,8 @@ if (!empty($_SESSION)) {
 }
 
 
+
+
 if (isset($_POST['email'])) {
     $login_check = false; // Check for login success
 
@@ -94,8 +96,7 @@ if (isset($_POST['email'])) {
 
             if ($service == 'restaurant') {
                 header("location: new-listing.php");
-            }
-            else {
+            } else {
                 header("location: main-listing.php");
             }
         }
@@ -103,9 +104,8 @@ if (isset($_POST['email'])) {
 
     if ($login_check == false) {
 
-
         $_SESSION['message'] = "Wrong email or password. Please try again.";
-//        header("location: error.php");
+
         include "error.php";
     } else {
         $_SESSION['message'] = null;

@@ -9,6 +9,7 @@
 </head>
 <div class="container">
 <body>
+
 <?php
 session_start();
 if (!empty($_SESSION['user_type'])) {

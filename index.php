@@ -8,7 +8,7 @@
     <title>Login</title>
 </head>
 
-<?php   
+<?php
 session_start();
 
 if (!empty($_SESSION['user_type'])) {
@@ -96,8 +96,11 @@ if (isset($_POST['email'])) {
     <div>
         <center>
             <?php
-            if ($login_check == false) {
+//            if ($login_check == false) {
+            if ($_SESSION['message'] == "Wrong email or password. Please try again.") {
                 echo $_SESSION['message'];
+
+                $_SESSION['message'] = null;
             }
             ?>
         </center>

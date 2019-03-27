@@ -8,7 +8,7 @@
     <title>Login</title>
 </head>
 
-<?php
+<?php   
 session_start();
 
 if (!empty($_SESSION['user_type'])) {

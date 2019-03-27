@@ -11,11 +11,12 @@
 <body>
 <?php
 session_start();
-if (!empty($_SESSION)) {
+if (!empty($_SESSION['user_type'])) {
     if ($_SESSION['user_type'] == 'charity') {
         header("location: main-listing.php");
     } elseif ($_SESSION['user_type'] == 'restaurant') {
         header("location: new-listing.php");
+//    } elseif ($_SESSION['message'] == null) {
     } else {
         header("location: logout.php");
     }

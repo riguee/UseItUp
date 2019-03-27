@@ -8,44 +8,19 @@
     <title>Login</title>
 </head>
 
-<body>
-<h1>Welcome To UseItUp</h1>
-<div class="container">
-    <p><img src="useitup.png" alt="UseItUp" class="center"></p>
-    <form action="index.php" method="post" autocomplete="off">
-        <div class="form-group">
-            <label for="email">Email address</label>
-            <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" required>
-        </div>
-        <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" class="form-control" aria-describedby="forgot" id="password" name="password" placeholder="Password" required>
-        </div>
-        <p class="forgot"><a href="Forgot.php">Forgot password?</a></p>
-        <button type="submit" class="btn btn-primary btn-block">Log in</button>
-    </form>
-    <br>
-    <a href="register.php" class="btn btn-secondary btn-block" name="register">Don't have an account? Register</a>
-
-</div>
-
-
-
 <?php
 session_start();
 
-if (!empty($_SESSION)) {
+if (!empty($_SESSION['user_type'])) {
     if ($_SESSION['user_type'] == 'charity') {
         header("location: main-listing.php");
     } elseif ($_SESSION['user_type'] == 'restaurant') {
         header("location: new-listing.php");
+//    } elseif ($_SESSION['message'] == null) {
     } else {
         header("location: logout.php");
     }
 }
-
-
-
 
 if (isset($_POST['email'])) {
     $login_check = false; // Check for login success
@@ -106,12 +81,44 @@ if (isset($_POST['email'])) {
 
         $_SESSION['message'] = "Wrong email or password. Please try again.";
 
-        include "error.php";
+//        include "error.php";
     } else {
         $_SESSION['message'] = null;
     }
 }
 ?>
+
+<body>
+<h1>Welcome To UseItUp</h1>
+<div class="container">
+    <p><img src="useitup.png" alt="UseItUp" class="center"></p>
+
+    <div>
+        <center>
+            <?php
+            if ($login_check == false) {
+                echo $_SESSION['message'];
+            }
+            ?>
+        </center>
+    </div>
+
+    <form action="index.php" method="post" autocomplete="off">
+        <div class="form-group">
+            <label for="email">Email address</label>
+            <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" maxlength="30" required>
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" aria-describedby="forgot" id="password" name="password" placeholder="Password" maxlength="30" required>
+        </div>
+        <p class="forgot"><a href="Forgot.php">Forgot password?</a></p>
+        <button type="submit" class="btn btn-primary btn-block">Log in</button>
+    </form>
+    <br>
+    <a href="register.php" class="btn btn-secondary btn-block" name="register">Don't have an account? Register</a>
+
+</div>
 
 </body>
 </html>

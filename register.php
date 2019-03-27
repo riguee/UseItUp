@@ -154,7 +154,7 @@ if (!empty($_SESSION['user_type'])) {
         <label for="phone">
             Phone:
         </label>
-        <input type="number" class="form-control" name="phone" id="phone" placeholder="The phone number of your company">
+        <input type="text" class="form-control" name="phone" id="phone" placeholder="The phone number of your company">
         <div id = "char_div" style="display: none;">
             <label for="charity_id">
                 Charity ID:*

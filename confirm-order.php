@@ -52,7 +52,9 @@ $restaurant = new Restaurant();
 $restaurant->setRestaurantFromId($listing->restaurant_id);
 ?>
 <div class="card">
-    <h5 class="card-header">From <a href="#"><?php echo $restaurant->name ?></a></h5>
+    <h5 class="card-header"><form action="restaurant-account.php" method="post"> From
+                <button type="submit" name="restaurant" value="<?php echo $restaurant->id ?>" class="btn-link"><?php echo $listing->restaurant_name ?></button>
+                .</form></h5>
     <div class="card-body">
         <span class="h6">Pick up time: </span><span><?php echo $_POST['pickup-time'] ?></span><br>
         <span class="h6">Pick up address: </span><span><?php echo $restaurant->address ?>, <?php echo $restaurant->postcode ?></span><br>
@@ -146,7 +148,9 @@ if($count > 0): ?>
                     </div>
                     <div class="col-9">
                         <h4><?php echo $available_listing->title ?></h4>
-                        <h6>by <a href="#"><?php echo $available_listing->restaurant_name ?></a>.</h6>
+                        <form action="restaurant-account.php" method="post"> <h6>by
+                                <button type="submit" name="restaurant" value="<?php echo $available_listing->restaurant_id ?>" class="btn-link"><?php echo $listing->restaurant_name ?></button>
+                                .</h6></form>
                         <p><?php echo $available_listing->description ?></p>
                         <h6>Portions: <?php echo $available_listing->portions ?>.</h6>
                         <?php if (!empty($available_listing->allergen)) { ?>

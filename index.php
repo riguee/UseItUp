@@ -97,10 +97,8 @@ if (isset($_POST['email'])) {
         <center>
             <?php
 //            if ($login_check == false) {
-            if ($_SESSION['message'] == "Wrong email or password. Please try again.") {
+            if (!empty($_SESSION['message'])) {
                 echo $_SESSION['message'];
-
-                $_SESSION['message'] = null;
             }
             ?>
         </center>

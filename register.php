@@ -29,7 +29,7 @@ if (!empty($_SESSION['user_type'])) {
     <div>
         <center>
             <?php
-            if ($_SESSION['message'] == "Sorry that email address is already used.") {
+            if (!empty($_SESSION['message'])) {
                 echo $_SESSION['message'];
 
                 $_SESSION['message'] = null;

@@ -84,8 +84,14 @@ $user->setRestaurantFromId($id);
         else {
             document.getElementById($element_from).removeAttribute("disabled");
             document.getElementById($element_until).removeAttribute("disabled");
-            document.getElementById($element_from).value = document.getElementById($element_from + "_display").value;
-            document.getElementById($element_until).value = document.getElementById($element_until + "_display").value;
+            if (document.getElementById($element_from + "_display") === null) {
+                document.getElementById($element_from).value = "00:00:00";
+                document.getElementById($element_until).value = "00:00:00";
+            } else {
+                document.getElementById($element_from).value = document.getElementById($element_from + "_display").value;
+                document.getElementById($element_until).value = document.getElementById($element_until + "_display").value;
+            }
+
             document.getElementById($element_btn).value = "The restaurant is closed on " + day + "s.";
             document.getElementById($element_btn).classList.remove("btn-primary");
             document.getElementById($element_btn).classList.add("btn-secondary");

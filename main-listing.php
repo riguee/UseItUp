@@ -48,7 +48,7 @@
                 }
             }
             else {
-                alert("You have to input a pickup time.")
+                alert("You have to input a pickup time.");
                 return false;
             }
         }

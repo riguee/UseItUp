@@ -17,15 +17,27 @@ if (!empty($_SESSION['user_type'])) {
         header("location: main-listing.php");
     } elseif ($_SESSION['user_type'] == 'restaurant') {
         header("location: new-listing.php");
-//    } elseif ($_SESSION['message'] == null) {
+    } elseif ($_SESSION['message'] != null) {
     } else {
         header("location: logout.php");
     }
 }
-
 ?>
 <div id="signup">
     <h1>Sign Up for Free</h1>
+
+    <div>
+        <center>
+            <?php
+            if ($_SESSION['message'] == "Sorry that email address is already used.") {
+                echo $_SESSION['message'];
+
+                $_SESSION['message'] = null;
+            }
+            ?>
+        </center>
+    </div>
+
     <form action="create-account.php" method="post" autocomplete="off" onsubmit="return checkPassword(this)">
         <label for="selecttype">Type of Account: </label>
         <select class="custom-select" name="selecttype" id="selecttype" onchange="change(this.value)">
@@ -110,7 +122,6 @@ if (!empty($_SESSION['user_type'])) {
                     if (!re.test(form.password.value)) {
                         alert("The password you have entered is not valid! It needs to have at least one uppercase, one lowercase, one number, and be of six characters.");
                         form.password.focus();
-
                         return false;
                     }
                 }
@@ -280,5 +291,7 @@ if (!empty($_SESSION['user_type'])) {
 
 
 </div>
+
+
 </body>
 </html>

@@ -50,16 +50,16 @@ else {
 
     <h1>Choose Your New Password</h1>
 
-    <form action="ResetPW.php" method="post">
+    <form action="ResetPW.php" class="form-group" method="post">
 
-        <div class="field-wrap">
+        <div class="form-group">
             <label>
                 New Password<span class="req">*</span>
             </label>
             <input type="password"required name="newpassword" autocomplete="off"/>
         </div>
 
-        <div class="field-wrap">
+        <div class="form-group">
             <label>
                 Confirm New Password<span class="req">*</span>
             </label>
@@ -71,7 +71,7 @@ else {
         <input type="hidden" name="password" value="<?= $hash ?>">
         <input type="hidden" name="service" value="<?= $service ?>">
 
-        <button class="button button-block"/>Apply</button>
+        <button class="btn btn-primary btn-block"/>Apply</button>
 
     </form>
 

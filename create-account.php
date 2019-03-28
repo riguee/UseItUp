@@ -53,8 +53,9 @@ if (isset($_POST["name"])) {
     if ($div_select == "charity") {
         $stmt = $conn->query("SELECT * FROM charities WHERE email = '" . $email . "'");
         if (mysqli_num_rows($stmt)>0) {
-            echo "<script> alert('Sorry that email address is already used')</script>";
-            header( "location: index.php" );
+//            echo "<script> alert('Sorry that email address is already used')</script>";
+            $_SESSION['message'] = "Sorry that email address is already used.";
+            header( "location: register.php" );
             return;
         } else {
             $stmt = $conn->prepare("INSERT INTO charities (id, name, email, phone, address, postcode, charity_number, password, active) VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, 0)");
@@ -74,8 +75,9 @@ if (isset($_POST["name"])) {
     } elseif ($div_select == "restaurant") {
         $stmt = $conn->query("SELECT * FROM restaurants WHERE email = '" . $email . "'");
         if (mysqli_num_rows($stmt)>0) {
-            echo "<script> alert('Sorry that email address is already used')</script>";
-//            header( "location: index.php" );
+//            echo "<script> alert('Sorry that email address is already used')</script>";
+            $_SESSION['message'] = "Sorry that email address is already used.";
+            header( "location: register.php" );
             return;
         } else {
                 $stmt = $conn->prepare("INSERT INTO restaurants (`id`, `name`, `phone`, `email`, `address`, `postcode`, `password`, `monday_from`, `monday_until`, `tuesday_from`, `tuesday_until`, `wednesday_from`, `wednesday_until`, `thursday_from`, `thursday_until`, `friday_from`, `friday_until`, `saturday_from`, `saturday_until`, `sunday_from`, `sunday_until`, `active`)

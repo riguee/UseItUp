@@ -14,19 +14,17 @@
 
     <h1>Reset Your Password</h1>
 
-    <form action="forgot.php" method="post">
-        <div class="field-wrap">
+    <form action="forgot.php"  method="post">
+        <div class="form-group">
             <label>
-                Email Address<span class="req">*</span>
+                Email Address<span >*</span>
             </label>
             <input type="email"required autocomplete="off" name="email"/>
         </div>
-        <button class="button button-block"/>Reset</button>
+        <button class="forgot"/>Reset</button>
     </form>
 </div>
 
-<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-<script src="js/index.js"></script>
 </body>
 
 </html>
@@ -66,7 +64,7 @@ if (isset($_POST['email'])) {
         $name = $user['name'];
         $password = $user['password'];
 
-        // Send registration confirmation link (reset.php)
+        // Posts registration confirmation link (reset.php)
         $to      = $email;
         $subject = 'Password Reset Link';
         $message_body = '

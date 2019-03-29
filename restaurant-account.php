@@ -89,18 +89,29 @@ $restaurant->setRestaurantFromId($rest_id);
 ?>
     <h1><?php echo $restaurant->name ?></h1>
     <div class="col-6 mx-auto">
-        <div class="row">
-            <div class="col-4">Email</div>
-            <div class="col-8"><input class="form-control-plaintext" type="email" name="email" placeholder="email" id="email" value="<?php echo $restaurant->email ?>" readonly></div>
+        <div class="form-group row">
+            <label for="email" class="col-4 col-form-label">Email</label>
+            <div class="col-8">
+                <input type="text" readonly class="form-control-plaintext" id="email" value="<?php echo $restaurant->email ?>">
+            </div>
         </div>
-        <div class="row">
-            <div class="col-4">Phone</div>
-            <div class="col-8"><input class="form-control-plaintext" type="text" name="phone" placeholder="phone number" id="phone" value="<?php echo $restaurant->phone ?>" readonly></div>
+        <div class="form-group row">
+            <label for="phone" class="col-4 col-form-label">Phone</label>
+            <div class="col-8">
+                <input type="text" readonly class="form-control-plaintext" id="phone" value="<?php echo $restaurant->phone ?>">
+            </div>
         </div>
-        <div class="row">
-            <div class="col-4">Address</div>
-            <div class="col-8"><input class="form-control-plaintext" type="text" name="address" placeholder="address" id="address" value="<?php echo $restaurant->address ?>" readonly>
-                <input class="form-control-plaintext" type="text" name="postcode" placeholder="postcode" id="postcode" value="<?php echo $restaurant->postcode ?>" readonly></div>
+        <div class="form-group row">
+            <label for="address" class="col-4 col-form-label">Address</label>
+            <div class="col-8">
+                <input type="text" readonly class="form-control-plaintext" id="address" value="<?php echo $restaurant->address ?>">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="postcode" class="col-4 col-form-label">Postcode</label>
+            <div class="col-8">
+                <input type="text" readonly class="form-control-plaintext" id="postcode" value="<?php echo $restaurant->postcode ?>">
+            </div>
         </div>
 
 <?php
@@ -110,30 +121,26 @@ $days = array('monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'
 foreach ($days as $day) {
     if ($restaurant->{$day . "_from"} != NULL) {
         ?>
-        <div class="row">
-            <div class="col-6">
-                <label for="<?php echo $day . "_from" ?>"><?php echo $day . " from:" ?></label>
-                <input type="time" class="form-control" id="<?php echo $day . "_from" ?>"
-                       value="<?php echo $restaurant->{$day . "_from"} ?>" name="<?php echo $day . "_from" ?>"
-                       readonly>
+        <label for="<?php echo $day ?>"><?php echo ucfirst($day) ?></label>
+        <div class="input-group" id="<?php echo $day ?>">
+            <div class="input-group-prepend">
+                <div class="input-group-text">From</div>
             </div>
-            <div class="col-6">
-                <label for="<?php echo $day . "_until" ?>">until:</label>
-                <input type="time" class="form-control" id="<?php echo $day . "_until" ?>"
-                       name="<?php echo $day . "_until" ?>" value="<?php echo $restaurant->{$day . "_until"} ?>" readonly>
+            <input type="time" class="form-control" value="<?php echo $restaurant->{$day . "_until"} ?>" readonly>
+            <div class="input-group-append">
+                <div class="input-group-text">From</div>
             </div>
-        </div><br>
+            <input type="time" class="form-control" value="<?php echo $restaurant->{$day . "_from"} ?>" readonly>
+        </div>
+        <br>
         <?php
     }  else {
-        ?><div class="row">
-        <div class="col-12"><br>
-            <input type="button" class="btn btn-secondary btn-check" id="<?php echo "closed_" . $day ?>"
-                   value="The restaurant is closed on <?php echo $day . "s" ?>"
-                   onclick="disable('<?php echo $day ?>');" disabled>
-            <input type="checkbox" name="<?php echo "closed_" . $day ?>" id="<?php echo $day ?>"
-                   value="1" style="display: none;">
-        </div>
-        </div><br>
+        ?>
+        <label for="<?php echo $day ?>"><?php echo ucfirst($day) ?></label>
+        <input type="button" class="btn btn-secondary btn-check" id="<?php echo $day ?>" value="The restaurant doesn't accept pickups on <?php echo ucfirst($day) . "s" ?>" disabled>
+        <input type="checkbox" name="<?php echo "closed_" . $day ?>" id="<?php echo $day ?>" value="1" style="display: none;">
+        <br><br>
+
     <?php }
 }
 echo "</div>";
@@ -156,7 +163,7 @@ if (mysqli_num_rows($result) > 0) {
      }
      echo "</div>";
 } else {
-    echo "<h1> There are currently no available listings from this restaurant</h1>";
+    echo "<h1> There are currently no available listings from this restaurant.</h1>";
 }
 ?>
 </div>

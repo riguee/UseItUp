@@ -18,7 +18,7 @@ if (empty($_SESSION)) {
     header("location: main-listing.php");
 } elseif ($_SESSION['user_type'] == 'charity') {
     if ($_SESSION['id'] == $_POST['charity']) {
-        header( "location: my-account.php" );
+        header( "location: my-account-charity.php" );
     } else {include "navbar-charity.php";}
 } elseif ($_SESSION['user_type'] == 'restaurant') {
     include "navbar-restaurant.php";
@@ -36,22 +36,35 @@ if (empty($_SESSION)) {
     ?>
     <h1><?php echo $charity->name ?></h1>
     <div class="col-6 mx-auto">
-        <div class="row">
-            <div class="col-4">Email</div>
-            <div class="col-8"><input class="form-control-plaintext" type="email" name="email" placeholder="email" id="email" value="<?php echo $charity->email ?>" readonly></div>
+        <div class="form-group row">
+            <label for="email" class="col-4 col-form-label">Email</label>
+            <div class="col-8">
+                <input type="text" readonly class="form-control-plaintext" id="email" value="<?php echo $charity->email ?>">
+            </div>
         </div>
-        <div class="row">
-            <div class="col-4">Phone</div>
-            <div class="col-8"><input class="form-control-plaintext" type="text" name="phone" placeholder="phone number" id="phone" value="<?php echo $charity->phone ?>" readonly></div>
+        <div class="form-group row">
+            <label for="phone" class="col-4 col-form-label">Phone</label>
+            <div class="col-8">
+                <input type="text" readonly class="form-control-plaintext" id="phone" value="<?php echo $charity->phone ?>">
+            </div>
         </div>
-        <div class="row">
-            <div class="col-4">Address</div>
-            <div class="col-8"><input class="form-control-plaintext" type="text" name="address" placeholder="address" id="address" value="<?php echo $charity->address ?>" readonly>
-                <input class="form-control-plaintext" type="text" name="postcode" placeholder="postcode" id="postcode" value="<?php echo $charity->postcode ?>" readonly></div>
+        <div class="form-group row">
+            <label for="address" class="col-4 col-form-label">Address</label>
+            <div class="col-8">
+                <input type="text" readonly class="form-control-plaintext" id="address" value="<?php echo $charity->address ?>">
+            </div>
         </div>
-        <div class="row">
-            <div class="col-4">Charity number</div>
-            <div class="col-8"><input class="form-control-plaintext" type="text" name="charity_number" placeholder="charity_number" id="charity_number" value="<?php echo $charity->charity_number ?>" readonly></div>
+        <div class="form-group row">
+            <label for="postcode" class="col-4 col-form-label">Postcode</label>
+            <div class="col-8">
+                <input type="text" readonly class="form-control-plaintext" id="postcode" value="<?php echo $charity->postcode ?>">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="charity_number" class="col-4 col-form-label">Charity number</label>
+            <div class="col-8">
+                <input type="text" readonly class="form-control-plaintext" id="charity_number" value="<?php echo $charity->charity_number ?>">
+            </div>
         </div>
     </div>
 </div>

@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <title>New listing</title>
@@ -30,7 +29,7 @@ header( "location: logout.php" );
 ?>
 
 <div class="container">
-    <h3>You uploaded the following listing:</h3>
+    <h1>Your listing was successfully uploaded.</h1>
 <?php
 include 'connection.php';
 $restaurant_session = 1;
@@ -121,9 +120,13 @@ if (isset($_POST["diet"])) {
 }
 $createdlisting = new Listing();
 $createdlisting->setListingFromId($new_id);
-$createdlisting->displayCreated();
+$createdlisting->displayMyAccount();
 $conn->close();
 ?>
+</div>
+<br>
+<div>
+    <a href="my-account-restaurant.php" class="btn btn-secondary btn-block col-sm-10 col-md-6 my-1 mx-auto">View my account</a>
 </div>
 </body>
 </html>

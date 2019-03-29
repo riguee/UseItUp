@@ -105,7 +105,7 @@ $user->setRestaurantFromId($id);
 
 <div class="container">
     <h1>My account</h1>
-    <button type='button' class='btn btn-primary btn-block col-sm-10 col-md-6 my-1 mx-auto' onclick='editrest();' id='editrest'>Edit details</button>
+    <button type='button' class='btn-edit btn btn-primary btn-block col-sm-10 col-md-6 mx-auto' onclick='editrest();' id='editrest'>Edit details</button>
     <form method="post" action="edit-account.php">
         <input type="hidden" name="user_type" value="<?php echo $_SESSION['user_type'] ?>">
         <div class="col-sm-10 col-md-6 my-1 mx-auto">

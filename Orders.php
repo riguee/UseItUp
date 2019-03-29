@@ -47,8 +47,7 @@ class Order
         <div class="card">
             <div class="card-header" style="padding: 12px 20px 12px 20px">
                 <h5 style="float: left; margin: 0px"><form action="restaurant-account.php" method="post"> From
-                            <button type="submit" name="restaurant" value="<?php echo $restaurant->id ?>" class="btn-link"><?php echo $listing->restaurant_name ?></button>
-                            .</form></h5>
+                            <button type="submit" name="restaurant" value="<?php echo $restaurant->id ?>" class="btn btn-link"><?php echo $listing->restaurant_name ?></button>.</form></h5>
                 <h5 style="float: right; margin: 0px" class="text-muted">ID #<?php echo $this->id?></h5>
             </div>
             <div class="card-body">
@@ -103,8 +102,7 @@ class Order
         <div class="card">
             <div class="card-header" style="padding: 12px 20px 12px 20px">
             <h5 style="float: left; margin: 0px"><form action="restaurant-account.php" method="post"> From
-                        <button type="submit" name="restaurant" value="<?php echo $restaurant->id ?>" class="btn-link"><?php echo $listing->restaurant_name ?></button>
-                        .</h5></form>
+                        <button type="submit" name="restaurant" value="<?php echo $restaurant->id ?>" class="btn btn-link"><?php echo $listing->restaurant_name ?></button>.</h5></form>
             <h5 style="float: right; margin: 0px" class="text-muted">ID #<?php echo $this->id?></h5>
             </div>
             <div class="card-body">
@@ -156,8 +154,7 @@ class Order
         <div class="card">
             <div class="card-header" style="padding: 12px 20px 12px 20px">
                 <h5 style="float: left; margin: 0px"><form action="charity-account.php" method="post"> From
-                            <button type="submit" name="charity" value="<?php echo $charity->id ?>" class="btn-link"><?php echo  $charity->name ?></button>
-                            .</form>
+                            <button type="submit" name="charity" value="<?php echo $charity->id ?>" class="btn btn-link"><?php echo  $charity->name ?></button>.</form>
                    </h5>
                 <h5 style="float: right; margin: 0px" class="text-muted">ID #<?php echo $this->id?></h5>
             </div>
@@ -213,8 +210,7 @@ class Order
         <div class="card">
             <div class="card-header" style="padding: 12px 20px 12px 20px">
                 <h5 style="float: left; margin: 0px"><form action="charity-account.php" method="post"> From
-                        <button type="submit" name="charity" value="<?php echo $charity->id ?>" class="btn-link"><?php echo  $charity->name ?></button>
-                        .</form>
+                        <button type="submit" name="charity" value="<?php echo $charity->id ?>" class="btn btn-link"><?php echo  $charity->name ?></button>.</form>
                 </h5>
                 <h5 style="float: right; margin: 0px" class="text-muted">ID #<?php echo $this->id?></h5>
             </div>

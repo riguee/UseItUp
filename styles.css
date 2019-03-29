@@ -23,9 +23,13 @@ h1 {
     cursor:pointer;
     color:#e0a800;
     padding:0;
-    text-decoration:underline;
     font-family:inherit;
     font-size:inherit;
+}
+
+.btn-link:hover {
+    text-decoration: underline;
+    color: #d0a440;
 }
 
 .btn-primary {
@@ -122,4 +126,8 @@ label {
 .btn-hours {
     margin-top: 5px;
     margin-bottom: 5px;
+}
+
+.btn-edit {
+    margin-bottom: 10px;
 }

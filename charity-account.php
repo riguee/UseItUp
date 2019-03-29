@@ -9,7 +9,7 @@
     <meta charset="UTF-8">
     <title>Restaurant account</title>
 </head>
-<body>e
+<body>
 <?php
 session_start();
 if (empty($_SESSION)) {

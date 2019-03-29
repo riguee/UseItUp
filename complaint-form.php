@@ -23,20 +23,41 @@ elseif ($_SESSION['user_type'] == 'restaurant') {
 else {
     header( "location: logout.php" );
 }?>
+
+
+
 <div class="container">
     <h1>Report a Problem</h1>
+    <div><p></p>
+        <center>
+            <?php
+            if ($_SESSION['problem'] == true) {
+                $_SESSION['problem'] = false;
+
+                echo "Complaint submitted!";
+            }
+            ?>
+        </center>
+    </div><p></p>
     <p>Please fill in this form to lodge a complaint or report a problem regarding your order.</p>
+
     <hr>
     <form method="post" action="submit-complaint.php">
         <label for="subject">Subject</label>
-        <input type="text" class="form-control" placeholder="Enter subject" name="subject" id="subject" required value="<?php if (isset($_POST['order'])) {print("Order #" . $_POST['order']);} ?>">
+        <input type="text" class="form-control" placeholder="Enter subject" minlength="1" name="subject" id="subject" required value="<?php if (isset($_POST['order'])) {print("Order #" . $_POST['order']);} ?>">
         <small class="form-text text-muted">If your issue concerns a specific order, please write the order's ID as the subject.</small>
         <br>
         <label for="complaint">Description</label>
-        <textarea name="complaint" id="complaint" class="form-control" rows="4" cols="50" placeholder="<?php if ($_SESSION['user_type'] == 'restaurant') {print("e.g. The charity did not show up or showed up late");} ?> <?php if ($_SESSION['user_type'] == 'charity') {print("e.g. The restaurant had closed or there was a mistake in the order");} ?>"></textarea>
+        <textarea name="complaint" id="complaint" class="form-control" rows="4" cols="50" minlength="10" placeholder="<?php if ($_SESSION['user_type'] == 'restaurant') {print("e.g. The charity did not show up or showed up late");} ?> <?php if ($_SESSION['user_type'] == 'charity') {print("e.g. The restaurant had closed or there was a mistake in the order");} ?>" required></textarea>
         <br>
         <button type="submit" class="btn btn-primary btn-block">Submit</button>
     </form>
+
+</div>
+
+
+</div>
+</div>
 </div>
 </body>
 </html>

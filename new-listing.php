@@ -122,11 +122,11 @@
     $check = $conn->query($query);
     $check_result = $check->fetch_assoc();
     if ($check_result[$today . '_from'] == NULL) {
-        echo "You can only create listings on the day itself. You have not specified opening hours on " . ucfirst($today) . "s. <br> You can change your pickup hours on the 'My Account' tab. <br> Listings will automatically expire at the end of the pickup window.</br> ";
+        echo "You can only create listings to be picked up on the same day. You have disabled pickups on " . ucfirst($today) . "s. <br> You can enable pickups and specify available pickup times on the <a href='my-account-restaurant.php'>My Account</a> tab. <br> Listings will automatically expire at the end of the pickup window.</br> ";
     } else {
     ?>
     <form name="selectsaved" action="" onsubmit="return checkSelectSavedDish();" method="post">
-        <p> Warning! Listings will automatically expire at the end of the pickup window.</p>
+        <p>Listings will automatically expire at the end of the pickup window.</p>
         <label for="dishes" onchange="">Select one of your saved dishes:</label>
         <div class="row">
             <div class="col-11">

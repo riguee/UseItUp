@@ -11,8 +11,8 @@
             <li class="nav-item <?php if (basename($_SERVER['PHP_SELF']) == "main-listing.php") {print("active");} ?>">
                 <a class="nav-link" href="main-listing.php">Search for food <span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item <?php if (basename($_SERVER['PHP_SELF']) == "my-account.php") {print("active");} ?>">
-                <a class="nav-link" href="my-account.php">My account <span class="sr-only">(current)</span></a>
+            <li class="nav-item <?php if (basename($_SERVER['PHP_SELF']) == "my-account-charity.php") {print("active");} ?>">
+                <a class="nav-link" href="my-account-charity.php">My account <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item <?php if (basename($_SERVER['PHP_SELF']) == "charity-orders.php") {print("active");} ?>">
                 <a class="nav-link" href="charity-orders.php">My orders <span class="sr-only">(current)</span></a>

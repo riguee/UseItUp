@@ -113,7 +113,6 @@ if (isset($_POST['email'])) {
             <label for="password">Password</label>
             <input type="password" class="form-control" aria-describedby="forgot" id="password" name="password" placeholder="Password" maxlength="30" required>
         </div>
-        <p class="forgot"><a href="Forgot.php">Forgot password?</a></p>
         <button type="submit" class="btn btn-primary btn-block">Log in</button>
     </form>
     <br>

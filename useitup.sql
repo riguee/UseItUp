@@ -3,18 +3,24 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Mar 29, 2019 at 02:37 PM
+-- Generation Time: Mar 18, 2019 at 01:46 PM
 -- Server version: 5.7.23
 -- PHP Version: 7.2.10
-
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
+
+CREATE USER 'useitup'@'localhost';GRANT USAGE ON *.* TO 'useitup'@'localhost'
+REQUIRE NONE WITH MAX_QUERIES_PER_HOUR 0 MAX_CONNECTIONS_PER_HOUR 0 MAX_UPDATES_PER_HOUR 0 MAX_USER_CONNECTIONS 0;
 
 --
 -- Database: `useitup`
 --
 
--- --------------------------------------------------------
+CREATE DATABASE useitup;
+
+GRANT ALL PRIVILEGES ON `useitup`.* TO 'useitup'@'localhost' WITH GRANT OPTION;
+
+USE useitup;
 
 --
 -- Table structure for table `allergens`

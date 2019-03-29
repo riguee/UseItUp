@@ -157,125 +157,125 @@ if (!empty($_SESSION['user_type'])) {
         </label>
         <div class="row">
             <div class="col-9">
-                <input type="text" class="form-control" id="address" name="address" placeholder="Your address" minlength="1" autocomplete="off" required/>
+                <input type="text" class="form-control" id="address" name="address" placeholder="Your address" minlength="1" autocomplete="off" />
             </div>
             <div class="col-3">
-                <input type="text" class="form-control" id="postcode" name="postcode" placeholder="Your postcode" minlength="1" autocomplete="off" required/>
+                <input type="text" class="form-control" id="postcode" name="postcode" placeholder="Your postcode" minlength="1" autocomplete="off" />
             </div>
         </div>
         <label for="phone">
             Phone:
         </label>
-        <input type="text" class="form-control" name="phone" id="phone" placeholder="The phone number of your company" minlength="5" required>
+        <input type="text" class="form-control" name="phone" id="phone" placeholder="The phone number of your company" minlength="5">
         <div id = "char_div" style="display: none;">
             <label for="charity_id">
                 Charity ID:*
             </label>
-            <input type="text" class="form-control" id="charity_id" name="charityid" placeholder="Your charity ID" autocomplete="off" required/>
+            <input type="text" class="form-control" id="charity_id" name="charityid" placeholder="Your charity ID" autocomplete="off"/>
             <br><br>
         </div>
-        <div id = "rest_div" style="display: none;">
-            <hr/>
-            <h5>Please specify the available pickup times:</h5>
-            <div class="row">
-                <div class="col-4">
-                    <label for="monday_from">Monday from</label>
-                    <input type="time" class="form-control" id="monday_from" name="monday_from" required>
-                </div>
-                <div class="col-4">
-                    <label for="monday_until">until:</label>
-                    <input type="time" class="form-control" id="monday_until" name="monday_until" required>
-                </div>
-                <div class="col-4"><br>
-                    <input type="button" class="btn btn-secondary btn-check" id="closed_monday" value="The restaurant is closed on mondays" onclick="disable('monday');">
-                    <input type="checkbox" name="closed_monday" id="monday" value="1" style="display: none;">
-                </div>
-            </div><br>
-            <div class="row">
-                <div class="col-4">
-                    <label for="tuesday_from">Tuesday from:</label>
-                    <input type="time" class="form-control" id="tuesday_from" name="tuesday_from" required>
-                </div>
-                <div class="col-4">
-                    <label for="tuesday_until">until:</label>
-                    <input type="time" class="form-control" id="tuesday_until" name="tuesday_until" required>
-                </div>
-                <div class="col-4"><br>
-                    <input type="button" class="btn btn-secondary btn-check" id="closed_tuesday" value="The restaurant is closed on tuesdays" onclick="disable('tuesday');">
-                    <input type="checkbox" name="closed_tuesday" id="tuesday" value="1" style="display: none;">
-                </div>
-            </div><br>
-            <div class="row">
-                <div class="col-4">
-                    <label for="wednesday_from">Wednesday from:</label>
-                    <input type="time" class="form-control" id="wednesday_from" name="wednesday_from" required>
-                </div>
-                <div class="col-4">
-                    <label for="wednesday_until">until:</label>
-                    <input type="time" class="form-control" id="wednesday_until" name="wednesday_until" required>
-                </div>
-                <div class="col-4"><br>
-                    <input type="button" class="btn btn-secondary btn-check" id="closed_wednesday" value="The restaurant is closed on wednesdays" onclick="disable('wednesday');">
-                    <input type="checkbox" name="closed_wednesday" id="wednesday" value="1" style="display: none;">
-                </div>
-            </div><br>
-            <div class="row">
-                <div class="col-4">
-                    <label for="thursday_from">Thursday from:</label>
-                    <input type="time" class="form-control" id="thursday_from" name="thursday_from" required>
-                </div>
-                <div class="col-4">
-                    <label for="thursday_until">until:</label>
-                    <input type="time" class="form-control" id="thursday_until" name="thursday_until" required>
-                </div>
-                <div class="col-4"><br>
-                    <input type="button" class="btn btn-secondary btn-check" id="closed_thursday" value="The restaurant is closed on thursdays" name="closed_thursday" onclick="disable('thursday');">
-                    <input type="checkbox" name="closed_thursday" id="thursday" value="1" style="display: none;">
-                </div>
-            </div><br>
-            <div class="row">
-                <div class="col-4">
-                    <label for="friday_from">Friday from:</label>
-                    <input type="time" class="form-control" id="friday_from" name="friday_from" required>
-                </div>
-                <div class="col-4">
-                    <label for="friday_until">until:</label>
-                    <input type="time" class="form-control" id="friday_until" name="friday_until" required>
-                </div>
-                <div class="col-4"><br>
-                    <input type="button" class="btn btn-secondary btn-check" id="closed_friday" value="The restaurant is closed on fridays" name="closed_friday" onclick="disable('friday');">
-                    <input type="checkbox" name="closed_friday" id="friday" value="1" style="display: none;">
-                </div>
-            </div><br>
-            <div class="row">
-                <div class="col-4">
-                    <label for="saturday_from">Saturday from:</label>
-                    <input type="time" class="form-control" id="saturday_from" name="saturday_from" required>
-                </div>
-                <div class="col-4">
-                    <label for="saturday_until">until: </label>
-                    <input type="time" class="form-control" id="saturday_until" name="saturday_until" required>
-                </div>
-                <div class="col-4"><br>
-                    <input type="button" class="btn btn-secondary btn-check" id="closed_saturday" value="The restaurant is closed on saturdays" name="closed_saturday" onclick="disable('saturday');">
-                    <input type="checkbox" name="closed_saturday" id="saturday" value="1" style="display: none;">
-                </div>
-            </div><br>
-            <div class="row">
-                <div class="col-4">
-                    <label for="sunday_from">Sunday from:</label>
-                    <input type="time" class="form-control" id="sunday_from" name="sunday_from" required>
-                </div>
-                <div class="col-4">
-                    <label for="sunday_until">until:</label>
-                    <input type="time" class="form-control" id="sunday_until" name="sunday_until" required>
-                </div>
-                <div class="col-4"><br>
-                    <input type="button" class="btn btn-secondary btn-check" id="closed_sunday" value="The restaurant is closed on sundays" name="closed_sunday" onclick="disable('sunday');">
-                    <input type="checkbox" name="closed_sunday" id="sunday" value="1" style="display: none;">
-                </div>
-            </div>
-        </div>
+<!--        <div id = "rest_div" style="display: none;">-->
+<!--            <hr/>-->
+<!--            <h5>Please specify the available pickup times:</h5>-->
+<!--            <div class="row">-->
+<!--                <div class="col-4">-->
+<!--                    <label for="monday_from">Monday from</label>-->
+<!--                    <input type="time" class="form-control" id="monday_from" name="monday_from" required>-->
+<!--                </div>-->
+<!--                <div class="col-4">-->
+<!--                    <label for="monday_until">until:</label>-->
+<!--                    <input type="time" class="form-control" id="monday_until" name="monday_until" required>-->
+<!--                </div>-->
+<!--                <div class="col-4"><br>-->
+<!--                    <input type="button" class="btn btn-secondary btn-check" id="closed_monday" value="The restaurant is closed on mondays" onclick="disable('monday');">-->
+<!--                    <input type="checkbox" name="closed_monday" id="monday" value="1" style="display: none;">-->
+<!--                </div>-->
+<!--            </div><br>-->
+<!--            <div class="row">-->
+<!--                <div class="col-4">-->
+<!--                    <label for="tuesday_from">Tuesday from:</label>-->
+<!--                    <input type="time" class="form-control" id="tuesday_from" name="tuesday_from" required>-->
+<!--                </div>-->
+<!--                <div class="col-4">-->
+<!--                    <label for="tuesday_until">until:</label>-->
+<!--                    <input type="time" class="form-control" id="tuesday_until" name="tuesday_until" required>-->
+<!--                </div>-->
+<!--                <div class="col-4"><br>-->
+<!--                    <input type="button" class="btn btn-secondary btn-check" id="closed_tuesday" value="The restaurant is closed on tuesdays" onclick="disable('tuesday');">-->
+<!--                    <input type="checkbox" name="closed_tuesday" id="tuesday" value="1" style="display: none;">-->
+<!--                </div>-->
+<!--            </div><br>-->
+<!--            <div class="row">-->
+<!--                <div class="col-4">-->
+<!--                    <label for="wednesday_from">Wednesday from:</label>-->
+<!--                    <input type="time" class="form-control" id="wednesday_from" name="wednesday_from" required>-->
+<!--                </div>-->
+<!--                <div class="col-4">-->
+<!--                    <label for="wednesday_until">until:</label>-->
+<!--                    <input type="time" class="form-control" id="wednesday_until" name="wednesday_until" required>-->
+<!--                </div>-->
+<!--                <div class="col-4"><br>-->
+<!--                    <input type="button" class="btn btn-secondary btn-check" id="closed_wednesday" value="The restaurant is closed on wednesdays" onclick="disable('wednesday');">-->
+<!--                    <input type="checkbox" name="closed_wednesday" id="wednesday" value="1" style="display: none;">-->
+<!--                </div>-->
+<!--            </div><br>-->
+<!--            <div class="row">-->
+<!--                <div class="col-4">-->
+<!--                    <label for="thursday_from">Thursday from:</label>-->
+<!--                    <input type="time" class="form-control" id="thursday_from" name="thursday_from" required>-->
+<!--                </div>-->
+<!--                <div class="col-4">-->
+<!--                    <label for="thursday_until">until:</label>-->
+<!--                    <input type="time" class="form-control" id="thursday_until" name="thursday_until" required>-->
+<!--                </div>-->
+<!--                <div class="col-4"><br>-->
+<!--                    <input type="button" class="btn btn-secondary btn-check" id="closed_thursday" value="The restaurant is closed on thursdays" name="closed_thursday" onclick="disable('thursday');">-->
+<!--                    <input type="checkbox" name="closed_thursday" id="thursday" value="1" style="display: none;">-->
+<!--                </div>-->
+<!--            </div><br>-->
+<!--            <div class="row">-->
+<!--                <div class="col-4">-->
+<!--                    <label for="friday_from">Friday from:</label>-->
+<!--                    <input type="time" class="form-control" id="friday_from" name="friday_from" required>-->
+<!--                </div>-->
+<!--                <div class="col-4">-->
+<!--                    <label for="friday_until">until:</label>-->
+<!--                    <input type="time" class="form-control" id="friday_until" name="friday_until" required>-->
+<!--                </div>-->
+<!--                <div class="col-4"><br>-->
+<!--                    <input type="button" class="btn btn-secondary btn-check" id="closed_friday" value="The restaurant is closed on fridays" name="closed_friday" onclick="disable('friday');">-->
+<!--                    <input type="checkbox" name="closed_friday" id="friday" value="1" style="display: none;">-->
+<!--                </div>-->
+<!--            </div><br>-->
+<!--            <div class="row">-->
+<!--                <div class="col-4">-->
+<!--                    <label for="saturday_from">Saturday from:</label>-->
+<!--                    <input type="time" class="form-control" id="saturday_from" name="saturday_from" required>-->
+<!--                </div>-->
+<!--                <div class="col-4">-->
+<!--                    <label for="saturday_until">until: </label>-->
+<!--                    <input type="time" class="form-control" id="saturday_until" name="saturday_until" required>-->
+<!--                </div>-->
+<!--                <div class="col-4"><br>-->
+<!--                    <input type="button" class="btn btn-secondary btn-check" id="closed_saturday" value="The restaurant is closed on saturdays" name="closed_saturday" onclick="disable('saturday');">-->
+<!--                    <input type="checkbox" name="closed_saturday" id="saturday" value="1" style="display: none;">-->
+<!--                </div>-->
+<!--            </div><br>-->
+<!--            <div class="row">-->
+<!--                <div class="col-4">-->
+<!--                    <label for="sunday_from">Sunday from:</label>-->
+<!--                    <input type="time" class="form-control" id="sunday_from" name="sunday_from" required>-->
+<!--                </div>-->
+<!--                <div class="col-4">-->
+<!--                    <label for="sunday_until">until:</label>-->
+<!--                    <input type="time" class="form-control" id="sunday_until" name="sunday_until" required>-->
+<!--                </div>-->
+<!--                <div class="col-4"><br>-->
+<!--                    <input type="button" class="btn btn-secondary btn-check" id="closed_sunday" value="The restaurant is closed on sundays" name="closed_sunday" onclick="disable('sunday');">-->
+<!--                    <input type="checkbox" name="closed_sunday" id="sunday" value="1" style="display: none;">-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
         <br>
         <div>
             <button type="submit" class="btn btn-block btn-primary">Sign Up</button>

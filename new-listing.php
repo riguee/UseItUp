@@ -122,7 +122,7 @@
     $check = $conn->query($query);
     $check_result = $check->fetch_assoc();
     if ($check_result[$today . '_from'] == NULL) {
-        echo "You have not specified opening hours on " . $today . "s. <br> You can change your pickup hours on the 'my account' tab. ";
+        echo "You can only create listings on the day itself. You have not specified opening hours on " . $today . "s. <br> You can change your pickup hours on the 'my account' tab. ";
     } else {
     ?>
     <form name="selectsaved" action="" onsubmit="return checkSelectSavedDish();" method="post">
@@ -181,7 +181,7 @@
     <form name="newlisting" enctype="multipart/form-data" autocomplete="off" action="createdlisting.php" onsubmit="return timecheck();" method="post">
         <br>
         <label for="title">or <br> fill in information for a new dish:</label>
-        <input type="text" class="form-control" id="title" name="title" placeholder="Name of the dish" value="<?php if (isset($_POST['dishes'])) { echo $savedstmt['title'];}?>">
+        <input type="text" class="form-control" id="title" name="title" placeholder="Name of the dish" minlength="3" value="<?php if (isset($_POST['dishes'])) { echo $savedstmt['title'];}?>" required>
         <br>
         <label for="description">Description</label>
         <textarea type="text" class="form-control" rows="5" id="description" name="description" placeholder="e.g. ingredients, flavour, etc."><?php if (isset($_POST['dishes'])) { echo $savedstmt['description'];}?></textarea>
@@ -196,7 +196,7 @@
         ?>
         <br>
         <label for="portions">Quantity</label>
-        <input type="number" name="portions" id="portions" class="form-control" min="1">
+        <input type="number" name="portions" id="portions" class="form-control" min="1" required>
         <br>
         <label for="allergens">Allergens:</label>
         <select name="allergen[]" id="allergens" class="selectpicker" multiple data-live-search="true">

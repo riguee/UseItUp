@@ -122,7 +122,7 @@
     $check = $conn->query($query);
     $check_result = $check->fetch_assoc();
     if ($check_result[$today . '_from'] == NULL) {
-        echo "You can only create listings on the day itself. You have not specified opening hours on " . $today . "s. <br> You can change your pickup hours on the 'My Account' tab. <br> Listings will automatically expire at the end of the pickup window.</br> ";
+        echo "You can only create listings on the day itself. You have not specified opening hours on " . ucfirst($today) . "s. <br> You can change your pickup hours on the 'My Account' tab. <br> Listings will automatically expire at the end of the pickup window.</br> ";
     } else {
     ?>
     <form name="selectsaved" action="" onsubmit="return checkSelectSavedDish();" method="post">

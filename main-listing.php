@@ -189,8 +189,7 @@
                     <div class="col-9">
                         <h4><?php echo $listing->title ?></h4>
                         <form action="restaurant-account.php" method="post"> <h6>by
-                                <button type="submit" name="restaurant" value="<?php echo $listing->restaurant_id ?>" class="btn-link"><?php echo $listing->restaurant_name ?></button>
-                            .</h6></form>
+                                <button type="submit" name="restaurant" value="<?php echo $listing->restaurant_id ?>" class="btn-link"><?php echo $listing->restaurant_name ?></button>.</h6></form>
                         <p><?php echo $listing->description ?></p>
                         <h6>Portions: <?php echo $listing->portions ?></h6>
                         <?php if (!empty($listing->allergen)) { ?>

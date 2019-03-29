@@ -151,6 +151,12 @@ class Order
         $charity = new Charity();
         $charity->setCharityFromId($this->charity_id);
         ?>
+        <script>
+            function cancelconfirm() {
+                var r = confirm("Are you sure you want to cancel this order?");
+                return r;
+            }
+        </script>
         <div class="card">
             <div class="card-header" style="padding: 12px 20px 12px 20px">
                 <h5 style="float: left; margin: 0px"><form action="charity-account.php" method="post"> From
@@ -190,8 +196,8 @@ class Order
                     </tbody>
                 </table>
                 <div class="row">
-                    <form class="col-md-5" style="margin: 15px auto" action="" method="post">
-                        <button type="submit" class="btn btn-block btn-danger" >Cancel order</button>
+                    <form class="col-md-5" style="margin: 15px auto" action="cancel-order.php" method="post" onsubmit="return cancelconfirm()">
+                        <button type="submit" class="btn btn-block btn-danger" name="order" value="<?php print($this->id) ?>">Cancel order</button>
                     </form>
                     <form class="col-md-5" style="margin: 15px auto" action="" method="post">
                         <button type="submit" class="btn btn-block btn-warning" >Report a problem</button>

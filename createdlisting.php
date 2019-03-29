@@ -32,7 +32,7 @@ header( "location: logout.php" );
     <h1>Your listing was successfully uploaded.</h1>
 <?php
 include 'connection.php';
-$restaurant_session = 1;
+$restaurant_session =  $_SESSION['id'];
 $title = $_POST["title"];
 $description = $_POST["description"];
 $portion = $_POST['portions'];
@@ -43,11 +43,11 @@ $result = mysqli_fetch_assoc($result);
 $timefrom = $result[$today . "_from"];
 $timeuntil = $result[$today . "_until"];
 
+
 include 'Listings.php';
 
-$restaurant = $_SESSION['id'];
 $createlisting = $conn->prepare("INSERT INTO listings (id, title, description, portions, time_from, time_until, day_posted, restaurant_id)
-VALUES (NULL, ?, ?, ?, ?, ?, NOW()," . $restaurant . ")");
+VALUES (NULL, ?, ?, ?, ?, ?, NOW()," . $restaurant_session . ")");
 $createlisting->bind_param("sssss", $title, $description, $portion, $timefrom, $timeuntil);
 $createlisting->execute();
 $new_id = mysqli_insert_id($conn);

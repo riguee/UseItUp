@@ -143,11 +143,11 @@ if (!empty($_SESSION['user_type'])) {
         <label for="name">
             Name:*
         </label>
-        <input type="text" class="form-control" name="name" id="name"  placeholder="The name of your company" autocomplete="off" maxlength="15" required/>
+        <input type="text" class="form-control" name="name" id="name"  placeholder="The name of your company" autocomplete="off" minlength="3" maxlength="30" required/>
         <label>
             Email:*
         </label>
-        <input type="email" class="form-control" name="email"  placeholder="The email of your company" autocomplete="off" maxlength="30" required/>
+        <input type="email" class="form-control" name="email"  placeholder="The email of your company" autocomplete="off" minlength="3" maxlength="30" required/>
         <label for="password">
             Password:*
         </label>
@@ -157,21 +157,21 @@ if (!empty($_SESSION['user_type'])) {
         </label>
         <div class="row">
             <div class="col-9">
-                <input type="text" class="form-control" id="address" name="address" placeholder="Your address" autocomplete="off"/>
+                <input type="text" class="form-control" id="address" name="address" placeholder="Your address" minlength="1" autocomplete="off" required/>
             </div>
             <div class="col-3">
-                <input type="text" class="form-control" id="postcode" name="postcode" placeholder="Your postcode" autocomplete="off"/>
+                <input type="text" class="form-control" id="postcode" name="postcode" placeholder="Your postcode" minlength="1" autocomplete="off" required/>
             </div>
         </div>
         <label for="phone">
             Phone:
         </label>
-        <input type="text" class="form-control" name="phone" id="phone" placeholder="The phone number of your company">
+        <input type="text" class="form-control" name="phone" id="phone" placeholder="The phone number of your company" minlength="5" required>
         <div id = "char_div" style="display: none;">
             <label for="charity_id">
                 Charity ID:*
             </label>
-            <input type="text" class="form-control" id="charity_id" name="charityid" placeholder="Your charity ID" autocomplete="off"/>
+            <input type="text" class="form-control" id="charity_id" name="charityid" placeholder="Your charity ID" autocomplete="off" required/>
             <br><br>
         </div>
         <div id = "rest_div" style="display: none;">

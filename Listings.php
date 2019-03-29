@@ -153,49 +153,45 @@ class Listing
                 return r;
             }
         </script>
-        <div class="card" style="margin: 20px">
-            <h5 class="card-header"><?php echo $this->title; ?></h5>
-            <div class="row">
-                <div class="col-4">
-                    <img src="<?php print($this->image) ?>" style="max-height: 250px; max-width: 100%; border-radius: 5px">
-                </div>
-                <div class="col-8">
-                    Dish description: <?php echo $this->description; ?><br>
-                    Number of portions: <?php echo $this->portions; ?><br>
-                    Allergens <?php
-                    if(isset($this->allergen)) {
-                        foreach ($this->allergen as $this_allergen) {
-                            echo "  ".$this_allergen. "  ";
-                        }
-                        echo "<br>";
-                    }
-                    else {
-                        echo "No allergen. ";
-                    }
-
-
-                    if(isset($this->diet)) {
-                        echo "Suitable for : ";
-                        foreach ($this->diet as $this_diet) {
-                            echo "  ".$this_diet."  ";
-                        }
-                        echo "<br>";
-                    }
-                    else {
-                        echo "No diets";
-                    }
-                    ?>
-                    <p>Available pickup times: between
-                        <span id="<?php print("timefrom" . $this->id) ?>"><?php echo date("H:i", strtotime($this->time_from)) ?>
+        <div class="card container-fluid" style="margin:10px 0 10px 0">
+            <div class="card-body" style="min-height: 300px">
+                <div class="row">
+                    <div class="col-3">
+                        <img src="<?php print($this->image) ?>" style="max-height: 250px; max-width: 100%; border-radius: 5px">
+                    </div>
+                    <div class="col-9">
+                        <h4><?php echo $this->title ?></h4>
+                        <p><?php echo $this->description ?></p>
+                        <h6>Portions: <?php echo $this->portions ?></h6>
+                        <?php if (!empty($this->allergen)) { ?>
+                        <h6>Allergens: <?php
+                            $count = count($this->allergen);
+                            for ($i = 0; $i < $count - 1; $i++) {
+                                echo $this->allergen[$i] . ", ";
+                            }
+                            echo $this->allergen[$count - 1];
+                            }
+                            ?></h6>
+                        <?php if (isset($this->diet)) { ?>
+                            <h6>Suitable for: <?php
+                                $count = count($this->diet);
+                                for ($i = 0; $i<$count-1; $i++) {
+                                    echo $this->diet[$i].", ";
+                                }
+                                echo $this->diet[$count-1];
+                                ?></h6>
+                        <?php } ?>
+                        <h6>Available pickup times: between
+                            <span id="<?php print("timefrom" . $this->id) ?>"><?php echo date("H:i", strtotime($this->time_from)) ?>
                             </span> and
-                        <span id="<?php print("timeuntil" . $this->id) ?>"><?php echo date("H:i", strtotime($this->time_until)) ?>
+                            <span id="<?php print("timeuntil" . $this->id) ?>"><?php echo date("H:i", strtotime($this->time_until)) ?>
                             </span>
-                    </p>
-                    <form action="cancel-listing.php" onsubmit="return cancelconfirm();" method="post"><button type="submit" class="btn btn-danger" value="<?php print($this->id) ?>" name="listing">Delete listing</button></form>
+                        </h6>
+                        <form action="cancel-listing.php" onsubmit="return cancelconfirm();" method="post"><button type="submit" class="btn btn-danger" value="<?php print($this->id) ?>" name="listing">Delete listing</button></form>
+                    </div>
                 </div>
             </div>
         </div>
-
         <?php
     }
 

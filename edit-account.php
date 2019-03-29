@@ -15,6 +15,7 @@ include('connection.php');
 if (isset($_POST["user_type"])) {
 
     //Setting POST variables
+    $name = $_POST['name'];
     $email = $_POST['email'];
     $address = $_POST['address'];
     $postcode = $_POST['postcode'];

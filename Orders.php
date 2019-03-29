@@ -199,8 +199,8 @@ class Order
                     <form class="col-md-5" style="margin: 15px auto" action="cancel-order.php" method="post" onsubmit="return cancelconfirm()">
                         <button type="submit" class="btn btn-block btn-danger" name="order" value="<?php print($this->id) ?>">Cancel order</button>
                     </form>
-                    <form class="col-md-5" style="margin: 15px auto" action="" method="post">
-                        <button type="submit" class="btn btn-block btn-warning" >Report a problem</button>
+                    <form class="col-md-5" style="margin: 15px auto" action="complaint-form.php" method="post">
+                        <button type="submit" class="btn btn-block btn-warning" name="order" value="<?php print($this->id) ?>">Report a problem</button>
                     </form>
                 </div>
             </div>

@@ -180,6 +180,10 @@ if (!empty($_SESSION['user_type'])) {
         </div>
         <br>
         <div>
+            <p>By signing up, you have read and agreed to the <a href="terms.php"> Terms & Conditions and Privacy Policy </a></p>
+        </div>
+        <p></p>
+        <div>
             <button type="submit" class="btn btn-block btn-primary">Sign up</button>
         </div>
     </form>
@@ -191,6 +195,9 @@ if (!empty($_SESSION['user_type'])) {
         <br>
     </form>
 </div>
+
+
+
 
 
 </div>

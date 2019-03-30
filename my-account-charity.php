@@ -68,12 +68,8 @@ $id = $_SESSION['id'];
 </script>
 
 <div class="container">
-    <h1><?php echo $user->name ?></h1>
-    <?php if ($_SESSION['user_type'] == 'charity') {
-        echo '<button type=\'button\' class=\'btn btn-primary\' onclick=\'edit();\' id=\'edit\'>Edit details</button>';
-    } else {
-        echo "<button type='button' class='btn btn-primary' onclick='editrest();' id='editrest'>Edit details</button>";
-} ?>
+    <h1>My account</h1>
+    <button type='button' class='btn-edit btn btn-primary btn-block col-sm-10 col-md-6 mx-auto' onclick='edit();' id='edit'>Edit details</button>
 
     <div class="col-6 mx-auto">
         <form method="post" action="edit-account.php">

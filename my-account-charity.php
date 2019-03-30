@@ -35,6 +35,7 @@ $id = $_SESSION['id'];
 <script>
     function edit() {
         if (document.getElementById('email').hasAttribute('readonly')){
+            document.getElementById('name').removeAttribute("readonly");
             document.getElementById('email').removeAttribute("readonly");
             document.getElementById('phone').removeAttribute("readonly");
             document.getElementById('address').removeAttribute("readonly");
@@ -43,10 +44,12 @@ $id = $_SESSION['id'];
             document.getElementById('confirm').hidden = false;
             document.getElementById('confirm').disabled = false;
             document.getElementById('edit').classList.remove("btn-primary");
-            document.getElementById('edit').classList.add("btn-secondary");
+            document.getElementById('edit').classList.add("btn-danger");
             document.getElementById('edit').innerHTML = "Cancel changes";
         }
         else {
+            document.getElementById('name').readOnly = true;
+            document.getElementById('name').value = "<?php echo $user->name ?>";
             document.getElementById('email').readOnly = true;
             document.getElementById('email').value = "<?php echo $user->email ?>";
             document.getElementById('phone').readOnly = true;
@@ -70,34 +73,58 @@ $id = $_SESSION['id'];
 <div class="container">
     <h1>My account</h1>
     <button type='button' class='btn-edit btn btn-primary btn-block col-sm-10 col-md-6 mx-auto' onclick='edit();' id='edit'>Edit details</button>
-
-    <div class="col-6 mx-auto">
-        <form method="post" action="edit-account.php">
-            <input type="hidden" name="user_type" value="<?php echo $_SESSION['user_type'] ?>">
-            <div class="row">
-                <div class="col-4">Email</div>
-                <div class="col-8"><input class="form-control-plaintext" type="email" name="email" placeholder="email" id="email" value="<?php echo $user->email ?>" readonly></div>
+    <form method="post" action="edit-account.php">
+        <input type="hidden" name="user_type" value="<?php echo $_SESSION['user_type'] ?>">
+        <div class="col-sm-10 col-md-6 my-1 mx-auto">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">Name</div>
+                </div>
+                <input type="text" class="form-control" placeholder="Name" name="name" id="name" value="<?php echo $user->name ?>" readonly>
             </div>
-            <div class="row">
-                <div class="col-4">Phone</div>
-                <div class="col-8"><input class="form-control-plaintext" type="text" name="phone" placeholder="phone number" id="phone" value="<?php echo $user->phone ?>" readonly></div>
+        </div>
+        <div class="col-sm-10 col-md-6 my-1 mx-auto">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">Email</div>
+                </div>
+                <input type="email" class="form-control" placeholder="Email" name="email" id="email" value="<?php echo $user->email ?>" readonly>
             </div>
-            <div class="row">
-                <div class="col-4">Address</div>
-                <div class="col-8"><input class="form-control-plaintext" type="text" name="address" placeholder="address" id="address" value="<?php echo $user->address ?>" readonly>
-                    <input class="form-control-plaintext" type="text" name="postcode" placeholder="postcode" id="postcode" value="<?php echo $user->postcode ?>" readonly></div>
+        </div>
+        <div class="col-sm-10 col-md-6 my-1 mx-auto">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">Phone</div>
+                </div>
+                <input type="text" class="form-control" placeholder="Phone Number" name="phone" id="phone" value="<?php echo $user->phone ?>" readonly>
             </div>
-            <?php
-
-                echo "<div class=\"row\">
-                <div class=\"col-4\">Charity ID </div>
-                <div class=\"col-8\"><input class='form-control-plaintext' type='text' name='charityid' placeholder='charity id' id=\"charityid\" value=\"". $user->charity_number ."\" readonly>
-                </div>";
-
-            ?>
-            <button type='submit' class='btn btn-primary' id='confirm' hidden disabled>Confirm changes</button>
-        </form>
-    </div>
+        </div>
+        <div class="col-sm-10 col-md-6 my-1 mx-auto">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">Address</div>
+                </div>
+                <input type="text" class="form-control" placeholder="Address" name="address" id="address" value="<?php echo $user->address ?>" readonly>
+            </div>
+        </div>
+        <div class="col-sm-10 col-md-6 my-1 mx-auto">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">Postcode</div>
+                </div>
+                <input type="text" class="form-control" placeholder="Postcode" name="postcode" id="postcode" value="<?php echo $user->postcode ?>" readonly>
+            </div>
+        </div>
+        <div class="col-sm-10 col-md-6 my-1 mx-auto">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">Charity number</div>
+                </div>
+                <input type="text" class="form-control" placeholder="Charity number" name="charityid" id="charityid" value="<?php echo $user->charity_number ?>" readonly>
+            </div>
+        </div>
+        <button type='submit' class='btn btn-primary btn-block col-sm-10 col-md-6 my-1 mx-auto' id='confirm' hidden disabled>Confirm changes</button>
+    </form>
 
 
 </body>

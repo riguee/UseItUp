@@ -53,11 +53,15 @@
     function displayopening() {
         if (document.getElementById('hours').classList.contains('hours')){
             document.getElementById('hours').classList.remove('hours');
-            document.getElementById('display_hours').innerHTML = 'Hide pickup hours'
+            document.getElementById('display_hours').innerHTML = 'Hide pickup hours';
+            document.getElementById('display_hours').classList.remove('btn-primary');
+            document.getElementById('display_hours').classList.add('btn-secondary');
         }
         else {
             document.getElementById('hours').classList.add('hours');
             document.getElementById('display_hours').innerHTML = 'Show pickup hours'
+            document.getElementById('display_hours').classList.remove('btn-secondary');
+            document.getElementById('display_hours').classList.add('btn-primary');
         }
     }
 

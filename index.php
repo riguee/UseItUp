@@ -93,6 +93,8 @@ if (isset($_POST['email'])) {
 <div class="container">
     <p><img src="useitup.png" alt="UseItUp" class="center"></p>
 
+    <h5>Join us on our journey to reduce food waste and help local charities! </h5>
+
     <div>
         <center>
             <?php
@@ -117,7 +119,7 @@ if (isset($_POST['email'])) {
     </form>
     <br>
     <a href="register.php" class="btn btn-secondary btn-block" name="register">Don't have an account? Register</a>
-
+<p></p>
 </div>
 
 </body>

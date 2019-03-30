@@ -147,9 +147,6 @@ if($count > 0): ?>
                     </div>
                     <div class="col-9">
                         <h4><?php echo $available_listing->title ?></h4>
-                        <form action="restaurant-account.php" method="post"> <h6>by
-                                <button type="submit" name="restaurant" value="<?php echo $available_listing->restaurant_id ?>" class="btn-link"><?php echo $listing->restaurant_name ?></button>
-                                .</h6></form>
                         <p><?php echo $available_listing->description ?></p>
                         <h6>Portions: <?php echo $available_listing->portions ?>.</h6>
                         <?php if (!empty($available_listing->allergen)) { ?>

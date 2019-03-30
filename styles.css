@@ -132,3 +132,9 @@ label {
 .btn-edit {
     margin-bottom: 10px;
 }
+
+.caption {
+    text-align: center;
+    margin: 30px;
+    font-size:20px;
+}

@@ -93,7 +93,7 @@ if (isset($_POST['email'])) {
 <div class="container">
     <p><img src="useitup.png" alt="UseItUp" class="center"></p>
 
-    <h5>Join us on our journey to reduce food waste and help local charities! </h5>
+    <p class="caption">Join us on our journey to reduce food waste and help local charities! </p>
 
     <div>
         <center>

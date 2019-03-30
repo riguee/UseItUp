@@ -96,7 +96,10 @@ INSERT INTO `allergen_listings` (`listing_id`, `allergen_id`) VALUES
 (4, 7),
 (4, 2),
 (21, 9),
-(22, 3);
+(22, 3),
+(24, 1),
+(24, 3),
+(24, 9);
 
 -- --------------------------------------------------------
 
@@ -138,16 +141,17 @@ INSERT INTO `charities` (`id`, `name`, `email`, `phone`, `address`, `postcode`, 
 CREATE TABLE `complaints` (
   `id` int(11) NOT NULL,
   `subject` varchar(100) NOT NULL,
-  `complaint` text NOT NULL
+  `complaint` text NOT NULL,
+  `user_type` enum('restaurant','charity') NOT NULL,
+  `user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `complaints`
 --
 
-INSERT INTO `complaints` (`id`, `subject`, `complaint`) VALUES
-(2, 'Order #18', 'There was a mistake in the banana'),
-(3, 'Order #18', 'jdfhsd,jfh');
+INSERT INTO `complaints` (`id`, `subject`, `complaint`, `user_type`, `user_id`) VALUES
+(2, 'Order #18', 'There was a mistake in the banana', 'restaurant', 0);
 
 -- --------------------------------------------------------
 
@@ -230,7 +234,10 @@ INSERT INTO `diet_listings` (`listing_id`, `diet_id`) VALUES
 (4, 4),
 (4, 3),
 (21, 3),
-(22, 3);
+(22, 3),
+(24, 1),
+(24, 2),
+(24, 3);
 
 -- --------------------------------------------------------
 
@@ -293,28 +300,29 @@ CREATE TABLE `listings` (
 --
 
 INSERT INTO `listings` (`id`, `title`, `description`, `portions`, `time_from`, `time_until`, `day_posted`, `restaurant_id`, `image`, `saved`) VALUES
-(1, 'Banana sandwich', 'Two slices of bread and one whole unpeeled banana.', 50, '04:00:00', '16:00:00', '2019-03-29', 1, 'uploads/1', 1),
-(2, 'Banana soup', 'It\'s warm water with pieces of banana floating.', 30, '04:00:00', '16:00:00', '2019-03-29', 1, 'uploads/2', 1),
-(3, 'Banana stew', 'Beef and banana in our special banana sauce.', 55, '04:00:00', '16:00:00', '2019-03-29', 1, 'uploads/3', 1),
-(4, 'Vegan burger', 'One raw mushroom between two slices of bread.', 67, '12:00:00', '20:00:00', '2019-03-29', 7, 'uploads/4', 1),
-(5, 'Double burger with extra bacon', 'An entire cow and an entire pig in a burger.', 80, '12:00:00', '20:00:00', '2019-03-29', 7, 'uploads/5', 1),
-(6, 'Falafel Sandwich (small)', '3 falafels.', 66, '14:00:00', '20:00:00', '2019-03-29', 4, 'uploads/6', 1),
-(7, 'Falafel sandwich (large)', '23 falafels.', 90, '14:00:00', '20:00:00', '2019-03-29', 4, 'uploads/7', 1),
-(8, 'A glass of ketchup', 'Our homemade ketchup in a disposable plastic cup.', 30, '10:00:00', '19:00:00', '2019-03-29', 6, 'uploads/8', 1),
-(9, 'Ketchup ice cream', 'Our signature ketchup ice cream.', 45, '10:00:00', '15:00:00', '2019-03-29', 6, 'uploads/9', 1),
-(10, 'Mustard ice cream', 'Our signature ketchup ice cream with a twist.', 56, '10:00:00', '16:00:00', '2019-03-29', 6, 'uploads/10', 1),
-(11, 'Spinach pancake', 'Delicious and vegan.', 87, '09:00:00', '19:00:00', '2019-03-29', 2, 'uploads/11', 1),
-(12, 'Lentils pancake', 'Delicious and vegan.', 89, '09:00:00', '19:00:00', '2019-03-29', 2, 'uploads/12', 1),
-(13, 'Pancake milkshake', 'Pancakes blended with vanilla ice cream.', 65, '09:00:00', '19:00:00', '2019-03-29', 2, 'uploads/13', 1),
-(14, 'Hot dog pancake', 'A traditional hot dog with pancake instead of the bun.', 45, '09:00:00', '19:00:00', '2019-03-29', 2, 'uploads/14', 1),
-(15, 'Pepperoni pizza', '', 76, '05:00:00', '12:00:00', '2019-03-29', 5, 'uploads/dish.png', 1),
-(16, 'Pizza Margherita', '', 30, '05:00:00', '15:00:00', '2019-03-29', 5, 'uploads/dish.png', 1),
-(17, 'Caesar salad (small)', '', 30, '09:00:00', '22:00:00', '2019-03-29', 3, 'uploads/17', 1),
-(18, 'Caesar salad (large)', '', 40, '09:00:00', '22:00:00', '2019-03-29', 3, 'uploads/18', 1),
-(19, 'Cheeseburger salad', 'A salad with a side of cheeseburger.', 20, '09:00:00', '22:00:00', '2019-03-29', 3, 'uploads/19', 1),
-(20, 'Banana salad', 'Chopped bananas tossed in our signature vinaigrette.', 21, '09:00:00', '22:00:00', '2019-03-29', 3, 'uploads/20', 1),
-(21, 'Banana smoothie', 'the dish is a smoothie', 4356789, '10:00:00', '20:00:00', '2019-03-29', 1, 'uploads/21', 1),
-(22, 'Banana omelet', 'Eggs and bananas', 344, '19:00:00', '23:59:59', '2019-03-29', 1, 'uploads/22', 1);
+(1, 'Banana sandwich', 'Two slices of bread and one whole unpeeled banana.', 50, '04:00:00', '16:00:00', '2019-03-30', 1, 'uploads/1', 1),
+(2, 'Banana soup', 'It\'s warm water with pieces of banana floating.', 30, '04:00:00', '16:00:00', '2019-03-30', 1, 'uploads/2', 1),
+(3, 'Banana stew', 'Beef and banana in our special banana sauce.', 55, '04:00:00', '16:00:00', '2019-03-30', 1, 'uploads/3', 1),
+(4, 'Vegan burger', 'One raw mushroom between two slices of bread.', 67, '12:00:00', '20:00:00', '2019-03-30', 7, 'uploads/4', 1),
+(5, 'Double burger with extra bacon', 'An entire cow and an entire pig in a burger.', 80, '12:00:00', '20:00:00', '2019-03-30', 7, 'uploads/5', 1),
+(6, 'Falafel Sandwich (small)', '3 falafels.', 66, '14:00:00', '20:00:00', '2019-03-30', 4, 'uploads/6', 1),
+(7, 'Falafel sandwich (large)', '23 falafels.', 90, '14:00:00', '20:00:00', '2019-03-30', 4, 'uploads/7', 1),
+(8, 'A glass of ketchup', 'Our homemade ketchup in a disposable plastic cup.', 30, '10:00:00', '19:00:00', '2019-03-30', 6, 'uploads/8', 1),
+(9, 'Ketchup ice cream', 'Our signature ketchup ice cream.', 45, '10:00:00', '15:00:00', '2019-03-30', 6, 'uploads/9', 1),
+(10, 'Mustard ice cream', 'Our signature ketchup ice cream with a twist.', 56, '10:00:00', '16:00:00', '2019-03-30', 6, 'uploads/10', 1),
+(11, 'Spinach pancake', 'Delicious and vegan.', 87, '09:00:00', '19:00:00', '2019-03-30', 2, 'uploads/11', 1),
+(12, 'Lentils pancake', 'Delicious and vegan.', 89, '09:00:00', '19:00:00', '2019-03-30', 2, 'uploads/12', 1),
+(13, 'Pancake milkshake', 'Pancakes blended with vanilla ice cream.', 65, '09:00:00', '19:00:00', '2019-03-30', 2, 'uploads/13', 1),
+(14, 'Hot dog pancake', 'A traditional hot dog with pancake instead of the bun.', 45, '09:00:00', '19:00:00', '2019-03-30', 2, 'uploads/14', 1),
+(15, 'Pepperoni pizza', '', 76, '05:00:00', '12:00:00', '2019-03-30', 5, 'uploads/dish.png', 1),
+(16, 'Pizza Margherita', '', 30, '05:00:00', '15:00:00', '2019-03-30', 5, 'uploads/dish.png', 1),
+(17, 'Caesar salad (small)', '', 30, '09:00:00', '22:00:00', '2019-03-30', 3, 'uploads/17', 1),
+(18, 'Caesar salad (large)', '', 40, '09:00:00', '22:00:00', '2019-03-30', 3, 'uploads/18', 1),
+(19, 'Cheeseburger salad', 'A salad with a side of cheeseburger.', 20, '09:00:00', '22:00:00', '2019-03-30', 3, 'uploads/19', 1),
+(20, 'Banana salad', 'Chopped bananas tossed in our signature vinaigrette.', 21, '09:00:00', '22:00:00', '2019-03-30', 3, 'uploads/20', 1),
+(21, 'Banana smoothie', 'the dish is a smoothie', 4356789, '10:00:00', '20:00:00', '2019-03-30', 1, 'uploads/21', 1),
+(22, 'Banana omelet', 'Eggs and bananas', 344, '19:00:00', '23:59:59', '2019-03-30', 1, 'uploads/22', 1),
+(24, 'Vegetarian lasagna', 'Tomato and roast pepper lasagna.', 55, '12:00:00', '23:00:00', '2019-03-30', 9, 'uploads/24', 1);
 
 -- --------------------------------------------------------
 
@@ -396,13 +404,15 @@ CREATE TABLE `restaurants` (
 --
 
 INSERT INTO `restaurants` (`id`, `name`, `phone`, `email`, `address`, `postcode`, `password`, `monday_from`, `monday_until`, `tuesday_from`, `tuesday_until`, `wednesday_from`, `wednesday_until`, `thursday_from`, `thursday_until`, `friday_from`, `friday_until`, `saturday_from`, `saturday_until`, `sunday_from`, `sunday_until`, `active`) VALUES
-(1, 'Banana Land', '07123234454', 'banana@land.com', '67 Banana Street, London', 'WT8PMJX', '72b302bf297a228a75730123efef7c41', '19:00:00', '23:59:00', '19:00:00', '23:59:00', NULL, NULL, '19:00:00', '23:59:00', '19:00:00', '23:59:00', '18:00:00', '22:00:00', NULL, NULL, 0),
+(1, 'Banana Land', '07123234488', 'banana@land.com', '67 Banana Street, London', 'WT8PJJX', '72b302bf297a228a75730123efef7c41', '19:00:00', '23:59:00', '19:00:00', '23:59:00', NULL, NULL, '19:00:00', '23:59:00', NULL, NULL, '18:00:00', '22:00:00', NULL, NULL, 0),
 (2, 'Pancake Palace', '07348765098', 'pancake@palace.com', '89 Pancake Street, London', 'NU9HC33', '', NULL, NULL, '22:00:00', '24:00:00', '22:00:00', '24:00:00', '22:00:00', '24:00:00', '22:00:00', '24:00:00', '22:00:00', '24:00:00', '22:00:00', '23:00:00', 0),
 (3, 'Salad Mania', '07444459008', 'salad@mania.com', '22 Salad Street, London', 'J98EH28', '', '18:00:00', '22:00:00', '18:00:00', '22:00:00', '18:00:00', '22:00:00', '18:00:00', '22:00:00', '18:00:00', '22:00:00', '18:00:00', '22:00:00', '18:00:00', '22:00:00', 0),
 (4, 'Falafel Fiesta', '07645537281', 'falafel@fiesta.com', '66 Falafel Street, London', 'HDS2J99', '', NULL, NULL, '18:00:00', '20:30:00', '18:00:00', '20:30:00', '18:00:00', '20:30:00', '18:00:00', '20:30:00', '18:00:00', '20:00:00', NULL, NULL, 0),
 (5, 'Pizza Emporium', '07555536287', 'pizza@emporium.com', '21 Pizza Street, London', 'JD02JD8S', '', '23:00:00', '24:00:00', '23:00:00', '24:00:00', '23:00:00', '24:00:00', '23:00:00', '24:00:00', '23:00:00', '24:00:00', '23:00:00', '24:00:00', '23:00:00', '24:00:00', 0),
 (6, 'Ketchup Pool', '02056778976', 'ketchup@pool.com', '722 Ketchup Lane, London', 'HE29IJ9', '', NULL, NULL, '19:00:00', '24:00:00', NULL, NULL, '19:00:00', '24:00:00', NULL, NULL, '19:00:00', '24:00:00', '19:00:00', '24:00:00', 0),
-(7, 'Burger Bistro', '02073324563', 'burger@bistro.com', '90 Burger Avenue, London', 'PO329CN', '', '19:30:00', '23:30:00', '19:30:00', '23:30:00', '19:30:00', '23:30:00', '19:30:00', '23:30:00', '19:30:00', '23:30:00', '19:30:00', '23:30:00', NULL, NULL, 0);
+(7, 'Burger Bistro', '02073324563', 'burger@bistro.com', '90 Burger Avenue, London', 'PO329CN', '', '19:30:00', '23:30:00', '19:30:00', '23:30:00', '19:30:00', '23:30:00', '19:30:00', '23:30:00', '19:30:00', '23:30:00', '19:30:00', '23:30:00', NULL, NULL, 0),
+(8, 'test', '12345', 'test@test.com', 'test', 'test', '68eacb97d86f0c4621fa2b0e17cabd8c', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
+(9, 'Print Room Café', '02076792147', 'printroom@ucl.ac.uk', '136 Gower Street, London', 'WC1E 6BT', '753339e3d0a350b7c11c0971d2b8d109', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '12:00:00', '23:00:00', NULL, NULL, 0);
 
 --
 -- Indexes for dumped tables
@@ -501,7 +511,7 @@ ALTER TABLE `charities`
 -- AUTO_INCREMENT for table `complaints`
 --
 ALTER TABLE `complaints`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `diets`
@@ -513,7 +523,7 @@ ALTER TABLE `diets`
 -- AUTO_INCREMENT for table `listings`
 --
 ALTER TABLE `listings`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `orders`
@@ -525,7 +535,7 @@ ALTER TABLE `orders`
 -- AUTO_INCREMENT for table `restaurants`
 --
 ALTER TABLE `restaurants`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Constraints for dumped tables

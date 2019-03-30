@@ -127,32 +127,34 @@
     ?>
     <form name="selectsaved" action="" onsubmit="return checkSelectSavedDish();" method="post">
         <p>Listings will automatically expire at the end of the pickup window.</p>
-        <label for="dishes" onchange="">Select one of your saved dishes:</label>
+
         <div class="row">
             <div class="col-11">
         <?php
         $stmt = $conn->prepare("SELECT * FROM listings WHERE saved = 1 AND restaurant_id = " . $_SESSION['id']);
         $stmt->execute();
         $result = $stmt->get_result();
-        if (mysqli_num_rows($result) > 0) {
-            echo "<select class=\"form-control\" name=\"dishes\" id=\"dishes\">
+        if (mysqli_num_rows($result) > 0) { ?>
+                <label for="dishes" onchange="">Select one of your saved dishes:</label>
+           <select class=\"form-control\" name=\"dishes\" id=\"dishes\">
                     <option selected value disabled> -- select an option -- </option>";
+               <?php
             // output data of each row
             while($row = $result->fetch_assoc()) {
-                echo "<option value='".$row["id"]."'>".$row["title"]."</option>";
+                echo "<option value='".$row["id"]."'>".$row["title"]."</option>"; ?>
+               <div class="col-1">
+                   <button type="submit" class="btn btn-primary">Submit</button>
+                   <p>or</p>
+               </div>
+               <?php
             }
-        }
-        else {
-            echo "<br><n/>You have no saved dish. Create a listing and chose to save it at the end of the form :-). <br>";
         }
 
 
         ?>
         </select>
         </div>
-        <div class="col-1">
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </div>
+
         </div>
     </form>
     <?php
@@ -181,7 +183,7 @@
     ?>
     <form name="newlisting" enctype="multipart/form-data" autocomplete="off" action="createdlisting.php" onsubmit="return timecheck();" method="post">
         <br>
-        <label for="title">or <br> fill in information for a new dish:</label>
+        <label for="title">Fill in information for a new dish</label>
         <input type="text" class="form-control" id="title" name="title" placeholder="Name of the dish" minlength="3" value="<?php if (isset($_POST['dishes'])) { echo $savedstmt['title'];}?>" required>
         <br>
         <label for="description">Description</label>

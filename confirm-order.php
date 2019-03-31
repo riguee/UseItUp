@@ -77,7 +77,7 @@ $restaurant->setRestaurantFromId($listing->restaurant_id);
                 <td><?php echo $listing->title ?></td>
                 <td><?php echo $listing->portions ?></td>
                 <?php if (count($listing_IDs)>1): ?>
-                <td style="text-align: right">
+                <td class="delete">
                     <form method="post" action="confirm-order.php">
                         <select hidden class="form-control col-4" name="pickup-time">
                             <option selected><?php echo $_POST['pickup-time'] ?></option>
@@ -95,13 +95,13 @@ $restaurant->setRestaurantFromId($listing->restaurant_id);
         </table>
     <form action="place-order.php" method="post">
         <div class="col-12">
-            <textarea type="text" class="form-control" rows="5" placeholder="Enter comments here" name="comments" style="margin-right:40px"></textarea>
+            <textarea type="text" class="form-control" rows="5" placeholder="Enter comments here" name="comments"></textarea>
         </div>
         <div class="row">
-            <div class="col-md-5" style="margin: 15px auto">
+            <div class="col-md-5 btn-order">
                 <a href="main-listing.php" class="btn btn-block btn-danger" >Cancel order</a>
             </div>
-            <div class="col-md-5" style="margin: 15px auto">
+            <div class="col-md-5 btn-order">
                 <select hidden name="restaurant">
                     <option selected><?php print $restaurant->id ?></option>
                 </select>
@@ -143,7 +143,7 @@ if($count > 0): ?>
             <div class="card-body">
                 <div class="row">
                     <div class="col-3">
-                        <img src="<?php print($available_listing->image) ?>" style="max-height: 250px; max-width: 100%; border-radius: 5px">
+                        <img src="<?php print($available_listing->image) ?>" class="listing-img">
                     </div>
                     <div class="col-9">
                         <h4><?php echo $available_listing->title ?></h4>

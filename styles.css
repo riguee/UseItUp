@@ -181,3 +181,17 @@ label {
     margin: 30px;
     font-size:20px;
 }
+
+.listing-img {
+    max-height: 250px;
+    max-width: 100%;
+    border-radius: 5px
+}
+
+.delete {
+    text-align: right;
+}
+
+.btn-order {
+    margin: 15px auto;
+}

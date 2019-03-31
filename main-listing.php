@@ -184,7 +184,7 @@
             <div class="card-body displ-card-body">
                 <div class="row">
                     <div class="col-3">
-                        <img src="<?php print($listing->image) ?>">
+                        <img src="<?php print($listing->image) ?>" class="listing-img">
                     </div>
                     <div class="col-9">
                         <h4><?php echo $listing->title ?></h4>

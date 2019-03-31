@@ -8,8 +8,8 @@ h1 {
     margin: 30px;
 }
 
-.accent {
-    color: #e7bb41;
+.white {
+    color: white;
 }
 
 .hours {
@@ -180,4 +180,44 @@ label {
     text-align: center;
     margin: 30px;
     font-size:20px;
+}
+
+.listing-img {
+    max-height: 250px;
+    max-width: 100%;
+    border-radius: 5px
+}
+
+.delete {
+    text-align: right;
+}
+
+.btn-order {
+    margin: 15px auto;
+}
+
+.navigation-bar {
+    background-color: #82924d;
+}
+
+.card-order {
+    padding: 12px 20px 12px 20px;
+}
+
+.order-title {
+    float: left;
+    margin: 0px;
+}
+
+.order-id {
+    float: right;
+    margin: 0px
+}
+
+.accent {
+    color: #e7bb41;
+}
+
+.navbar-brand {
+    color: #e7bb41 !important;
 }

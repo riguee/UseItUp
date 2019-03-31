@@ -91,11 +91,11 @@ class Listing
         <?php
     }
     function displayAccount() {?>
-        <div class="card container-fluid" style="margin:10px 0 10px 0">
-            <div class="card-body" style="min-height: 300px">
+        <div class="card container-fluid displ-card">
+            <div class="card-body displ-card-body">
                 <div class="row">
                     <div class="col-3">
-                        <img src="<?php print($this->image) ?>" style="max-height: 250px; max-width: 100%; border-radius: 5px">
+                        <img src="<?php print($this->image) ?>" class="listing-img">
                     </div>
                     <div class="col-9">
                         <h4><?php echo $this->title ?></h4>
@@ -128,9 +128,9 @@ class Listing
                         </h6>
                         <br>
                         <form class="form-inline row" method="post" action="confirm-order.php" onsubmit="return timeCheck(<?php print($this->id) ?>)">
-                            <span style="margin-right: 10px">Choose pickup time</span>
+                            <span class="displ-span">Choose pickup time</span>
                             <input type="time" class="form-control" id="<?php print($this->id) ?>" name="pickup-time">
-                            <span style="margin: 0 10px 0 10px"> and </span>
+                            <span class="displ-span-and"> and </span>
                             <button type="submit" class="btn btn-primary col-4" name="listing" value="<?php print($this->id) ?>" >Order</button>
                         </form>
                     </div>
@@ -147,11 +147,11 @@ class Listing
                 return r;
             }
         </script>
-        <div class="card container-fluid" style="margin:10px 0 10px 0">
-            <div class="card-body" style="min-height: 300px">
+        <div class="card container-fluid displ-card">
+            <div class="card-body displ-card-body">
                 <div class="row">
                     <div class="col-3">
-                        <img src="<?php print($this->image) ?>" style="max-height: 250px; max-width: 100%; border-radius: 5px">
+                        <img src="<?php print($this->image) ?>" class="listing-img">
                     </div>
                     <div class="col-9">
                         <h4><?php echo $this->title ?></h4>

@@ -1,5 +1,5 @@
-<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #82924d">
-    <span class="navbar-brand mb-0 h1" style="color: #e7bb41">UseItUp</span>
+<nav class="navbar navbar-expand-lg navbar-dark navigation-bar">
+    <span class="navbar-brand mb-0 h1">UseItUp</span>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -27,7 +27,7 @@
             <button class="btn btn-outline-warning my-2 my-sm-0" type="submit"><i class="fa fa-search"></i></button>
         </form>
         <?php } */?>-->
-        <span style="color:white">Welcome, <span class="accent"><?php echo $name ?></span>.</span>
-        <a class="btn btn-light" style="margin-left: 10px" href="logout.php">Log out</a>
+        <span class="white">Welcome, <span class="accent"><?php echo $name ?></span>.</span>
+        <a class="btn btn-light displ-i" href="logout.php">Log out</a>
     </div>
 </nav>

@@ -53,6 +53,7 @@ if (!empty($_SESSION['user_type'])) {
                 if (value == "charity") {
                     document.getElementById("char_div").style.display = "block";
                     document.getElementById("rest_div").style.display = "none";
+                    document.getElementById('charity_id').required = true;
                     document.getElementById('monday_from').required = false;
                     document.getElementById('monday_until').required = false;
                     document.getElementById('tuesday_from').required = false;
@@ -71,6 +72,7 @@ if (!empty($_SESSION['user_type'])) {
                 else {
                     document.getElementById("char_div").style.display = "none";
                     document.getElementById("rest_div").style.display = "block";
+                    document.getElementById('charity_id').required = false;
                     document.getElementById('monday_from').required = true;
                     document.getElementById('monday_until').required = true;
                     document.getElementById('tuesday_from').required = true;

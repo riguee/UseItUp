@@ -86,7 +86,6 @@
                 }*/
 
             }
-        }
 
     </script>
     <title>New listing</title>
@@ -125,35 +124,36 @@
         echo "You have not specified opening hours on " . $today . "s. <br> You can change your pickup hours on the 'my account' tab. ";
     } else {
     ?>
-    <form name="selectsaved" action="" onsubmit="return checkSelectSavedDish();" method="post">
-        <label for="dishes" onchange="">Select one of your saved dishes:</label>
-        <div class="row">
-            <div class="col-11">
+
         <?php
         $stmt = $conn->prepare("SELECT * FROM listings WHERE saved = 1 AND restaurant_id = " . $_SESSION['id']);
         $stmt->execute();
         $result = $stmt->get_result();
-        if (mysqli_num_rows($result) > 0) {
-            echo "<select class=\"form-control\" name=\"dishes\" id=\"dishes\">
-                    <option selected value disabled> -- select an option -- </option>";
+        if (mysqli_num_rows($result) > 0) {?>
+            <form name="selectsaved" action="" onsubmit="return checkSelectSavedDish();" method="post">
+            <label for="dishes" onchange="">Select one of your saved dishes:</label>
+                <div class="row">
+                    <div class="col-11">
+                        <select class="form-control" name="dishes" id="dishes">
+                            <option selected value disabled> -- select an option -- </option>";
             // output data of each row
-            while($row = $result->fetch_assoc()) {
+            <?php while($row = $result->fetch_assoc()) {
                 echo "<option value='".$row["id"]."'>".$row["title"]."</option>";
-            }
-        }
+            }?>
+                        </select>
+                    </div>
+                    <div class="col-1">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </div>
+            </form>
+            or <br>
+        <?php }
         else {
             echo "<br><n/>You have no saved dish. Create a listing and chose to save it at the end of the form :-). <br>";
         }
-
-
         ?>
-        </select>
-        </div>
-        <div class="col-1">
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </div>
-        </div>
-    </form>
+
     <?php
     if (isset($_POST['dishes'])) {
         $query = "SELECT * FROM listings where id = ". $_POST['dishes'];
@@ -180,7 +180,7 @@
     ?>
     <form name="newlisting" enctype="multipart/form-data" autocomplete="off" action="createdlisting.php" onsubmit="return timecheck();" method="post">
         <br>
-        <label for="title">or <br> fill in information for a new dish:</label>
+        <label for="title">fill in information for a new dish:</label>
         <input type="text" class="form-control" id="title" name="title" placeholder="Name of the dish" value="<?php if (isset($_POST['dishes'])) { echo $savedstmt['title'];}?>">
         <br>
         <label for="description">Description</label>

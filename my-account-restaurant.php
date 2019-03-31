@@ -132,7 +132,6 @@ if ($todaylistings = mysqli_query($conn,$todaylistingsquery)) {
 
 <div class="container">
     <h1>My account</h1>
-    <button type='button' onclick="checkexistinglistings()">click here</button>
     <button type='button' class='btn-edit btn btn-primary btn-block col-sm-10 col-md-6 mx-auto' onclick='editrest();' id='editrest'>Edit details</button>
     <form method="post" action="edit-account.php" onsubmit="return checkexistinglistings();">
         <input type="hidden" name="user_type" value="<?php echo $_SESSION['user_type'] ?>">

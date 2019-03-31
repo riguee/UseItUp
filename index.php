@@ -86,7 +86,6 @@ if (isset($_POST['email'])) {
 <body>
 <h1>Welcome To UseItUp</h1>
 <?php
-//            if ($login_check == false) {
 if (isset($_SESSION['message'])) {
     echo "<div class='alert alert-danger'>".$_SESSION['message']."</div>";
     $_SESSION['message'] = null;

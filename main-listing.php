@@ -88,19 +88,19 @@
         <div class="d-flex justify-content-center">
             <div class="col-md-5">
                 <div class="card">
-                    <div class="card-header" id="heading"><button type="button" style="padding: 0" class="btn btn-link" data-toggle="collapse" data-target="#advanced-search">Advanced search<i style="margin-left: 10px" class="fas fa-chevron-down"></i></button></div>
+                    <div class="card-header " id="heading"><button type="button" class="btn btn-link disp-btn" data-toggle="collapse" data-target="#advanced-search">Advanced search<i class="fas fa-chevron-down displ-i"></i></button></div>
                     <div id="advanced-search" class="collapse card-body">
                         <form method="post" action="" onsubmit="return transferSearch()">
                             <input type="search" name="advanced-search" id="advancedsearchbar" value="" hidden>
-                            <span style="margin-right: 10px">Sort by pick-up time:</span>
-                            <div class="form-check form-check-inline" style="margin: 0 0 10px 0">
+                            <span class="displ-span">Sort by pick-up time:</span>
+                            <div class="form-check form-check-inline displ-form">
                                 <input class="form-check-input" type="radio" name="sort-by" id="earliest" value="earliest" <?php if (isset($_POST['sort-by'])) {if ($_POST['sort-by'] == 'earliest') {print('checked');}} else {print('checked');} ?>>
-                                <label style="margin-right: 5px; font-weight: unset" class="form-check-label" for="earliest">earliest first</label>
+                                <label  class="form-check-label displ-label" for="earliest">earliest first</label>
                                 <input class="form-check-input" type="radio" name="sort-by" id="latest" value="latest" <?php if (isset($_POST['sort-by']) && $_POST['sort-by'] == 'latest') {print('checked');} ?>>
-                                <label style="font-weight: unset" class="form-check-label" for="latest">latest first</label>
+                                <label class="form-check-label displ-label" for="latest">latest first</label>
                             </div>
-                            <div class="form-inline" style="margin: 20px 0 10px 0">
-                                <label style="margin-right: 10px; font-weight: unset" for="portions">Portions:</label>
+                            <div class="form-inline disp-form-inl">
+                                <label class="displ-label" for="portions">Portions:</label>
                                 <select class="form-control" name="portions" id="portions">
                                     <option <?php if (isset($_POST['portions'])) {if ($_POST['portions'] == 'all') {print('selected="selected"');}} else {print('selected="selected"');} ?> value="all">Show all</option>
                                     <option value="low" <?php if (isset($_POST['portions']) && $_POST['portions'] == 'low') {print('selected="selected"');} ?>>0-49</option>
@@ -109,8 +109,8 @@
                                 </select>
                             </div>
                             <br>
-                            <label for="allergens" style="font-weight: unset">Refine your search by excluding specific allergens:</label>
-                                <div class="form-check" style="padding-left: 0px">
+                            <label for="allergens" class="displ-label">Refine your search by excluding specific allergens:</label>
+                                <div class="form-check displ-btn" >
                                 <select name="allergen[]" class="selectpicker" multiple data-live-search="true" id="allergens">
                                     <?php
                                     $stmt = $conn->prepare("SELECT * FROM allergens");
@@ -129,25 +129,25 @@
                             <span>Only show specific diets:</span>
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" value="3" id="vegetarian" name="diet[]" <?php if (isset($_POST['diet']) && in_array("3", $_POST['diet'])) {print("checked");} ?>>
-                                <label style="font-weight: unset" class="form-check-label" for="vegetarian">
+                                <label class="form-check-label displ-label" for="vegetarian">
                                     Vegetarian
                                 </label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" value="4" id="vegan" name="diet[]" <?php if (isset($_POST['diet']) && in_array("4", $_POST['diet'])) {print("checked");} ?>>
-                                <label style="font-weight: unset" class="form-check-label" for="vegan">
+                                <label class="form-check-label displ-label" for="vegan">
                                     Vegan
                                 </label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" value="1" id="halal" name="diet[]" <?php if (isset($_POST['diet']) && in_array("1", $_POST['diet'])) {print("checked");} ?>>
-                                <label style="font-weight: unset" class="form-check-label" for="halal">
+                                <label class="form-check-label displ-label" for="halal">
                                     Halal
                                 </label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" value="2" id="kosher" name="diet[]" <?php if (isset($_POST['diet']) && in_array("2", $_POST['diet'])) {print("checked");} ?>>
-                                <label style="font-weight: unset" class="form-check-label" for="kosher">
+                                <label class="form-check-label displ-label" for="kosher">
                                     Kosher
                                 </label>
                             </div>
@@ -180,11 +180,11 @@
         while ($row = $result->fetch_assoc()) {
             $listing = new Listing();
             $listing->setListingFromId($row['id']);?>
-        <div class="card container-fluid" style="margin:10px 0 10px 0">
-            <div class="card-body" style="min-height: 300px">
+        <div class="card container-fluid displ-card">
+            <div class="card-body displ-card-body">
                 <div class="row">
                     <div class="col-3">
-                        <img src="<?php print($listing->image) ?>" style="max-height: 250px; max-width: 100%; border-radius: 5px">
+                        <img src="<?php print($listing->image) ?>">
                     </div>
                     <div class="col-9">
                         <h4><?php echo $listing->title ?></h4>
@@ -218,9 +218,9 @@
                         </h6>
                         <br>
                         <form class="form-inline row" method="post" action="confirm-order.php" onsubmit="return timeCheck(<?php print($listing->id) ?>)">
-                            <span style="margin-right: 10px">Choose pickup time</span>
+                            <span class="displ-span">Choose pickup time</span>
                             <input type="time" class="form-control" id="<?php print($listing->id) ?>" name="pickup-time">
-                            <span style="margin: 0 10px 0 10px"> and </span>
+                            <span class="displ-span-and"> and </span>
                             <button type="submit" class="btn btn-primary col-4" name="listing" value="<?php print($listing->id) ?>" >Order</button>
                         </form>
                     </div>

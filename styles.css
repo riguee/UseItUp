@@ -16,6 +16,49 @@ h1 {
     display: none;
 }
 
+.displ-btn {
+    padding: 0;
+}
+
+.displ-i {
+    margin-left: 10px;
+}
+
+.displ-form {
+    margin: 0 0 10px 0;
+}
+
+.disp-form-inl {
+    margin: 20px 0 10px 0
+}
+
+.displ-span {
+    margin-right: 10px;
+}
+
+.displ-span-and {
+    margin: 0 10px 0 10px;
+}
+
+.displ-label {
+    margin-right: 5px;
+    font-weight: unset;
+}
+
+.displ-card {
+    margin:10px 0 10px 0;
+}
+
+.displ-image {
+    max-height: 250px;
+    max-width: 100%;
+    border-radius: 5px;
+}
+
+.displ-card-body {
+    min-height: 300px;
+}
+
 .btn-link{
     border:none;
     outline:none;

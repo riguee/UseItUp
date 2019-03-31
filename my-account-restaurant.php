@@ -161,7 +161,7 @@ $user->setRestaurantFromId($id);
                             <div class="input-group-prepend">
                                 <div class="input-group-text">From</div>
                             </div>
-                            <input type="time" class="form-control" id="<?php echo $day . "_from_display" ?>" name="<?php echo $day . "_from_display" ?>" id="phone" value="<?php echo $user->{$day . "_from"} ?>" readonly >
+                            <input type="time" class="form-control" id="<?php echo $day . "_from_display" ?>" name="<?php echo $day . "_from_display" ?>" value="<?php echo $user->{$day . "_from"} ?>" readonly >
                             <div class="input-group-append">
                                 <div class="input-group-text">Until</div>
                             </div>

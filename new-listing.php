@@ -141,7 +141,7 @@
             or <br>
         <?php }
         else {
-            echo "<br><n/>You have no saved dish. Create a listing and chose to save it at the end of the form :-). <br>";
+            echo "<br><n/>Listings will expire if they are not ordered before the end of pickup time. <br>";
         }
 
 

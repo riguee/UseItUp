@@ -59,7 +59,7 @@ class Order
                     <span class="h6">Comments: </span><span><?php echo $this->comments ?></span><br>
                 <?php endif ?>
                 <br>
-                <table class="table" style="right: unset;">
+                <table class="table">
                     <thead>
                     <tr>
                         <th scope="col">#</th>
@@ -81,7 +81,7 @@ class Order
                 </table>
             </div>
             <div class="row">
-                <div class="col-md-5" style="margin: 15px auto">
+                <div class="col-md-5 btn-order">
                     <form action="cancel-order.php" onsubmit="return cancelconfirm()" method="post"><button class="btn btn-block btn-danger" value="<?php print($this->id) ?>"  type="submit" name="order">Cancel order</button></form>
                 </div>
             </div>
@@ -100,10 +100,10 @@ class Order
             array_push($listings, $listing);
         }?>
         <div class="card">
-            <div class="card-header" style="padding: 12px 20px 12px 20px">
-            <h5 style="float: left; margin: 0px"><form action="restaurant-account.php" method="post"> From
+            <div class="card-header card-order">
+            <h5 class="order-title"><form action="restaurant-account.php" method="post"> From
                         <button type="submit" name="restaurant" value="<?php echo $restaurant->id ?>" class="btn btn-link"><?php echo $listing->restaurant_name ?></button>.</h5></form>
-            <h5 style="float: right; margin: 0px" class="text-muted">ID #<?php echo $this->id?></h5>
+            <h5 class="text-muted order-id">ID #<?php echo $this->id?></h5>
             </div>
             <div class="card-body">
                 <span class="h6">Pick up date: </span><span><?php echo $this->pickup_day. " at " . date("H:i", strtotime($this->pickup_time)) ?></span><br>
@@ -114,7 +114,7 @@ class Order
                     <span class="h6">Comments: </span><span><?php echo $this->comments ?></span><br>
                 <?php endif ?>
                 <br>
-                <table class="table" style="right: unset;">
+                <table class="table">
                     <thead>
                     <tr>
                         <th scope="col">#</th>
@@ -136,7 +136,7 @@ class Order
                 </table>
             </div>
             <div class="row">
-                <div class="col-md-5" style="margin: 15px auto">
+                <div class="col-md-5 btn-order">
                     <form action="complaint-form.php" method="post">
                         <button class="btn btn-block btn-warning" value="<?php print($this->id) ?>"  name="order" type="submit">Report a problem</button>
                     </form>
@@ -158,11 +158,11 @@ class Order
             }
         </script>
         <div class="card">
-            <div class="card-header" style="padding: 12px 20px 12px 20px">
-                <h5 style="float: left; margin: 0px"><form action="charity-account.php" method="post"> From
+            <div class="card-header card-order">
+                <h5 class="order-title"><form action="charity-account.php" method="post"> From
                             <button type="submit" name="charity" value="<?php echo $charity->id ?>" class="btn btn-link"><?php echo  $charity->name ?></button>.</form>
                    </h5>
-                <h5 style="float: right; margin: 0px" class="text-muted">ID #<?php echo $this->id?></h5>
+                <h5 class="text-muted order-id">ID #<?php echo $this->id?></h5>
             </div>
             <div class="card-body">
                 <span class="h6">Pick up time: </span><span><?php echo date("H:i", strtotime($this->pickup_time)) ?></span><br>
@@ -172,7 +172,7 @@ class Order
                     <span class="h6">Comments: </span><span><?php echo $this->comments ?></span><br>
                 <?php endif ?>
                 <br>
-                <table class="table" style="right: unset;">
+                <table class="table">
                     <thead>
                     <tr>
                         <th scope="col">#</th>
@@ -196,10 +196,10 @@ class Order
                     </tbody>
                 </table>
                 <div class="row">
-                    <form class="col-md-5" style="margin: 15px auto" action="cancel-order.php" method="post" onsubmit="return cancelconfirm()">
+                    <form class="col-md-5 btn-order" action="cancel-order.php" method="post" onsubmit="return cancelconfirm()">
                         <button type="submit" class="btn btn-block btn-danger" name="order" value="<?php print($this->id) ?>">Cancel order</button>
                     </form>
-                    <form class="col-md-5" style="margin: 15px auto" action="complaint-form.php" method="post">
+                    <form class="col-md-5 btn-order" action="complaint-form.php" method="post">
                         <button type="submit" class="btn btn-block btn-warning" name="order" value="<?php print($this->id) ?>">Report a problem</button>
                     </form>
                 </div>
@@ -214,11 +214,11 @@ class Order
         $charity->setCharityFromId($this->charity_id);
         ?>
         <div class="card">
-            <div class="card-header" style="padding: 12px 20px 12px 20px">
-                <h5 style="float: left; margin: 0px"><form action="charity-account.php" method="post"> From
+            <div class="card-header card-order">
+                <h5 class="order-title"><form action="charity-account.php" method="post"> From
                         <button type="submit" name="charity" value="<?php echo $charity->id ?>" class="btn btn-link"><?php echo  $charity->name ?></button>.</form>
                 </h5>
-                <h5 style="float: right; margin: 0px" class="text-muted">ID #<?php echo $this->id?></h5>
+                <h5 class="text-muted order-id">ID #<?php echo $this->id?></h5>
             </div>
             <div class="card-body">
                 <span class="h6">Pick up date: </span><span><?php echo $this->pickup_day . " at " . date("H:i", strtotime($this->pickup_time)) ?></span><br>
@@ -228,7 +228,7 @@ class Order
                     <span class="h6">Comments: </span><span><?php echo $this->comments ?></span><br>
                 <?php endif ?>
                 <br>
-                <table class="table" style="right: unset;">
+                <table class="table">
                     <thead>
                     <tr>
                         <th scope="col">#</th>
@@ -251,7 +251,7 @@ class Order
                     <?php } ?>
                     </tbody>
                 </table>
-                <form class="col-md-8" style="margin: 15px auto" action="complaint-form.php" method="post">
+                <form class="col-md-8 btn-order" action="complaint-form.php" method="post">
                     <button type="submit" class="btn btn-block btn-warning" name="order" value="<?php print($this->id) ?>">Report a problem</button>
                 </form>
             </div>

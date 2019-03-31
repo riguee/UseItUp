@@ -157,7 +157,7 @@ echo "</div>";
 $query = "SELECT id FROM listings WHERE restaurant_id =  " . $restaurant->id . "  AND listings.id NOT IN (SELECT listing_id FROM order_listings) AND CONCAT(listings.day_posted, \" \", listings.time_until) > NOW()";
 $result = mysqli_query($conn, $query);
 if (mysqli_num_rows($result) > 0) {
-    echo "<hr><h1>Available listings from this restaurant:</h1><div style='margin: 20px'";
+    echo "<hr><h1>Available listings from this restaurant:</h1>";
 
      while($row = $result->fetch_assoc()) {
            $listing = new Listing();
@@ -165,7 +165,7 @@ if (mysqli_num_rows($result) > 0) {
            $listing->displayAccount();
            echo "<br><br>";
      }
-     echo "</div>";
+
 } else {
     echo "<h1> There are currently no available listings from this restaurant.</h1>";
 }

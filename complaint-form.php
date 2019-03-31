@@ -29,15 +29,14 @@ else {
 <div class="container">
     <h1>Report a Problem</h1>
     <div><p></p>
-        <center>
+        <div>
             <?php
-            if ($_SESSION['problem'] == true) {
+            if (!empty($_SESSION['problem'])) {
                 $_SESSION['problem'] = false;
-
                 echo "Complaint submitted!";
             }
             ?>
-        </center>
+        </div>
     </div><p></p>
     <p>Please fill in this form to lodge a complaint or report a problem regarding your order.</p>
 

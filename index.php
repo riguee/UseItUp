@@ -78,32 +78,27 @@ if (isset($_POST['email'])) {
     }
 
     if ($login_check == false) {
-
         $_SESSION['message'] = "Wrong email or password. Please try again.";
-
-//        include "error.php";
-    } else {
-        $_SESSION['message'] = null;
     }
 }
 ?>
 
 <body>
 <h1>Welcome To UseItUp</h1>
+<?php
+//            if ($login_check == false) {
+if (isset($_SESSION['message'])) {
+    echo "<div class='alert alert-danger'>".$_SESSION['message']."</div>";
+    $_SESSION['message'] = null;
+}
+?>
 <div class="container">
     <p><img src="useitup.png" alt="UseItUp" class="center"></p>
 
     <p class="caption">Join us on our journey to reduce food waste and help local charities! </p>
 
     <div>
-        <center>
-            <?php
-//            if ($login_check == false) {
-            if (!empty($_SESSION['message'])) {
-                echo $_SESSION['message'];
-            }
-            ?>
-        </center>
+
     </div>
 
     <form action="index.php" method="post" autocomplete="off">

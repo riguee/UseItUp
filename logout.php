@@ -20,7 +20,7 @@ session_destroy();
 <div class="form">
     <h1>Thanks for stopping by</h1>
 
-    <p style="text-align: center"><?= 'You have been logged out!'; ?></p>
+    <p class="caption"><?= 'You have been logged out!'; ?></p>
 
     <div class="col-6 mx-auto">
         <a href="index.php" class="btn btn-primary btn-block">Click here to login again</a>

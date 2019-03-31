@@ -171,7 +171,7 @@
 
     }
     ?>
-    <form name="newlisting" enctype="multipart/form-data" autocomplete="off" action="createdlisting.php" onsubmit="return timecheck();" method="post">
+    <form name="newlisting" enctype="multipart/form-data" autocomplete="off" action="created-listing.php" onsubmit="return timecheck();" method="post">
         <br>
         <label for="title">Fill in information for a new dish:</label>
         <input type="text" class="form-control" id="title" name="title" placeholder="Name of the dish" value="<?php if (isset($_POST['dishes'])) { echo $savedstmt['title'];}?>">

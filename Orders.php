@@ -45,10 +45,10 @@ class Order
             }
         </script>
         <div class="card">
-            <div class="card-header" style="padding: 12px 20px 12px 20px">
-                <h5 style="float: left; margin: 0px"><form action="restaurant-account.php" method="post"> From
+            <div class="card-header card-order">
+                <h5 class="order-title"><form action="restaurant-account.php" method="post"> From
                             <button type="submit" name="restaurant" value="<?php echo $restaurant->id ?>" class="btn btn-link"><?php echo $listing->restaurant_name ?></button>.</form></h5>
-                <h5 style="float: right; margin: 0px" class="text-muted">ID #<?php echo $this->id?></h5>
+                <h5 class="text-muted order-id">ID #<?php echo $this->id?></h5>
             </div>
             <div class="card-body">
                 <span class="h6">Pick up time: </span><span><?php echo date("H:i", strtotime($this->pickup_time)) ?></span><br>

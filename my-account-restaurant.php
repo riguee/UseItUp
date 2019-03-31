@@ -149,7 +149,7 @@ $user->setRestaurantFromId($id);
             </div>
         </div>
         <hr>
-        <h3 style="text-align: center">Available times for pick-up</h3>
+        <h3 class="details">Available times for pick-up</h3>
         <div id="hours">
             <?php
             $days = array('monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday');

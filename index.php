@@ -93,6 +93,8 @@ if (isset($_POST['email'])) {
 <div class="container">
     <p><img src="useitup.png" alt="UseItUp" class="center"></p>
 
+    <p class="caption">Join us on our journey to reduce food waste and help local charities! </p>
+
     <div>
         <center>
             <?php
@@ -113,12 +115,11 @@ if (isset($_POST['email'])) {
             <label for="password">Password</label>
             <input type="password" class="form-control" aria-describedby="forgot" id="password" name="password" placeholder="Password" maxlength="30" required>
         </div>
-        <p class="forgot"><a href="Forgot.php">Forgot password?</a></p>
         <button type="submit" class="btn btn-primary btn-block">Log in</button>
     </form>
     <br>
     <a href="register.php" class="btn btn-secondary btn-block" name="register">Don't have an account? Register</a>
-
+<p></p>
 </div>
 
 </body>

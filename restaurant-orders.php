@@ -56,7 +56,7 @@ $restaurant_session = $_SESSION['id'];
     }
     ?>
     <hr>
-    <h2>Past orders</h2><br>
+    <h2>Past orders</h2>
     <?php
     $query = "SELECT id FROM orders WHERE restaurant_id = " . $restaurant_session . " AND CONCAT(pickup_day, \" \", pickup_time) <= NOW() ORDER BY pickup_day, pickup_time";
     $result = mysqli_query($conn, $query);

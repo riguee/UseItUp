@@ -104,7 +104,7 @@ if (isset($_POST["name"])) {
 else {
     header("location: register.php" );
 }
-header("location: my-account.php" );
+header("location: my-account-charity.php" );
 
 
 ?>

@@ -32,7 +32,19 @@ $restaurant = new Restaurant();
 $user = new Restaurant();
 $user->setRestaurantFromId($id);
 
+$today = strtolower(date("l"));
+
+$query = "SELECT " . $today . "_from, " . $today . "_until FROM restaurants WHERE id = " . $_SESSION['id'];
+$result = mysqli_query($conn,$query);
+$result = $result->fetch_assoc();
+$from = $result[$today . '_from'];
+$until = $result[$today . '_until'];
+$todaylistingsquery = "SELECT * from listings WHERE CONCAT(listings.day_posted, \" \", listings.time_until) > NOW() AND restaurant_id = " . $_SESSION['id'];
+if ($todaylistings = mysqli_query($conn,$todaylistingsquery)) {
+    $rowcount = mysqli_num_rows($todaylistings);
+}
 ?>
+
 <script>
     function editrest() {
         if (document.getElementById('email').hasAttribute('readonly')){
@@ -102,11 +114,27 @@ $user->setRestaurantFromId($id);
         }
     }
 </script>
+<script>
+    function checkexistinglistings() {
+        let rows = <?php echo $rowcount ?>;
+        let fromtime = '<?php echo $from ?>';
+        let untiltime = '<?php echo $until ?>';
+        if (rows > 0){
+            if (document.getElementById("<?php echo $today . '_from' ?>").value !== fromtime || document.getElementById("<?php echo $today . '_until' ?>").value !== untiltime) {
+                alert ("You cannot change today's pickup time as you have upcoming listings or orders.");
+                return false;
+            }
+
+        }
+    }
+</script>
+
 
 <div class="container">
     <h1>My account</h1>
+    <button type='button' onclick="checkexistinglistings()">click here</button>
     <button type='button' class='btn-edit btn btn-primary btn-block col-sm-10 col-md-6 mx-auto' onclick='editrest();' id='editrest'>Edit details</button>
-    <form method="post" action="edit-account.php">
+    <form method="post" action="edit-account.php" onsubmit="return checkexistinglistings();">
         <input type="hidden" name="user_type" value="<?php echo $_SESSION['user_type'] ?>">
         <div class="col-sm-10 col-md-6 my-1 mx-auto">
             <div class="input-group">

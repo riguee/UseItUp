@@ -58,7 +58,7 @@ if (isset($_POST["name"])) {
             header( "location: register.php" );
             return;
         } else {
-            $stmt = $conn->prepare("INSERT INTO charities (id, name, email, phone, address, postcode, charity_number, password, active) VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, 0)");
+            $stmt = $conn->prepare("INSERT INTO charities (id, name, email, phone, address, postcode, charity_number, password) VALUES (NULL, ?, ?, ?, ?, ?, ?, ?)");
             $stmt->bind_param('sssssss', $name, $email, $phone, $address, $postcode, $charitynumber, $password);
             if ($stmt->execute()){
                 echo "<script>alert('You have created an account')</script>";
@@ -80,8 +80,8 @@ if (isset($_POST["name"])) {
             header( "location: register.php" );
             return;
         } else {
-                $stmt = $conn->prepare("INSERT INTO restaurants (`id`, `name`, `phone`, `email`, `address`, `postcode`, `password`, `monday_from`, `monday_until`, `tuesday_from`, `tuesday_until`, `wednesday_from`, `wednesday_until`, `thursday_from`, `thursday_until`, `friday_from`, `friday_until`, `saturday_from`, `saturday_until`, `sunday_from`, `sunday_until`, `active`)
- VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0)");
+                $stmt = $conn->prepare("INSERT INTO restaurants (`id`, `name`, `phone`, `email`, `address`, `postcode`, `password`, `monday_from`, `monday_until`, `tuesday_from`, `tuesday_until`, `wednesday_from`, `wednesday_until`, `thursday_from`, `thursday_until`, `friday_from`, `friday_until`, `saturday_from`, `saturday_until`, `sunday_from`, `sunday_until`)
+ VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
                 $stmt->bind_param('ssssssssssssssssssss', $name, $phone, $email, $address, $postcode, $password, $monday_from, $monday_until, $tuesday_from,
                     $tuesday_until, $wednesday_from, $wednesday_until, $thursday_from, $thursday_until, $friday_from, $friday_until, $saturday_from, $saturday_until, $sunday_from, $sunday_until);
                 if ($stmt->execute()) {

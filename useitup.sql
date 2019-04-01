@@ -260,7 +260,7 @@ CREATE TABLE `listings` (
 --
 
 INSERT INTO `listings` (`id`, `title`, `description`, `portions`, `time_from`, `time_until`, `day_posted`, `restaurant_id`, `image`, `saved`) VALUES
-(1, 'Banana sandwich', 'Two slices of bread and one whole unpeeled banana.', 50, '09:00:00', '23:59:00', '2019-03-31', 1, 'uploads/1', 1),
+(1, 'Banana sandwich', 'Two slices of bread and one whole unpeeled banana.', 50, '09:00:00', '23:59:00', CURDATE(), 1, 'uploads/1', 1),
 (2, 'Banana soup', 'It\'s warm water with pieces of banana floating.', 30, '09:00:00', '23:59:00', CURDATE(), 1, 'uploads/2', 1),
 (3, 'Banana stew', 'Beef and banana in our special banana sauce.', 55, '09:00:00', '23:59:00', CURDATE(), 1, 'uploads/3', 1),
 (4, 'Vegan burger', 'One raw mushroom between two slices of bread.', 67, '09:30:00', '23:30:00', CURDATE(), 7, 'uploads/4', 1),

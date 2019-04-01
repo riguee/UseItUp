@@ -106,7 +106,6 @@ if ($todaylistings = mysqli_query($conn,$todaylistingsquery)) {
                 document.getElementById($element_from).value = document.getElementById($element_from + "_display").value;
                 document.getElementById($element_until).value = document.getElementById($element_until + "_display").value;
             }
-
             document.getElementById($element_btn).value = "Disable pick-up on " + day.charAt(0).toUpperCase() + day.slice(1) + "s";
             document.getElementById($element_btn).classList.remove("btn-primary");
             document.getElementById($element_btn).classList.add("btn-secondary");
@@ -124,9 +123,7 @@ if ($todaylistings = mysqli_query($conn,$todaylistingsquery)) {
                 alert ("You cannot change today's pickup time as you have upcoming listings or orders.");
                 return false;
             }
-
         }
-
         var x;
         var a = ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"];
         for (x = 0; x < a.length; ++x) {
@@ -136,9 +133,7 @@ if ($todaylistings = mysqli_query($conn,$todaylistingsquery)) {
                 }
             }
         }
-
     }
-
     function timecheck(day) {
         var fromtime = document.getElementById(day + "_from").value;
         var until = document.getElementById(day + "_until").value;
@@ -147,7 +142,6 @@ if ($todaylistings = mysqli_query($conn,$todaylistingsquery)) {
             return false;
         }
     }
-
 </script>
 
 

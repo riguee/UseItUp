@@ -86,7 +86,8 @@ if (!empty($_SESSION['user_type'])) {
                     document.getElementById('sunday_until').required = true;
                 }
             }
-
+            </script>
+        <script>
             function disable(day) {
                 $element_from = day + "_from";
                 $element_until = day + "_until";
@@ -119,40 +120,11 @@ if (!empty($_SESSION['user_type'])) {
             function checkPassword(form) {
                 if (form.password.value != "") {
                     var re = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
-
                     if (!re.test(form.password.value)) {
                         alert("The password you have entered is not valid. Please use at least one uppercase character, one lowercase character, one number, and at least six characters in total.");
                         form.password.focus();
                         return false;
                     }
-                }
-                var x;
-                var a = ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"];
-                for (x = 0; x < a.length; ++x) {
-                    if(document.getElementById(a[x] + "_from").value.length !== 0){
-                        if (timecheck(a[x]) === false){
-                            return false;
-                        }
-                    }
-                }
-            }
-
-            function checkForm(bool) {
-                if (bool) {
-                    return "create-account.php";
-                }
-                else {
-                    return "register.php";
-                }
-            }
-
-
-            function timecheck(day) {
-                var fromtime = document.getElementById(day + "_from").value;
-                var until = document.getElementById(day + "_until").value;
-                if (fromtime > until) {
-                    alert("The pickup time range is invalid for " + day);
-                    return false;
                 }
             }
 

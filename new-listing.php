@@ -9,76 +9,6 @@
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
-    <script>
-        //turns the values inputted from the time fields into dates so that they can be compared
-        function toDate(dStr,format) {
-            var now = new Date();
-            if (format == "h:m") {
-                now.setHours(dStr.substr(0,dStr.indexOf(":")));
-                now.setMinutes(dStr.substr(dStr.indexOf(":")+1));
-                now.setSeconds(0);
-                return now;
-            }else
-                return "Invalid Format";
-        }
-        //function called in timecheck() that verifies that there is an input in some selected fields
-        function required(inputtx)
-        {
-            if (inputtx.value.length == 0)
-            {
-                // alert("please fill all fields marked *");
-                return false;
-            }
-            return true;
-        }
-        //Checks the values are filled in and the time slot is correct
-        function timecheck() {
-            if (required(document.getElementById("title"))==false ||
-                required(document.getElementById("description"))==false ||
-                required(document.getElementById("from"))==false ||
-                required(document.getElementById("until"))==false) {
-                alert("please fill all fields marked *");
-                return false;
-            }
-            var fromtime = document.getElementById("from").value;
-            try {
-                var tfrom = toDate(fromtime, "h:m")}
-            catch {
-                alert("Something went wrong");
-                return false;
-            }
-            var until = document.getElementById("until").value;
-            try {
-                var tuntil = toDate(until, "h:m")}
-            catch {
-                alert("Something went wrong");
-                return false;
-            }
-            if (tfrom>tuntil) {
-                alert("The pickup time range is invalid.");
-                return false;
-            }
-            else if( (Math.abs(tuntil - tfrom))/60000<15){
-                alert("Please allow at least a 15 minute time window for the pickup.");
-                return false;
-            }
-            /*else {
-                if (confirm("Pickup time from " + fromtime + " time until " + until + ".")) {
-                    var image = document.getElementById('image');
-                    var ext =  image.split('.').pop();
-                    alert (ext);
-                    if (ext != "jpg" || ext != "JPEG" || ext != "jpeg" || ext != "png")
-                    {
-                        alert("there is something wrong");
-                        return false;
-                    }
-                    else {
-                        return true;
-                    }
-                }*/
-        }
-        }
-    </script>
     <title>New listing</title>
 </head>
 
@@ -121,7 +51,7 @@
         $stmt->execute();
         $result = $stmt->get_result();
         if (mysqli_num_rows($result) > 0) { ?>
-            <form name="selectsaved" action="" onsubmit="return checkSelectSavedDish();" method="post">
+            <form name="selectsaved" action="" method="post">
                 <label for="dishes" onchange="">Select one of your saved dishes:</label>
                 <div class="row">
                     <div class="col-11">
@@ -171,13 +101,13 @@
 
     }
     ?>
-    <form name="newlisting" enctype="multipart/form-data" autocomplete="off" action="created-listing.php" onsubmit="return timecheck();" method="post">
+    <form name="newlisting" enctype="multipart/form-data" autocomplete="off" action="created-listing.php" method="post">
         <br>
         <label for="title">Fill in information for a new dish:</label>
-        <input type="text" class="form-control" id="title" name="title" placeholder="Name of the dish" value="<?php if (isset($_POST['dishes'])) { echo $savedstmt['title'];}?>">
+        <input type="text" class="form-control" id="title" name="title" placeholder="Name of the dish" value="<?php if (isset($_POST['dishes'])) { echo $savedstmt['title'];}?>" required>
         <br>
         <label for="description">Description</label>
-        <textarea type="text" class="form-control" rows="5" id="description" name="description" placeholder="e.g. ingredients, flavour, etc."><?php if (isset($_POST['dishes'])) { echo $savedstmt['description'];}?></textarea>
+        <textarea type="text" class="form-control" rows="5" id="description" name="description" placeholder="e.g. ingredients, flavour, etc." required><?php if (isset($_POST['dishes'])) { echo $savedstmt['description'];}?></textarea>
         <br>
         <?php if(isset($_POST['dishes'])){
             echo "<input type=\"hidden\" id=\"savedimg\" name=\"savedimg\" value=". $savedstmt['image'] .">";
@@ -189,7 +119,7 @@
         ?>
         <br>
         <label for="portions">Quantity</label>
-        <input type="number" name="portions" id="portions" class="form-control" min="1">
+        <input type="number" name="portions" id="portions" class="form-control" min="1" required>
         <br>
         <label for="allergens">Allergens:</label>
         <select name="allergen[]" id="allergens" class="selectpicker" multiple data-live-search="true">

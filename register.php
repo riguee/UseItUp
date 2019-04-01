@@ -113,6 +113,8 @@ if (!empty($_SESSION['user_type'])) {
                 }
 
             }
+            </script>
+        <script>
 
             function checkPassword(form) {
                 if (form.password.value != "") {
@@ -124,8 +126,15 @@ if (!empty($_SESSION['user_type'])) {
                         return false;
                     }
                 }
-
-                return true;
+                var x;
+                var a = ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"];
+                for (x = 0; x < a.length; ++x) {
+                    if(document.getElementById(a[x] + "_from").value.length !== 0){
+                        if (timecheck(a[x]) === false){
+                            return false;
+                        }
+                    }
+                }
             }
 
             function checkForm(bool) {
@@ -136,6 +145,17 @@ if (!empty($_SESSION['user_type'])) {
                     return "register.php";
                 }
             }
+
+
+            function timecheck(day) {
+                var fromtime = document.getElementById(day + "_from").value;
+                var until = document.getElementById(day + "_until").value;
+                if (fromtime > until) {
+                    alert("The pickup time range is invalid for " + day);
+                    return false;
+                }
+            }
+
         </script>
 
 

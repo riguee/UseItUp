@@ -126,7 +126,28 @@ if ($todaylistings = mysqli_query($conn,$todaylistingsquery)) {
             }
 
         }
+
+        var x;
+        var a = ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"];
+        for (x = 0; x < a.length; ++x) {
+            if(document.getElementById(a[x] + "_from").value.length !== 0){
+                if (timecheck(a[x]) === false){
+                    return false;
+                }
+            }
+        }
+
     }
+
+    function timecheck(day) {
+        var fromtime = document.getElementById(day + "_from").value;
+        var until = document.getElementById(day + "_until").value;
+        if (fromtime > until) {
+            alert("The pickup time range is invalid for " + day);
+            return false;
+        }
+    }
+
 </script>
 
 
@@ -215,7 +236,7 @@ if ($todaylistings = mysqli_query($conn,$todaylistingsquery)) {
                             <div class="input-group-prepend">
                                 <div class="input-group-text">From</div>
                             </div>
-                            <input type="time" class="form-control" id="<?php echo $day . "_from" ?>" name="<?php echo $day . "_from" ?>" id="phone" value="<?php echo $user->{$day . "_from"} ?>" >
+                            <input type="time" class="form-control" id="<?php echo $day . "_from" ?>" name="<?php echo $day . "_from" ?>" value="<?php echo $user->{$day . "_from"} ?>" >
                             <div class="input-group-append">
                                 <div class="input-group-text">Until</div>
                             </div>
@@ -232,7 +253,7 @@ if ($todaylistings = mysqli_query($conn,$todaylistingsquery)) {
                             <div class="input-group-prepend">
                                 <div class="input-group-text">From</div>
                             </div>
-                            <input type="time" class="form-control" id="<?php echo $day . "_from" ?>" name="<?php echo $day . "_from" ?>" id="phone" value="<?php echo $user->{$day . "_from"} ?>" disabled>
+                            <input type="time" class="form-control" id="<?php echo $day . "_from" ?>" name="<?php echo $day . "_from" ?>" value="<?php echo $user->{$day . "_from"} ?>" disabled>
                             <div class="input-group-append">
                                 <div class="input-group-text">Until</div>
                             </div>
